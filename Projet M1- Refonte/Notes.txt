@@ -1,0 +1,10 @@
+
+
+Calculs.HTML fonctionne en local (de fichier a fichier).
+
+Retour si possible: 
+
+	-Pas de problèmes de caractères mal affichés, etc …
+
+Pour l’instant
+
