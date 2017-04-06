@@ -39,26 +39,24 @@ function animate(){
 
 		if ( r_part < r_phy || r_part == 0) {
 
-
-			if(Rebond){
+			// FAIRE BOUM
+			if(rebond){
 				r_part = r_phy;
-				phi = -(phi + 2*Math.PI);
-				console.log(L);
+				phi = -phi + (c*L*dtau/Math.pow(r_part,2)) + 2*Math.PI;
+				console.log(r_part);
 				console.log(phi);
-
 			}
 			else {
-
-
-			console.log("ici");
-			// FAIRE BOUM
-			arret();
-			Interv = setInterval(animate_explo,10);
+				arret();
+				Interv = setInterval(animate_explo,10);
+				phi = (c*L*dtau/Math.pow(r_part,2)) +phi;
 			}
+			
 
 		}
-
-		phi = phi + (c*L*dtau/Math.pow(r_part,2));
+		else {
+		phi = (c*L*dtau/Math.pow(r_part,2)) +phi;
+		}
 
 		posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
 		posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
@@ -69,6 +67,8 @@ function animate(){
 		}
 
 		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
+
+		console.log("V=" + V);
 		data2 = [];
 		data2.push({date:r_part,close:V});
 		update_graphique_2();
