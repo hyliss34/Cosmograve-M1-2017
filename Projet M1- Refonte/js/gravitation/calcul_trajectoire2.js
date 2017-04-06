@@ -1,3 +1,4 @@
+var Rebond = false;
 function animate(){
 	
 	element = document.params.traj;
@@ -12,8 +13,17 @@ function animate(){
 		context.stroke();
 		
 		diametre_particule = 4;
-		}else{
+	}else{
 		diametre_particule = 2;
+	}
+
+	Bond = document.params.bond;
+
+	if (Bond[0].checked){
+		Rebond = true;
+	}
+	else {
+		Rebond = false;
 	}
 
 	//Tracé de la particule
@@ -28,22 +38,36 @@ function animate(){
 		r_part = rungekutta(dtau);
 
 		if ( r_part < r_phy || r_part == 0) {
+
+
+			if(Rebond){
+				r_part = r_phy;
+				phi = -(phi + 2*Math.PI);
+				console.log(L);
+				console.log(phi);
+
+			}
+			else {
+
+
 			console.log("ici");
 			// FAIRE BOUM
 			arret();
 			Interv = setInterval(animate_explo,10);
-			
-			
+			}
+
 		}
+
+		phi = phi + (c*L*dtau/Math.pow(r_part,2));
+
+		posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
+		posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
+
+
 		if(r_part < 0.0) {
 			r_part = 0.0;
 		}
-		
-		phi = phi + (c*L*dtau/Math.pow(r_part,2));
-		
-		posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
-		posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
-		
+
 		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
 		data2 = [];
 		data2.push({date:r_part,close:V});
@@ -73,15 +97,15 @@ function animate(){
 			
 			document.getElementById('DivClignotante').innerHTML = " <img src='/Images/diodever.gif' height='14px' />";
 			document.getElementById('DivClignotante').style.color="green";
-			}else if ( 1 < Number(fm) && Number(fm) < 5) {
+		}else if ( 1 < Number(fm) && Number(fm) < 5) {
 			
 			document.getElementById('DivClignotante').innerHTML = " <img src='./Images/diodejaune.gif' height='14px' />"
 			document.getElementById('DivClignotante').style.color="yellow";
-			}else if ( Number(fm) >= 5 ) { 
+		}else if ( Number(fm) >= 5 ) { 
 			
 			document.getElementById('DivClignotante').innerHTML = " <img src='./Images/dioderouge.gif' height='14px' />"
 			document.getElementById('DivClignotante').style.color="red";
-			}else{
+		}else{
 			
 			document.getElementById('DivClignotante').innerHTML = " Erreur";
 		}
@@ -97,7 +121,7 @@ function animate(){
 
 function trajectoire() {
 	if(pause || debut){
-		$("#grsvg_2").empty();
+		$("#grsvg_2").empty();	
 		debut = false;
 		//-------- Nos variables Globales ( de c à L) --------//
 		c = 299792458;													
@@ -152,25 +176,25 @@ function trajectoire() {
 			L'enjeu ici est donc de calculer pour chaque itérations les coordonnées de la particule x2_part y2_part, x2_obs y2_obs 
 			on a donc d'abord besoin de calculer r_part et r_obs par Runge-Kutta, puis d'en déduire le calucl de phi et phi2, le
 			tout nous permettra donc de calculer x2 et y2 et les autres paramètres comme la force de marée en chaque point de la trajectoire
-		*/
-		canvas = document.getElementById("myCanvas");
-		
-		if(!canvas){
-			alert("Impossible de récupérer le canvas");
-			return;
-		}
-		
-		context = canvas.getContext("2d");
-		
-		if(!context){
-			alert("Impossible de récupérer le context");
-			return;
-		}
-		
-		context.clearRect(0, 0, canvas.width, canvas.height);
-		
-		diametre_particule = 2;
-		
+			*/
+			canvas = document.getElementById("myCanvas");
+
+			if(!canvas){
+				alert("Impossible de récupérer le canvas");
+				return;
+			}
+
+			context = canvas.getContext("2d");
+
+			if(!context){
+				alert("Impossible de récupérer le context");
+				return;
+			}
+
+			context.clearRect(0, 0, canvas.width, canvas.height);
+
+			diametre_particule = 2;
+
 		// La position de départ est le milieu de la fenêtre d'affichage auquel on ajoute la position initiale de la particule.     
 		
 		posX1 = (canvas.width/2.0) + x1part;
@@ -193,7 +217,7 @@ function trajectoire() {
 				dtau = Dtau1;
 			}
 			else {
-			dtau += dtau;
+				dtau += dtau;
 			}
 		}, false);
 		
@@ -202,7 +226,7 @@ function trajectoire() {
 				dtau = Dtau2;
 			}
 			else {
-			dtau = dtau/2;
+				dtau = dtau/2;
 			}
 		}, false);
 		
@@ -238,7 +262,7 @@ function trajectoire() {
 			context.moveTo(posX3,posY3+3);
 			context.lineTo(posX3,posY3+10);
 			context.stroke();
-			}else{
+		}else{
 			context.beginPath();
 			context.arc(posX3, posY3, ((190*m/rmax)), 0, Math.PI*2);
 			context.stroke();
@@ -271,7 +295,7 @@ function trajectoire() {
 				context.moveTo(posX3,posY3+3);
 				context.lineTo(posX3,posY3+10);
 				context.stroke();
-				}else{
+			}else{
 				context.beginPath();
 				context.arc(posX3, posY3, ((190*m/rmax)), 0, Math.PI*2);
 				context.stroke();
@@ -293,7 +317,7 @@ function trajectoire() {
 		data2.push({date:rmax,close:V});
 		
 		graphique_creation_pot();
-		}else{
+	}else{
 		myInterval = setInterval(animate,1000/300);
 	}
 }
@@ -312,7 +336,7 @@ function animate_explo(){
 	}
 	if(taille>29){
 		clearInterval(Interv);}
-}
+	}
 
 
 
