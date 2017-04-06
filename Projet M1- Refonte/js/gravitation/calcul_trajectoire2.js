@@ -15,7 +15,7 @@ function animate(){
 		}else{
 		diametre_particule = 2;
 	}
-	
+
 	//Tracé de la particule
 	context.beginPath();
 	context.fillStyle = '#008B8B';
@@ -26,9 +26,14 @@ function animate(){
 	if(r0!=0.0) {
 		temps_particule += dtau;
 		r_part = rungekutta(dtau);
-		
+
 		if ( r_part < r_phy || r_part == 0) {
+			console.log("ici");
+			// FAIRE BOUM
 			arret();
+			Interv = setInterval(animate_explo,10);
+			
+			
 		}
 		if(r_part < 0.0) {
 			r_part = 0.0;
@@ -92,6 +97,7 @@ function animate(){
 
 function trajectoire() {
 	if(pause || debut){
+		$("#grsvg_2").empty();
 		debut = false;
 		//-------- Nos variables Globales ( de c à L) --------//
 		c = 299792458;													
@@ -290,4 +296,23 @@ function trajectoire() {
 		}else{
 		myInterval = setInterval(animate,1000/300);
 	}
-}	
+}
+
+var taille =0;
+function animate_explo(){
+	context.beginPath();
+	context.fillStyle = '#000000';
+	context.arc(posX1, posY1, taille, 0, Math.PI*2);
+	context.lineWidth="1";
+	context.fill();
+
+
+	if(taille < 30){
+		taille = taille +1;
+	}
+	if(taille>29){
+		clearInterval(Interv);}
+}
+
+
+
