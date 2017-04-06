@@ -84,7 +84,7 @@ svg{
 
 @media screen and (min-width:1320px) and (max-width:1700px) 
 {
-	#radio_button {
+	#radio_button,#rebond {
 		display:inline-block;
 	}
 	#masse {
@@ -107,7 +107,7 @@ svg{
 		margin-bottom: 5px;
 		margin-top:5px;
 	}
-	#buts,#radio_button {
+	#buts,#radio_button,#rebond {
 		display:block;
 	}
 	#masse {

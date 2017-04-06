@@ -2,7 +2,7 @@
 
 //executing function
 function inverse(){
-	get_root_dm();
+	//get_root_dm();
 	get_root_t();
 }
 
@@ -13,20 +13,18 @@ function inverse(){
 function get_root_dm(){
 	//récupère les constants nécessaires pour les calculs
 	
-	//recuperation des valeurs
-	c = Number(document.getElementById("c_p").value);
+	au=149597870700;
+  c = Number(document.getElementById("c_p").value);
 	G = Number(document.getElementById("G_p").value);
 	h = Number(document.getElementById("h_p").value);
 	k = Number(document.getElementById("k_p").value);
-	typeannee = document.getElementById("typeannee").value;
-	nbr_precision = document.getElementById("nbr_precision").value;
-	t0 = Number(document.getElementById("T0_annexes").value);
 	h0 = Number(document.getElementById("H0_annexes").value); 
 	omegam0 = Number(document.getElementById("omegam0_annexes").value);
 	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
 	omegalambda0 = omegalambda0.toExponential();
-
-	//definition du type d'annee
+	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
+	eps = 0.00001;                                                              //tolérance d'érreur de l'intégral
+//definition du type d'annee
 	if(typeannee == "Sidérale"){
 		nbrjours = 365.256363051;
 		}else if(typeannee == "Julienne"){
@@ -61,9 +59,9 @@ function get_root_dm(){
 		Or = Or.toExponential();
 		} else {
 	}
-	eps = 0.00001;                                                              //tolérance d'érreur de l'intégral
+	eps = 0.00001;                           
 	
-	
+
 	dm = document.getElementById("dm_racine_dm").value;
 	z = bisection_method_dm(dm, omegam0, omegalambda0, Or, eps);
 	document.getElementById("z_racine_dm").innerHTML= z;
@@ -71,7 +69,6 @@ function get_root_dm(){
 }
 
 function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
-	
 	omegak0=(1-omegam0-omegalambda0-Or);
 	f_x = formule_z(omegak0);
 	za = 0;
@@ -80,12 +77,20 @@ function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 
 	dm_za = f_x(za, omegam0, omegalambda0, Or, eps); 
 	dm_zb = f_x(zb, omegam0, omegalambda0, Or, eps);
+	if (Number(dm)===0){
+	  return 0;
+	}
 	
 	if (omegak0 <=0){
-		while (dm > dm_zb){
+	  limit = 0;
+		while (dm > dm_zb && limit<100){
 			zb = zb*10;
 			dm_zb = f_x(zb, omegam0, omegalambda0, Or, eps);
+			limit+=1;
 		}
+		if (limit===100){
+			  return true;
+			}
 		Z = dichotomie(za, zb, f_x, dm, ex);
 		return Z;
 	}
@@ -126,6 +131,7 @@ function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 
 
 
+
 //												outil mathématique fondamental:   DICHOTOMIE  POUR "DM" 
 function dichotomie(BornInf, BornSup, fonction, cible, ex){
 	za = BornInf;
@@ -133,7 +139,6 @@ function dichotomie(BornInf, BornSup, fonction, cible, ex){
 	dm_za = fonction(za, omegam0, omegalambda0, Or, eps); 
 	dm_zb = fonction(zb, omegam0, omegalambda0, Or, eps);
 	while (true){
-			
 			zc = (za+zb)/2.0;
 			
 			dm_zc = fonction(zc, omegam0, omegalambda0, Or, eps);
@@ -191,8 +196,6 @@ function Sk_sinh_x(bornSup, omegam0, omegalambda0, Or, eps){
     return (c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
   }
 
-
-  
   
 //choix de la formule pour calculer dm
 function formule_z(omegak0){
@@ -233,11 +236,9 @@ function dichotomie_t(BornInf, BornSup, cible, ext, type){
 	t_za = f_za(za, omegam0, omegalambda0, Or, eps); 
 	t_zb = f_zb(zb, omegam0, omegalambda0, Or, eps);
 	while (true){
-			
 			zc = (za+zb)/2.0;
 			f_zc = formule_t(zc, omegam0, omegalambda0, Or, type);
 			t_zc = f_zc(zc, omegam0, omegalambda0, Or, eps);
-			alert("z: " +zc + "   t_zc: " + t_zc + "   zb-za" + (zb-za));
 			if (((zb-za)/2)<ext){
 				if ((zc/ext)<10){
 					ext = ext*1e-5;
@@ -277,7 +278,40 @@ function get_root_t(){
 	omegalambda0 = omegalambda0.toExponential();
 	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
 	eps = 0.0000001;                                                              //tolérance d'érreur de l'intégral
+	//definition du type d'annee
+	if(typeannee == "Sidérale"){
+		nbrjours = 365.256363051;
+		}else if(typeannee == "Julienne"){
+		nbrjours = 365.25;
+		}else if(typeannee == "Tropique (2000)"){
+		nbrjours = 365.242190517;
+		}else{
+		nbrjours = 365.2425;
+	}
+	
+
+	//calcul de h0 par secondes et par gigaannees
+	au = 149597870700;
+	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
+	H0parsec = H0parsec;
+	H0enannee = H0parsec*(3600*24*nbrjours);
+	H0engannee = H0enannee*Math.pow(10, 9);
+	
+	
 	Or = 0;
+	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		Or=1.68*Or;
+		Or = Or.toExponential();
+		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		Or = Or.toExponential();
+		} else {
+	}
 	
 	t_em = (document.getElementById("t_racine_em").value)*H0parsec;
 	z_em = bisection_method_t(t_em, omegam0, omegalambda0, Or, eps, 0);
@@ -308,11 +342,13 @@ function bisection_method_t (t, omegam0, omegalambda0, Or, eps, type){
 	t_za = f_x_za(za, omegam0, omegalambda0, Or, eps);
 	
 	//uncalculable signale si le calcul inverse est impossible. Sa fonction associé regulator ajuste l'intervalle où la solution peut se trouver
-	uncalculable = regulator(t, omegam0, omegalambda0, Or);
-	if (uncalculable){
+	
+	uncalculable = regulator(za, zb, t, omegam0, omegalambda0, Or);
+	if (isNaN(uncalculable[0]) || isNaN(uncalculable[1])){
 		return NaN;
 	}
-	
+	za = uncalculable[0];
+	zb = uncalculable[1];
 	return dichotomie_t(za, zb, t, ext, type);
 }
 
@@ -391,50 +427,82 @@ function formule_t(z, omegam0, omegalambda0, Or, type){
 /*cette fonction prend les paramètres et ajuste les intervalles dans les situations où celles-ci ne possèdent pas la solution recherché. La fonction
  déclare également lorsqu'il est véritablement impossible de calculer la solution (return "true")*/
  
-function regulator(t, omegam0, omegalambda0, Or){
-
+function regulator(za, zb, t, omegam0, omegalambda0, Or){
 	//la fonction associé à ces paramètres est monotone décroissante za<zb --- t_za>t_zb
 	if(Or === 0 && omegam0 !== 0){ 
 		if (t>t_za || t===0 || t<0){
-			return true;
+			  new_z = [NaN,NaN];
+			  
+		    return new_z;
 		}
 		//regulation de l'intervalle
-		while (t< t_zb && t!==0){
-			zb = zb*10;
-			f_x_zb = formule_t(zb, omegam0, omegalambda0, Or, eps);
-			t_zb = f_x_zb(zb, omegam0, omegalambda0, Or, eps);
+		else{
+		  limit =0;
+		  while (t< t_zb && t!==0 && limit<100){
+			  zb = zb*100;
+		  	f_x_zb = formule_t(zb, omegam0, omegalambda0, Or, eps);
+		  	t_zb = f_x_zb(zb, omegam0, omegalambda0, Or, eps);
+		  	limit+=1;
+		  }
+		  if (limit===100){
+		  	  new_z = [NaN,NaN];
+		      return new_z;
+		  }
+		  else{
+		    new_z = [za,zb];
+		    return new_z;
+	  	}
 		}
-		return false;
 	}
 	
 	
 	//la fonction associé à ces paramètres est monotone décroissante za<zb --- t_za>t_zb
 	else if(Or === 0 && omegam0=== 0 && omegak0 !== 0){
 		if (t>t_za || t===0 || t<0){
-			return true;
+			  new_z = [NaN,NaN];
+		      return new_z;
 		}
 		//regulation de l'intervalle
-		while (t< t_zb && t!==0){
-			zb = zb*10;
+		limit = 0;
+		while (t< t_zb && t!==0 && limit<100 ){
+			zb = zb*100;
 			f_x_zb = formule_t(zb, omegam0, omegalambda0, Or, eps);
 			t_zb = f_x_zb(zb, omegam0, omegalambda0, Or, eps);
+			limit +=1;
 		}
-		return false;
+
+		if (limit===100){
+			  new_z = [NaN,NaN];
+		    return new_z;
+			}
+			else{
+			  new_z = [za,zb];
+			 
+		    return new_z;
+			}
 	}
 	
 	
 	//la fonction associé à ces paramètres est monotone croissante za<zb --- t_za<t_zb
 	else if(Or === 0 && omegam0=== 0 && omegak0 === 0){
 		if (t<t_za || t===0 || t<0){
-			return true;
+			new_z = [NaN,NaN];
+		  return new_z;
 		}
+		limit = 0;
 		//regulation de l'intervalle
-		while (t > t_zb && t!==0){
+		while (t > t_zb && t!==0 &&limit<100){
 			zb = zb*10;
 			f_x_zb = formule_t(zb, omegam0, omegalambda0, Or, eps);
 			t_zb = f_x_zb(zb, omegam0, omegalambda0, Or, eps);
+			limit+=1;
 		}
-		return false;
+		if (limit===100){
+			  new_z = [NaN,NaN];
+		    return new_z;
+			}
+		new_z = [za,zb];
+		return new_z;
 	}
 	
 	
@@ -456,22 +524,31 @@ function regulator(t, omegam0, omegalambda0, Or){
 		
 		//la fonction associé à ces paramètres est monotone croissante za<zb --- t_za<t_zb
 		if(omegalambda0 >= Olambdalim){
-			return false                           //<----------------------------------à VOIR
+		  new_z = [za,zb];
+		  return new_z;                    //<----------------------------------à VOIR
 		}
 		
 		
 		//la fonction associé à ces paramètres est monotone décroissante za<zb --- t_za>t_zb
 		else{
 			if (t>t_za || t===0 || t<0){
-			return true;
+			  new_z = [NaN,NaN];
+		    return new_z;
 			}
+			limit = 0;
 			//regulation de l'intervalle
-			while (t< t_zb && t!==0){
+			while (t< t_zb && t!==0 && limit<100){
 				zb = zb*10;
 				f_x_zb = formule_t(zb, omegam0, omegalambda0, Or, eps);
 				t_zb = f_x_zb(zb, omegam0, omegalambda0, Or, eps);
+				limit+=1;
 			}
-			return false;
+			if (limit===100){
+			  new_z = [NaN,NaN];
+		    return new_z;
+			}
+			new_z = [za,zb]
+			return new_z;
 		}
 	}
 }
@@ -530,3 +607,4 @@ function T_Or_omegam0_z_sup(z, omegam0, omegalambda0, Or, eps){
 function T_Or_omegam0_omegak0(z, omegam0, omegalambda0, Or, eps){
   return Math.log(1+z)/Math.pow(Number(omegalambda0), 1/2);
 }
+
