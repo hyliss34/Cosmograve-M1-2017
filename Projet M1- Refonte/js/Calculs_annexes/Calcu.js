@@ -34,29 +34,6 @@ function calcu(){
 	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
 	omegalambda0 = omegalambda0.toExponential();
 
-	
-	Or = 0;
-	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
-		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
-		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or=1.68*Or;
-		Or = Or.toExponential();
-		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
-		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
-		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
-		} else {
-	}
-	
-	
-	//calcul de omegak
-	omegak0 = 1-Or-omegam0-omegalambda0;
-	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0;
-	
-	
-	
 	//definition du type d'annee
 	if(typeannee == "Sidérale"){
 		nbrjours = 365.256363051;
@@ -76,6 +53,29 @@ function calcu(){
 	H0parsec = H0parsec;
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
+	
+	
+	Or = 0;
+	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		Or=1.68*Or;
+		Or = Or.toExponential();
+		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		Or = Or.toExponential();
+		} else {
+	}
+	
+	
+	//calcul de omegak
+	omegak0 = 1-Or-omegam0-omegalambda0;
+	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0.toExponential(nbr_precision);
+	
+	
 	
 	
 	//on recupere les valeurs de z1 et z2

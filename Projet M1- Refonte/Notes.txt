@@ -10,6 +10,3 @@ Pour l’instant
 
 
 TEST COMMIT
-
-
-Test 2 comit
