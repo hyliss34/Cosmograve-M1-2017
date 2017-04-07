@@ -41,17 +41,18 @@ function calcul(){   // fonction principale de cosmograve
 	
 	//on calcule omegar si besoin
 	Or = 0;
+
 	if (document.getElementById("liste").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else if (document.getElementById("liste").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else {
 	}
 	

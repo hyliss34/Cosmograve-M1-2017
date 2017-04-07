@@ -2,7 +2,7 @@
 
 //executing function
 function inverse(){
-	//get_root_dm();
+	get_root_dm();
 	get_root_t();
 }
 
@@ -15,6 +15,7 @@ function get_root_dm(){
 	
 	au=149597870700;
   c = Number(document.getElementById("c_p").value);
+  t0 = document.getElementById("T0_annexes").value;
 	G = Number(document.getElementById("G_p").value);
 	h = Number(document.getElementById("h_p").value);
 	k = Number(document.getElementById("k_p").value);
@@ -23,8 +24,9 @@ function get_root_dm(){
 	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
 	omegalambda0 = omegalambda0.toExponential();
 	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
-	eps = 0.00001;                                                              //tolérance d'érreur de l'intégral
-//definition du type d'annee
+	eps = 0.00001;
+	                                                              //tolérance d'érreur de l'intégral
+	//definition du type d'annee
 	if(typeannee == "Sidérale"){
 		nbrjours = 365.256363051;
 		}else if(typeannee == "Julienne"){
@@ -44,23 +46,28 @@ function get_root_dm(){
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
 	
-	
+
+	// Calcul et affichage de Omegar0
+	Affi_Or= document.getElementById("resul_omegar0");
 	Or = 0;
+	Affi_Or.innerHTML = Or;
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
+		console.log("denadn");
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
+		Affi_Or.innerHTML = Or;
 		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
+		Affi_Or.innerHTML = Or;
 		} else {
 	}
 	eps = 0.00001;                           
-	
 
 	dm = document.getElementById("dm_racine_dm").value;
 	z = bisection_method_dm(dm, omegam0, omegalambda0, Or, eps);
@@ -70,6 +77,7 @@ function get_root_dm(){
 
 function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 	omegak0=(1-omegam0-omegalambda0-Or);
+	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0;
 	f_x = formule_z(omegak0);
 	za = 0;
 	zb = 1e8;
@@ -269,6 +277,7 @@ function dichotomie_t(BornInf, BornSup, cible, ext, type){
 function get_root_t(){
 	au=149597870700;
 	c = Number(document.getElementById("c_p").value);
+	t0 = document.getElementById("T0_annexes").value;
 	G = Number(document.getElementById("G_p").value);
 	h = Number(document.getElementById("h_p").value);
 	k = Number(document.getElementById("k_p").value);
@@ -298,18 +307,22 @@ function get_root_t(){
 	H0engannee = H0enannee*Math.pow(10, 9);
 	
 	
+	Affi_Or= document.getElementById("resul_omegar0");
 	Or = 0;
+	Affi_Or.innerHTML = Or;
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
+		Affi_Or.innerHTML = Or;
 		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
+		Affi_Or.innerHTML = Or;
 		} else {
 	}
 	
@@ -331,6 +344,7 @@ function get_root_t(){
 
 function bisection_method_t (t, omegam0, omegalambda0, Or, eps, type){
 	omegak0=(1-omegam0-omegalambda0-Or);
+	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0;
 	var za = 0;
 	var zb = 5e6; //valeur par default
 	ext = 0.00000000001; //indicateur de tolérence d'erreur dichotomie temporelle

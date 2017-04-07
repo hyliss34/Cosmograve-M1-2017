@@ -11,37 +11,37 @@ function calc_energie_noire() {
 	t0 = Number(document.getElementById("T0_annexes").value);
 	h0 = Number(document.getElementById("H0_annexes").value); 
 	omegam0 = Number(document.getElementById("omegam0_annexes").value);
-	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
-	omegalambda0 = omegalambda0.toExponential();
-	Or = document.getElementById("resultat_omegar0_annexes").value;
+	omegaDE0 = Number(document.getElementById("omegaDE0_annexes").value)
+	a = document.getElementById("resul_omegar0");
 	
 	
+
 	Or = 0;
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else {
 	}
 	
-	
+	a.value =Or;
+	a.innerHTML = Or;
 	//calcul de omegak
-	omegak0 = 1-Or-omegam0-omegalambda0;
+	omegak0 = 1-Or-omegam0-omegaDE0;
 	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0;
-	alert(omegak0);
-	omegade0 = omegalambda0;
+	
 
 	
 	//Energie Noire
-	w0 = Number(document.getElementById("w0").value);
-	w1 = Number(document.getElementById("w1").value);
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
 	
 	
 	alert("debut dm");
@@ -68,7 +68,7 @@ function calc_energie_noire() {
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
 	if (omegak0>0){
-		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
+		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omega), Number(Or),Eps);
 		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
 
 		dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
@@ -282,13 +282,9 @@ function calc_energie_noire() {
 
 // ENERGIE
 
-function a() {
-	alert(omegaDE(1));
-}
 
 
-function Enoire(x,omegam0, omegalambda0, Or) {
-	omegak0 = 1-Or-omegalambda0-omegam0;
+function Enoire(x,omegaDE0, omegak0, omegam0,Or) {
 	f =omegaDE(x)*Ya(x)+ omegak0/(x*x) + omegam0/Math.pow(x,3) + Or/Math.pow(x,4); // OMEGADE0 ......;
 	return 1/Math.pow(f,0.5);
 }
@@ -305,10 +301,7 @@ function fonction_integrale_enoire(x, omegam0, omegalambda0, Or){
 
 // Ya(x)
 
-function Ya(x){
-	w0 = Number(document.getElementById("w0").value);
-	w1 = Number(document.getElementById("w1").value);
-	
+function Ya(x,w1,w0){
 	return Math.exp(-3*(w1+w0+1)*Math.log(x) -3*w1*(1-x));
 }
 

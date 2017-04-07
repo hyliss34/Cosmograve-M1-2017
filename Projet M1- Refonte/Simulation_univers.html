@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width"/>
 	<link rel="stylesheet" href="Css/Simu-univers.css"/>
 	
@@ -17,6 +18,8 @@
 	<script src="./js/graphique_min.js"></script>
 	<script src="./js/integrale.js"></script>
 	<script src="./js/rungekutta.js"></script>
+	<script src="./js/ddl_canvas_min.js"></script>
+	<script src="./js/canvas_h0neg_min.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
@@ -26,7 +29,7 @@
 	<script src="./Lib/jquery-1.12.3.min.js"></script>
 	<script src="./Lib/d3_min.js"></script>
 </head>
-<body>
+<body id="MASQUE">
 
 
 <!-- Menus -->
@@ -52,7 +55,6 @@
 <!-- Boutons Calculs annexes et params -->
 <div id="Boutons_top_right" >
 		<input id="para"  type="button"  OnClick="param()"></input>
-	<form method="get" action="Calculs.html" id="calc_form" target="Calculs">
 	<!-- paramètre tracer -->
 	<input type="hidden" id="T0calc" name="T0_calc" value="2.7255"/>
 	<input type="hidden" id="H0calc"  name="H0_calc" value="67.74"/>
@@ -70,8 +72,8 @@
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" value="Calculs annexes" id="calc"></input>
-	</form>
+	<input type="submit" value="Calculs annexes" id="calc" onclick="ouvre_calc_fr()"></input>
+
 </div>
 	
 
@@ -172,5 +174,7 @@ myImg.onmousedown = GetCoordinates;
 </script>
 <br/>
 <p style="float:right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+
+
 </body>
 </html>

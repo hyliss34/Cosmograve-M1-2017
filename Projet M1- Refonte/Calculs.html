@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <link rel="stylesheet" href="Css/Index.css">
@@ -22,56 +23,33 @@
 
 <script>
 	window.onload = function charg_params(){
-	var parameters = location.search.substring(1).split("&");
-    var temp = parameters[0].split("=");
-    T0 = unescape(temp[1]);
-    temp = parameters[1].split("=");
-    H0 = unescape(temp[1]);
-   	temp = parameters[2].split("=");
-	omegam0 = unescape(temp[1]);
-	temp = parameters[3].split("=");
-	omegalambda0 = unescape(temp[1]);
-	temp = parameters[4].split("=");
-	Or = unescape(temp[1]);
-	temp = parameters[5].split("=");
-	omegak0 = unescape(temp[1]);
-	temp = parameters[6].split("=");
-	k = unescape(temp[1]);
-	temp = parameters[7].split("=");
-	h = unescape(temp[1]);
-	temp = parameters[8].split("=");
-	G = unescape(temp[1]);
-	temp = parameters[9].split("=");
-	c = unescape(temp[1]);
-	temp = parameters[10].split("=");
-	typeannee = unescape(temp[1]);
-	temp = parameters[11].split("=");
-	nbr = unescape(temp[1]);
 	
-		
-	document.getElementById("T0_annexes").value = T0;
-	document.getElementById("H0_annexes").value = H0;
-	document.getElementById("omegam0_annexes").value = omegam0;
-	document.getElementById("omegalambda0_annexes").value = omegalambda0;
-	document.getElementById("resultat_omegar0_annexes").value = Or;
-	document.getElementById("resultat_omegak0_annexes").value = omegak0;
-	document.getElementById("k_p").value = k;
-	document.getElementById("h_p").value = h;
-	document.getElementById("G_p").value = G;
-	document.getElementById("c_p").value = c;
-	document.getElementById("typeannee").value = typeannee;
-	document.getElementById("nbr_precision").value = nbr;
+	// Recuperations des valeurs de la page simulation.
+	document.getElementById("T0_annexes").value = sessionStorage.getItem("T0");
+	document.getElementById("H0_annexes").value = sessionStorage.getItem("H0");
+	document.getElementById("omegam0_annexes").value = sessionStorage.getItem("Om");
+	document.getElementById("omegalambda0_annexes").value = sessionStorage.getItem("Ol");
+	document.getElementById("resultat_omegar0_annexes").value = sessionStorage.getItem("Or");
+	document.getElementById("resultat_omegak0_annexes").value = sessionStorage.getItem("Ok");
+	document.getElementById("k_p").value = sessionStorage.getItem("k");
+	document.getElementById("h_p").value = sessionStorage.getItem("h");
+	document.getElementById("G_p").value = sessionStorage.getItem("G");
+	document.getElementById("c_p").value = sessionStorage.getItem("c");
+	document.getElementById("typeannee").value = sessionStorage.getItem("type");
+	document.getElementById("nbr_precision").value = sessionStorage.getItem("nb");
 	
 	};
 </script>
-<head>
-<meta charset="UTF-8">
+
+
 <title>Calculs</title>
 </head>
 
 <body>
-
-
+<ul class="topnav">
+  <li><a class="active" href="#">Calculs Annexes</a></li>
+</ul>
+<!--
 <ul class="topnav">
   <li><a href="index.html">Calculs Annexes</a></li>
   <li class="deroule">
@@ -89,7 +67,7 @@
 	</div>
   </li> 
 </ul>
-
+-->
 <!-- Paramètres de base cachés -->
 
 	<input type="hidden" id="k_p" value="1.38064852e-23" ></input>
@@ -124,12 +102,14 @@
 </div>
 
 <div>
-	<label for="resultat_omegar0_annexes">&Omega;<sub>r0</sub> =</label>
 	<select id="resultat_omegar0_annexes" style="color:blue">
-		<option>Matter and Lambda</option>
-		<option>Matter, Lambda and RFC</option>
-		<option>Matter, Lambda, RFC and Neutrinos</option>
+		<option>Matière et Lambda</option>
+		<option>Matière, Lambda et RFC</option>
+		<option>Matière, Lambda, RFC et Neutrinos</option>
 	</select>
+	<br/>
+	<label for="resul_omegar0">&Omega;<sub>r0</sub> =</label>
+	<span id="resul_omegar0" style="color:blue;"></span>
 </div>
 
 <div>
@@ -245,7 +225,7 @@
 </div>
 	
  <br />
-
+ 		<p><strong> Calculs Inverses</strong></p>
  		 <div class="desact_retour">
  		 	<label for="dm_racine_dm">d<sub>m</sub> =</label>
  		 	<input id="dm_racine_dm" value="0" maxlength="26" type="text"> (m)

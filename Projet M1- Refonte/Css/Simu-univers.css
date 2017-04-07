@@ -61,11 +61,12 @@ ul.topnav li a.active {background-color: #4CAF50;}
 /* Mise en page de base adapté aux mobiles et balises pour les écrans plus grand ainsi la lecture mobile demande moins de ressources */
 
 
+
+
 /* Enregistrer graphique */
 #dl,#type {display: none;}
 
 html, body {
-  overflow:scroll;
 }
 
 .inp {
