@@ -102,7 +102,12 @@ function Reset_para() {
 }
 
 function retour_simu(){
-	window.open("Simulation_univers.html");
+	window.close("Calculs.html");
+	window.close("Calculs_ang.html");
+}
+
+function retour_noire(){
+	window.close("Calculs_noire.html");
 }
 function retour() {
 	window.close("Paramètres.html");
