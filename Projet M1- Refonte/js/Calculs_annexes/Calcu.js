@@ -313,8 +313,8 @@ function calcu(){
 	
 	fin =new Date().getTime() - deb;
 	Chaine = "Le calcul a durer : " + fin + " millisecondes !";
-	time_affiche.innerHTML = Chaine;
-	time_affiche.style.display ="inline-block";
+	//time_affiche.innerHTML = Chaine;
+	//time_affiche.style.display ="inline-block";
 
 
 
