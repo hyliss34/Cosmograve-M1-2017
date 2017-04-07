@@ -1,12 +1,11 @@
 
-
-function lance_calc_noire() {
+function Lancer_calc() {
 	chargement();
-	setTimeout(calcul_noire,1000);
+	setTimeout(Calc,300);
 }
-function calcul_noire(){   // fonction principale de cosmograve
-	
-	
+
+function Calc(){
+
 	
 	//on recupere les valeurs des variables
 	c = Number(document.getElementById("c_p").value);
@@ -19,7 +18,7 @@ function calcul_noire(){   // fonction principale de cosmograve
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value;
 	omegam0 = Number(document.getElementById("omegam0").value);
-	omegalambda0 = Number(document.getElementById("omegalambda0").value);
+	omegaDE0 = Number(document.getElementById("omegaDE0").value);
 	
 	
 	//on recupere le bon nombre de jour par an.
@@ -58,19 +57,18 @@ function calcul_noire(){   // fonction principale de cosmograve
 	//on s'occupe de changer la position du point sur le modèle
 	PosX = 53+omegam0*230/3;
 	PosY = 246;
-	if(omegalambda0 >= 0){
-		PosY += -omegalambda0*325/4.5;
+	if(omegaDE0 >= 0){
+		PosY += -omegaDE0*325/4.5;
 		}else{
-		PosY -= omegalambda0*325/4.5
+		PosY -= omegaDE0*325/4.5
 	}
 	
 	PosX -= 1.5;
 	PosY -= 1.5;
 	
-	update_point();
 
 	//on calcule omegak
-	omegak0 = 1-Or-omegam0-omegalambda0;
+	omegak0 = 1-Or-omegam0-omegaDE0;
 	
 	Or = parseFloat(Or).toFixed(10);
 	omegak0 = omegak0.toFixed(10);
@@ -79,8 +77,8 @@ function calcul_noire(){   // fonction principale de cosmograve
 	
 	
 	//donne les variables sous forme d'exposant si differente de 0
-	if(omegalambda0 != 0){
-		omegalambda0 = omegalambda0.toExponential();
+	if(omegaDE0 != 0){
+		omegaDE0 = omegaDE0.toExponential();
 	}
 	if(omegak0 != 0){
 		omegak0 = parseFloat(omegak0).toExponential();
@@ -98,26 +96,26 @@ function calcul_noire(){   // fonction principale de cosmograve
 	//affiche les imformations sur les paramètres cosmologiques de la simulation
 	document.getElementById("resultat_omegam0").innerHTML = omegam0;
 	document.getElementById("resultat_omegar0").innerHTML = Or;
-	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
+	document.getElementById("resultat_omegarlambda0").innerHTML = omegaDE0;
 	document.getElementById("resultat_omegak0").innerHTML = Number(omegak0_afficher).toExponential();
 	
-	if(omegam0 != 0 && omegalambda0 != 1){
-		//calcul de l'age de l'univers
-		if(Or != 0 && t0 >= 2){
-			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or)) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)));
-		}else{
-			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-		}
-		age_sec = age_sec*(1./H0parsec);
-		//on le passe en gigaannees
-		age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
-		//on creer une variable limite en nombre de decimal pour l'affichage
-		age_afficher = Number(age).toExponential(nbr_precision);
-		age_sec_afficher = Number(age_sec).toExponential(nbr_precision);
-		}else{
-		age = NaN;
-		age_aficher = NaN;
-	}
+	
+	//calcul de l'age de l'univers
+		
+	//age_sec = simpson(0, 5e6, 1e8, Enoire_temps, omegam0, Number(omegaDE0), Number(Or)) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)));
+
+	eps = 0.00001;
+	age_sec = simpson(0, 5e6, Enoire_temps, omegam0, Number(omegaDE0), Number(Or),eps);
+		
+	age_sec = age_sec*(1./H0parsec);
+	//on le passe en gigaannees
+	age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
+
+	//on creer une variable limite en nombre de decimal pour l'affichage
+	age_afficher = Number(age).toExponential(nbr_precision);
+	age_sec_afficher = Number(age_sec).toExponential(nbr_precision);
+		
+	
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
 	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
@@ -131,100 +129,45 @@ function calcul_noire(){   // fonction principale de cosmograve
 		age = 0;
 	}
 	
-	//on regarde si on proche de la separatrice
-	w = 0;
-	v = 0;
-	if(omegam0 <= 0.5){
-		w=(1./3.)*Math.log(((1./omegam0)-1.)+Math.sqrt(((1./omegam0)-1.)*((1./omegam0)-1.)-1.0));
-		OlER=4.*omegam0*cosh(w)*cosh(w)*cosh(w);
-		}else{
-		v =(1./3.)*Math.acos((1./omegam0)-1.);
-		OlER=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
-	}
-	proche_bleu = Math.abs(omegalambda0 - OlER) < 0.01;
 	
-	//permet de recuperer la valeur de la separatrice verte
-	if(omegam0 >= 1){
-		u_max=1./3.*(Math.acos((1./omegam0)-1));
-		OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
-		}else{
-		OlER_max = 0;
-	}
-	proche_vert = Math.abs(omegalambda0 - OlER_max) < 0.01;
-	
-	if(proche_bleu){
-		alert("on est proche de la s\351paratrice");
-		document.getElementById("grille").checked = false;
-	}else if(proche_vert){
-		alert("on est proche de la s\351paratrice");
-	}
-	
+
 	//on fait appel a la methode de rungekutta pour calculer les points de la courbe
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
-	pas = 0.001;
+	pas = 0.0001;
 	m = 0;
 	yrunge = 1;
 	yrunge2 = 1;
 	data = [];
-	if(omegam0 == 0 && omegalambda0 == 1){
 		while (yrunge2 > 0.01 && yrunge2 < 5.){
 			
-				if(yrunge2<0.1){pas=Math.pow(10,-6);}
+
 				
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
+			res=age+m/H0engannee;
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
 			data.push({date:age+m/H0engannee,close:yrunge2});
 			m=m-pas;
 		}
-		}else{
-		while (yrunge2 > 0 && yrunge2 < 5.){
-				if(yrunge2<0.2){pas=Math.pow(10,-6);}
-				
-			yrunge2 = rungekutta_neg(m);
-			ymoinsrunge[0] = ymoinsrunge[1];
-			ymoinsrungederiv[0] = ymoinsrungederiv[1];
-			data.push({date:age+m/H0engannee,close:yrunge2});
-			m=m-pas;
-		}
-	}
+		
 	data.reverse();
 	
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
 	pas = 0.00001;
+	yrunge = 1;
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
-	omegalambda0_bis = Number(omegalambda0);
-	//suite rungekutta avec rajout du cas ou l'on serait sur la generatrice
-	if(omegalambda0_bis < OlER_max){
-		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
-			if(yrunge<0.25){pas=Math.pow(10,-6);}
-			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
-			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer enti\350rement pour raison de stabilit\351.")}
-			i=i+pas;
-		}
-		}else if(omegalambda0_bis == OlER_max){
-		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
+	while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0engannee,close:yrunge});
 			i=i+pas;
-		}
-		alert("Proche s\351paratrice");
-		}else{
-		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
-			if(yrunge<0.1){pas=Math.pow(10,-6);}
-			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
-			i=i+pas;
-		}
 	}
 	
 	//liste les differents cas pour afficher a l'utilisateur les informations
@@ -246,7 +189,82 @@ function calcul_noire(){   // fonction principale de cosmograve
 	
 	
 	//on creer le graphique
-	graphique_creation();
+	graphique_creation_noir();
 	setTimeout(stop_spin,300);
+	//setTimeout(stop_spin,300);
+}
+
+// ENERGIE NOIRE
+function Enoire_norm(x,omegam0, omegaDE0, Or){
+	omegak0 = 1 - Or - omegam0 -omegaDE0;
+	return (omegaDE0*Ya(x) + omegak0*(Math.pow((1.+x),2)) + omegam0*(Math.pow((1.+x),3)) + Or*(Math.pow((1.+x),4)));
+}
+function Enoire(x,omegam0, omegaDE0, Or) {
+	omegak0 = 1 - Or - omegam0 -omegaDE0;
+	return 1/Math.pow((omegaDE0*Ya(x) + omegak0*(Math.pow((1.+x),2)) + omegam0*(Math.pow((1.+x),3)) + Or*(Math.pow((1.+x),4))),1/2);
+
+}
+
+function Enoire_temps(x,omegam0, omegaDE0, Or){
+	return Enoire(x,omegam0,omegaDE0,Or)/(1+x);
+}
+
+
+
+// Ya(x)
+
+function Ya(x){
+	w0 = Number(document.getElementById("omega0").value);
+	w1 = Number(document.getElementById("omega1").value);
 	
+	if(x==0){return Math.exp(-3*(w1+w0+1)*Math.log(0.000001) -(3*w1*(1-x)))}
+	
+	return Math.exp(-3*(w1+w0+1)*Math.log(x) -(3*w1*(1-x)));
+}
+
+
+// Tracer graphique
+function graphique_creation_noir(){
+	chart = d3.select("#graphique_svg");
+    wid = chart.width;
+    hei = chart.height;
+    ratio = chart.width / chart.height;
+
+    c = d3.scale.linear().range([0, 680]);
+    d = d3.scale.linear().range([390, 0]);
+    e = d3.svg.line().x(function(a) {return c(a.date)}).y(function(a) {return d(a.close)});
+    b = d3.select("#graphique_svg").style("font-size", "12px").attr("width",wid).attr("height",hei).append("g").attr("transform", "translate(50,30)");
+    f = d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d"));
+    g = d3.svg.axis().scale(d).orient("left").ticks(10);
+
+    data.forEach(function(a) {
+        a.date = a.date;
+        a.close = +a.close
+    });
+    c.domain(d3.extent(data, function(a) {
+        return a.date
+    }));
+    d.domain([0, d3.max(data, function(a) {
+        return a.close
+    })]);
+    b.append("g").attr("class", "x axis").attr("transform", "translate(0,390)").style({
+        stroke: "black",
+        fill: "none",
+        "stroke-width": "1px",
+        "shape-rendering": "crispEdges"
+    }).call(f);
+    
+    1 == document.getElementById("grille").checked && (b.selectAll("line.x").data(c.ticks(10)).enter().append("line").attr("class",
+        "x").attr("x1", c).attr("x2", c).attr("y1", 0).attr("y2", 390).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"), b.selectAll("line.y").data(d.ticks(8)).enter().append("line").attr("class", "y").attr("x1", 0).attr("x2", 680).attr("y1", d).attr("y2", d).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"));
+    b.append("g").attr("class", "y axis").style({
+        stroke: "black",
+        fill: "none",
+        "stroke-width": "1px",
+        "shape-rendering": "crispEdges"
+    }).call(g);
+    b.append("text").attr("class", "legend_titre").attr("x", 175).attr("y", -15).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.3em").text("Evolution du facteur d'\u00e9chelle r\u00e9duit");
+    b.append("text").attr("class", "legend_axe").attr("x", 355).attr("y", 415).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.2em").text("t (Ga)");
+    b.append("text").attr("class", "legend_axe").attr("x", -200).attr("y", -37).attr("dy", ".3em").attr("transform", "rotate(-90)").style("font-weight", "bold").style("font-size", "1.2em").text("a (t)");
+    b.append("path").style("stroke", "steelblue").style("stroke-width", "2").style("fill", "none").attr("class", "line").attr("d", e(data));
+
 }

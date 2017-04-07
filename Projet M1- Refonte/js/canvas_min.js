@@ -33,7 +33,7 @@ function GetCoordinates(a) {
     PosX = PosX.toFixed(3);
     PosY = PosY.toFixed(3);
     document.getElementById("omegam0").value = PosX;
-    document.getElementById("omegalambda0").value = PosY;
+    document.getElementById("omegaDE0").value = PosY;
     lance_calc();
 
 }

@@ -1,11 +1,13 @@
 //formule appliquer aux calculs de rungekutta
 function fonction(x){
-	return (-Or/(Math.pow(x,3))-(0.5)*omegam0/(Math.pow(x,2))+x*omegalambda0);
+	w1= Number(document.getElementById("omega1").value);
+	w0= Number(document.getElementById("omega0").value);
+	f=((1.5*Math.pow(x,2)*w1) - (3*(w1+w0+1))*x)*Ya(x) + x*Ya(x);
+	return (-Or/(Math.pow(x,3))-(0.5)*omegam0/(Math.pow(x,2))+ x*Ya(x)*f*omegaDE0);
 }
 
-
-
-function valeurtest4(n, n2){ // 4 valeur test pour Runge-Kutta
+function valeurtest4(n, n2){
+// 4 valeur test pour Runge-Kutta
 	k[0]=fonction(n)*pas;
 	j[0] = n2*pas;
 	
@@ -41,7 +43,7 @@ function rungekutta_neg(n){ // Fonction Runge-Kutta
 
 function runge_adaptatif_neg(n){
 	var delta_x = 1;
-	var precision = 0.0001;
+	var precision = 0.001;
 	while(delta_x > precision){
 		//alert(delta_x+"	"+pas);
 		run_0 = rungekutta_neg(n);

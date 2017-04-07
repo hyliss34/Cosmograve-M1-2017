@@ -16,7 +16,7 @@ function graphique_creation() {
             return d(a.close)
         }),
         b = d3.select("#graphique_svg").style("font-size", "12px").attr("width",wid).attr("height",hei).append("g").attr("transform", "translate(50,30)"),
-        f = proche_bleu ? d3.svg.axis().scale(c).orient("bottom").ticks(0).tickFormat(d3.format("d")) : d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d")),
+        f = d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d")),
         g = d3.svg.axis().scale(d).orient("left").ticks(10);
     data.forEach(function(a) {
         a.date = a.date;
@@ -49,3 +49,4 @@ function graphique_creation() {
     b.append("path").style("stroke", "steelblue").style("stroke-width", "2").style("fill", "none").attr("class", "line").attr("d", e(data));
 
 };
+
