@@ -44,7 +44,7 @@ function calc_energie_noire() {
 	w1 = Number(document.getElementById("omega1_annexes").value);
 	
 	
-	alert("debut dm");
+
 // dm ........................................................................
 	z1 = Number(document.getElementById("z1").value);
 	z2 = Number(document.getElementById("z2").value);
@@ -60,7 +60,7 @@ function calc_energie_noire() {
 	}
 	
 	Eps = 0.00001;
-	console.log("laaaa");
+
 	//calcul de h0 par secondes et par gigaannees
 	au = 149597870700;
 	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
@@ -91,8 +91,7 @@ function calc_energie_noire() {
 	dda=dm1/(1+Number(z1));
 	dl=dm*(1+(z2-z1));
 	
-	console.log(dm1);
-	console.log(dm2);
+
 // TEMPS ................................................
 	w = 0;
 	v = 0;
@@ -187,7 +186,7 @@ function calc_energie_noire() {
 	
 	agebetween = tempsReception - tempsEmission;
 	agebetween_sec = tempsReception_sec - tempsEmission_sec;
-	alert("fin");
+	
 	
 		Tz1=t0*(1+Number(z1));
 	Tz1 = Tz1.toExponential(nbr_precision);
@@ -276,7 +275,7 @@ function calc_energie_noire() {
 	document.getElementById("Orz1").innerHTML = Orz1;
 	document.getElementById("Okz1").innerHTML = Okz1;
 	document.getElementById("Hz1").innerHTML = Hz1;
-	alert("tamere");
+	
 }
 
 // ENERGIE Noire
