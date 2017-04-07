@@ -207,12 +207,11 @@ function Enoire_temps(x,omegam0, omegaDE0, Or){
 // Ya(x)
 
 function Ya(x){
-	w0 = Number(document.getElementById("omega0").value);
-	w1 = Number(document.getElementById("omega1").value);
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
 	
-	if(x==0){return Math.exp(-3*(w1+w0+1)*Math.log(0.000001) -(3*w1*(1-x)))}
 	
-	return Math.exp(-3*(w1+w0+1)*Math.log(x) -(3*w1*(1-x)));
+	return Math.exp(-3*(w1+w0+1)*Math.log(1/(1+x)) -(3*w1*(1-(1/(1+x)))));
 }
 
 
