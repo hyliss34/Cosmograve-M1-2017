@@ -5,7 +5,7 @@ function fonction_integrale(x, omegam0, omegalambda0, Or){
 
 //formule utilis?e pour le calcul de distance metrique
 function fonction_dm(x, omegam0, omegalambda0, Or){
-	return 1.0/Math.pow((Or*Math.pow((1.0+x),4)+omegam0*Math.pow((1+x),3)+(1-Or-omegam0-omegalambda0)*Math.pow((1+x),2)+omegalambda0),(1.0/2.0));
+	return 1.0/Math.pow((Or*Math.pow((1.+x),4)+omegam0*Math.pow((1.+x),3)+(1-Or-omegam0-omegalambda0)*Math.pow((1+x),2)+omegalambda0),(1.0/2.0));
 }
 
 // pour calculer les omegas pour une valeur de z
@@ -17,6 +17,7 @@ function fonction_E(x,omegam0, omegalambda0, Or){
 //fonction de l'equation de simpson 
 function simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or, eps){
 	whole = inetgrate_area_simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or);
+
     return recursive_asr(bornInf, bornSup, fonction, omegam0, omegalambda0, Or, eps, whole);
 }
 
@@ -24,6 +25,7 @@ function inetgrate_area_simpson(bornInf, bornSup, fonction, omegam0, omegalambda
 
 	var centre = (bornInf+bornSup)/2.0;
 	var h3 = Math.abs(bornSup-bornInf)/6.0;
+	console.log(" fct" +fonction(bornSup,omegam0, omegalambda0, Or));
 	return h3*(fonction(bornInf,omegam0, omegalambda0, Or) + 4.0*fonction(centre,omegam0, omegalambda0, Or) + fonction(bornSup,omegam0, omegalambda0, Or));
 
 }

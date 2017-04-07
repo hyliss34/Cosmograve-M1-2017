@@ -34,3 +34,24 @@ function simpson(bornInf, bornSup, n, fonction, omegam0, omegalambda0, Or){
 	
     return S;
 }
+
+function simpson(bornInf, bornSup, n, fonction, omegaDE0, omegalambda0, Or){
+    var S = 0;
+	var somme1 = 0.0;
+	var somme2 = 0.0;
+	var h = (bornSup-bornInf)/n;
+	
+	var xk1 = bornInf+h;
+	var xk2 = bornInf+2.0*h;
+	
+    for (i=1; i<n; i+=2){
+        somme1+=fonction(xk1, omegam0, omegalambda0, Or);
+        somme2+=fonction(xk2, omegam0, omegalambda0, Or);
+        xk1+=2.0*h;
+        xk2+=2.0*h;
+	}
+	somme1+=fonction(xk1, omegam0, omegalambda0, Or);
+	S=(h/3.0)*( fonction(bornInf, omegam0, omegalambda0, Or) + 4.0*somme1 + 2.0*somme2 + fonction(bornSup, omegam0, omegalambda0, Or));
+	
+    return S;
+}
