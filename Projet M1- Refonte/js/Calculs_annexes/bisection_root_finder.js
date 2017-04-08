@@ -86,12 +86,11 @@ function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 	//cette variable possède 2 valeurs [nouveau_zb, contrainte] contrainte =0 ou 1. 0 pour absence de contrainte
 	reconditionneur = espacedefinie(omegam0, omegalambda0, Or); 
 	zb = Number(reconditionneur[0])-0.01;
-	alert("changed? " + zb);
 	contrainte = Number(reconditionneur[1]);
 	dm_za = f_x(za, omegam0, omegalambda0, Or, eps); 
 	dm_zb = f_x(zb, omegam0, omegalambda0, Or, eps);
 	
-	alert("dm_zb " + dm_zb);
+
 	if (Number(dm)===0){
 	  return 0;
 	}
@@ -99,7 +98,6 @@ function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 	if (omegak0 <=0){
 		limit = 0;
 		if (contrainte ==0){
-			alert("you can't be serious");
 			while (dm > dm_zb && limit<100){
 				zb = zb*10;
 				dm_zb = f_x(zb, omegam0, omegalambda0, Or, eps);
@@ -111,10 +109,9 @@ function bisection_method_dm (dm, omegam0, omegalambda0, Or, eps){
 		}
 		//la fonction "fonction_dm" est monotone pour omegak <=0. Si dm est supérieur à dm_zb et que zb est fixé à une valeur maximal permise alors aucune solution ne peut être trouvé
 		if (dm>dm_zb){
-			alert("there's no way");
+
 			return NaN;
 		}
-		alert("it's getting better");
 		Z = dichotomie(za, zb, f_x, dm, ex);
 		return Z;
 	}
@@ -167,14 +164,14 @@ function espacedefinie(omegam0, omegalambda0, Or){
 	
 	//on vérifie à l'avance si E'(x) coupe l'axe des abscisses sur [0;infini)
 	D_prime_za = derive_fonction_E(za,omegam0, omegalambda0, Or);
-	alert(D_prime_za);
+
 	D_prime_zb = derive_fonction_E(zb,omegam0, omegalambda0, Or);
-	alert(D_prime_zb);
+
 	if (D_prime_za*D_prime_zb<0){
 		z_prime = Number(dichotomie(0, zb,derive_fonction_E,0,ex));
 		//si on a E(z_prime)>0 alors E(x) n'a pas de racines et donc aucune contrainte se manifèste pour les intégrales. On conserve zb
 		if (fonction_E(z_prime,omegam0, omegalambda0, Or)>0){
-			alert("this is zb" + zb);
+
 			res = [zb,0];    //0 va être un indicateur qu'on utilisera plus tard qui confirme l'absence des contraintes possibles.
 			return res;
 		}
