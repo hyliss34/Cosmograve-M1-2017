@@ -2,8 +2,8 @@
 function fonction(x){
 	w1= Number(document.getElementById("omega1").value);
 	w0= Number(document.getElementById("omega0").value);
-	f=((1.5*Math.pow(x,2)*w1) - (3*(w1+w0+1))*x)*Ya(x) + x*Ya(x);
-	return (-Or/(Math.pow(x,3))-(0.5)*omegam0/(Math.pow(x,2))+ x*Ya(x)*f*omegaDE0);
+	f=((1.5*Math.pow(x,2)*w1) - (3*(w1+w0+1))*x)*Ya_a(x) + x*Ya_a(x);
+	return (-Or/(Math.pow(x,3))-(0.5)*omegam0/(Math.pow(x,2))+ x*Ya_a(x)*f*omegaDE0);
 }
 
 function valeurtest4(n, n2){
