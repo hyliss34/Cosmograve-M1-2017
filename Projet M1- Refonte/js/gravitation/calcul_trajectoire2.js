@@ -309,7 +309,6 @@ function trajectoire() {
 		for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
 			
 			V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
-			
 			data1.push({date:r,close:V});
 			
 		}
