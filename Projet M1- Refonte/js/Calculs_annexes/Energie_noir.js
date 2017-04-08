@@ -299,6 +299,14 @@ function Enoire_temps(x,omegam0, omegaDE0, Or){
 
 // Ya(x)
 
+function Ya_a(x){
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
+	
+	
+	return Math.exp(-3*(w1+w0+1)*Math.log(x) -(3*w1*(1-x)));
+}
+
 function Ya(x){
 	w0 = Number(document.getElementById("omega0_annexes").value);
 	w1 = Number(document.getElementById("omega1_annexes").value);

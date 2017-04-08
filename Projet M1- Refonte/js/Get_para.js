@@ -68,20 +68,22 @@ function ouvre_calc_Noire_fr(){
 }
 
 function param()
-{window.open("Parametres.html","childWindow","width=550,height=450,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no");
+{var fene = window.open("Parametres.html","childWindow","width=550,height=450,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no");
 }
 
 function param_ang()
 {window.open("Parameters_ang.html","childWindow","width=550,height=450,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no");
 }
 
+
 function enregis(){
 	window.opener.document.getElementById("k_p").value=document.getElementById("k").value;
 	window.opener.document.getElementById("c_p").value=document.getElementById("c").value;
 	window.opener.document.getElementById("G_p").value=document.getElementById("G").value;
 	window.opener.document.getElementById("h_p").value=document.getElementById("h").value;
-	window.opener.document.getElementById("typeannee").value=document.getElementById("typeannee").value;
+	window.opener.document.getElementById("typeannee").value=document.getElementById("type_annee").value;
 	window.opener.document.getElementById("nbr_precision").value=document.getElementById("nbre_chiffres").value;
+	window.close();
 	
 }
 
