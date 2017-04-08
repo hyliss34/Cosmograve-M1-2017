@@ -12,7 +12,7 @@ Changements au 08/04/2017
 	-le 2GM/C pour le rayon de Schwarschild est corrigé.
 	
 	Reste à faire (Dans l'ordre):
-	1-Trajectoire du photons.
+	1-Trajectoire du photons et adaptation du cadre/echelle pour la trajectoire.
 	1-Finition sur l'energie noire ( et correction si les resultats sont faux).
 	2-Metrique de kerr ?
 	3 ou 4-Version anglaise equivalente à la francaise (bien entendu cela se fera une fois TOUTES les fonctionnalités demandées installées et fonctionnelles sur la version francaise)
