@@ -152,23 +152,25 @@ svg{
 	
 }
 
-@media all and (max-device-width: 800px){
+@media all and (max-device-width: 600px){
 	html {
-		width:auto;
+		width:100%;	
 	}
 	#masse,#rayon,#rayon_phy,#vitesse2 {
 		display:block;
 	}
-	#information {
-		
-	}
+
+	/* On affiche pas le graphique sur mobile car probleme de taille (à regler)*/
 	#graphique2 {
-		display:block;
+		display:none;
 		float:none;
 		margin: 0 auto;
 	}
-	#canvas {
+	#myCanvas {
+		width:100%;
+		display:block;
 		margin:0 auto;
 		
 	}
+	
 }

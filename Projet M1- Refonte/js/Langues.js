@@ -56,3 +56,8 @@ function Version_Fr() {
 function Version_Ang() {
 	window.open("index_ang.html");
 }
+
+
+function menu() {
+	document.getElementsByTagName("ul").style.display = "block";
+}

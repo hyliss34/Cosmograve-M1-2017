@@ -1,0 +1,14 @@
+/* CSS Document */
+
+nav {
+	border:2px solid black;
+}
+
+ul {
+	list-style-type: none;
+	border:2px solid blue;
+}
+li {
+	height:20px;
+	border:2px solid red;
+}
