@@ -3,9 +3,9 @@ function graphique_creation_pot(){
 
 	// Set the dimensions of the canvas / graph
 	var margin = {top: 30, right: 0, bottom: 30, left: 80},
-	//chart = d3.select("#grsvg_2");
-	//wid = chart.width;
-	//hei = chart.height;
+	chart = d3.select("#graphique2");
+	wid = chart.width;
+	hei = chart.height;
 	//alert(wid);
 	width = 750 - margin.left - margin.right ,
 	height = 450 - margin.top - margin.bottom;

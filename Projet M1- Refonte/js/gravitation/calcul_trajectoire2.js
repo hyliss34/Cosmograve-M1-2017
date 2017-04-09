@@ -1,8 +1,6 @@
 var Rebond = false;
-var Tabe=new Array();
 function animate(){
 	
-	// Boutons trajectoires (simples et complexe)
 	element = document.params.traj;
 	
 	if (element[1].checked) {
@@ -15,8 +13,7 @@ function animate(){
 		context.stroke();
 		
 		diametre_particule = 4;
-	}
-	else{
+	}else{
 		diametre_particule = 2;
 	}
 
@@ -40,37 +37,31 @@ function animate(){
 		temps_particule += dtau;
 		r_part = rungekutta(dtau);
 
+		if ( r_part < r_phy || r_part == 0) {
 
 
-		if(r_part < r_phy) {
-			// FAIRE BOUM
-			if(Rebond==true){
+			if(Rebond){
 				r_part = r_phy;
-				phi = (c*L*dtau/Math.pow(r_part,2)) +phi;
-				phi = -phi;
-				console.log( "a" +a);
-				posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
-				posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
-				
+				phi = -(phi + 2*Math.PI);
+				console.log(L);
+				console.log(phi);
+
 			}
 			else {
-				arret();
-				Interv = setInterval(animate_explo,10);
+
+
+			console.log("ici");
+			// FAIRE BOUM
+			arret();
+			Interv = setInterval(animate_explo,10);
 			}
-			
 
 		}
-		else {
-			phi = (c*L*dtau/Math.pow(r_part,2)) +phi;
+
+		phi = phi + (c*L*dtau/Math.pow(r_part,2));
+
 		posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
 		posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
-
-		}
-
-
-		// Coordonnées de la particule
-
-	
 
 
 		if(r_part < 0.0) {
@@ -78,9 +69,6 @@ function animate(){
 		}
 
 		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
-
-
-		
 		data2 = [];
 		data2.push({date:r_part,close:V});
 		update_graphique_2();
@@ -328,6 +316,8 @@ function trajectoire() {
 		data2.push({date:rmax,close:V});
 		
 		graphique_creation_pot();
+	}else{
+		myInterval = setInterval(animate,1000/300);
 	}
 }
 
