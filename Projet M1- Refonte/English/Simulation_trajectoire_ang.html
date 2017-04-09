@@ -3,8 +3,8 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<link rel="stylesheet"  href="./Css/Simu_grav.css">
-		<link rel="stylesheet"  href="./Css/menu.css">
+		<link rel="stylesheet"  href="../Css/Simu_grav.css">
+		<link rel="stylesheet"  href="../Css/menu.css">
 		
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 		<script type="text/javascript" async
@@ -12,16 +12,16 @@
   		<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
-		<script src="./Lib/jquery-1.12.3.min.js"></script>
-		<script src="./Lib/math.min.js"></script>
-		<script src="./Lib/d3.js"></script>
-		<script src="./Lib/snap.svg.js"></script>
-		<script src="./Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-		<script src="./js/gravitation/calcul_trajectoire2.js"></script>
-		<script src="./js/gravitation/equation3d.js"></script>
-		<script src="./js/gravitation/Runge_Kutta2.js"></script>
-		<script src="./js/gravitation/stopper.js"></script>
-		<script src="./js/gravitation/graphe_potentiel.js"></script>
+		<script src="../Lib/jquery-1.12.3.min.js"></script>
+		<script src="../Lib/math.min.js"></script>
+		<script src="../Lib/d3.js"></script>
+		<script src="../Lib/snap.svg.js"></script>
+		<script src="../Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+		<script src="../js/gravitation/calcul_trajectoire2.js"></script>
+		<script src="../js/gravitation/equation3d.js"></script>
+		<script src="../js/gravitation/Runge_Kutta2.js"></script>
+		<script src="../js/gravitation/stopper.js"></script>
+		<script src="../js/gravitation/graphe_potentiel.js"></script>
 		<script type="text/javascript">
 			pause = true;
 			debut = true;
@@ -99,6 +99,11 @@
 										 <input type="radio" name="traj" value="complet" checked >Complete trajectory 
   										 <input type="radio" name="traj" value="simple" >Simple trajectory
 									</span>
+									<span id="rebond">Rebond:
+									<input type="radio" name ="bond" value = "oui">oui
+									<input type="radio" name="bond" value= "non" checked>non
+								</span>
+							
 							
 				</form>
 			</div>

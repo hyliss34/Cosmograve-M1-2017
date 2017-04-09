@@ -2,12 +2,12 @@ function graphique_creation_pot(){
 	
 
 	// Set the dimensions of the canvas / graph
-	var margin = {top: 30, right: 20, bottom: 30, left: 50},
+	var margin = {top: 30, right: 0, bottom: 30, left: 80},
 	//chart = d3.select("#grsvg_2");
 	//wid = chart.width;
 	//hei = chart.height;
 	//alert(wid);
-	width = 550 - margin.left - margin.right,
+	width = 750 - margin.left - margin.right ,
 	height = 450 - margin.top - margin.bottom;
 	
 	// Set the ranges
@@ -45,7 +45,7 @@ function graphique_creation_pot(){
 	});
 	//alert(data);
 	// Scale the range of the data
-	x.domain(d3.extent(data1, function(d) { return d.date; }));
+	x.domain(d3.extent(data1, function(d) { return d.date }));
 	y.domain([0, d3.max(data1, function(d) { return d.close; })]);
 	
 	// Add the X Axis
@@ -56,13 +56,13 @@ function graphique_creation_pot(){
 	
 	
 	svg.selectAll("line.x")
-	.data(x.ticks(10))
+	.data(x.ticks(8))
 	.enter().append("line")
 	.attr("class", "x")
 	.attr("x1", x)
 	.attr("x2", x)
 	.attr("y1", 0)
-	.attr("y2", 390)
+	.attr("y2", height)
 	.style("stroke", "#ccc");
 	
 	svg.selectAll("line.y")
@@ -83,7 +83,7 @@ function graphique_creation_pot(){
 	
 	svg.append("text")
 	.attr("class", "legend_titre")
-	.attr("x", 175)
+	.attr("x", 240)
 	.attr("y", -15)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
@@ -91,7 +91,7 @@ function graphique_creation_pot(){
 	
 	svg.append("text")
 	.attr("class", "legend_axe")
-	.attr("x", 225)
+	.attr("x", 350)
 	.attr("y", 420)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
@@ -99,8 +99,8 @@ function graphique_creation_pot(){
 	
 	svg.append("text")
 	.attr("class", "legend_axe")
-	.attr("x", -225)
-	.attr("y", -40)
+	.attr("x", -235)
+	.attr("y", -50)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(-90)")
 	.text("V(r)");

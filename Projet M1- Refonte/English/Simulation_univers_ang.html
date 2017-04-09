@@ -2,51 +2,47 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width"/>
-	<link rel="stylesheet" href="Css/Simu-univers.css"/>
+	<link rel="stylesheet" href="../Css/Simu-univers.css"/>
 	
 	
-	<script src="./js/Spin.js"></script>
-	<script src="./Lib/Spin/spin-min.js"></script>
-	<script src="./Lib/Spin/spin.js"></script>
+	<script src="../js/Spin.js"></script>
+	<script src="../Lib/Spin/spin-min.js"></script>
+	<script src="../Lib/Spin/spin.js"></script>
 	
 
-	<!--<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">-->
-	<!--<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">-->
-	<script src="./js/Get_para.js"></script>
-	<script src="./js/main_calcul.js"></script>
-	<script src="./js/canvas_min.js"></script>
-	<script src="./js/graphique_min.js"></script>
-	<script src="./js/integrale.js"></script>
-	<script src="./js/rungekutta.js"></script>
-	<script src="./js/ddl_canvas_min.js"></script>
-	<script src="./js/canvas_h0neg_min.js"></script>
+	<script src="../js/Get_para.js"></script>
+	<script src="../js/English/main_calcul_ang.js"></script>
+	<script src="../js/canvas_min.js"></script>
+	<script src="../js/graphique_min_ang.js"></script>
+	<script src="../js/integrale.js"></script>
+	<script src="../js/rungekutta.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
 	<script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-	<script src="./Lib/jquery-1.12.3.min.js"></script>
-	<script src="./Lib/d3_min.js"></script>
+	<script src="../Lib/jquery-1.12.3.min.js"></script>
+	<script src="../Lib/d3_min.js"></script>
 </head>
-<body id="MASQUE">
+<body>
 
 
 <!-- Menus -->
 <ul class="topnav">
-  <li><a href="index.html">Home</a></li>
+  <li><a href="index_ang.html">Home</a></li>
   <li class="deroule">
-  	<a class="active" href="#news">Univers</a>
+  	<a class="active" href="#news">Universe</a>
 	<div class="deroule-contenu">
-		<a href="Univers-theo.html">Theorie</a>
-		<a href="Simulation_univers.html">Simulation</a>
+		<a href="Univers_theo_ang.html">Theorie</a>
+		<a href="Simulation_univers_ang.html">Simulation</a>
 	</div>
   </li>
   <li class="deroule">
-	<a href="#">Trajectoires</a>
+	<a href="#">Trajectories</a>
 	<div class="deroule-contenu">
-		<a href="Trajectoire-the.html">Theorie</a>
-		<a href="Simulation_trajectoire.html">Simulation</a>
+		<a href="Trajectoire_theo_ang.html">Theorie</a>
+		<a href="Simulation_trajectoire_ang.html">Simulation</a>
 	</div>
   </li> 
 </ul>
@@ -54,7 +50,8 @@
 
 <!-- Boutons Calculs annexes et params -->
 <div id="Boutons_top_right" >
-		<input id="para"  type="button"  OnClick="param()"></input>
+		<input id="para"  type="button"  OnClick="param_ang()"></input>
+	<form method="get" action="Calculs_ang.html" id="calc_form" target="Calculs">
 	<!-- paramètre tracer -->
 	<input type="hidden" id="T0calc" name="T0_calc" value="2.7255"/>
 	<input type="hidden" id="H0calc"  name="H0_calc" value="67.74"/>
@@ -72,9 +69,8 @@
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" value="Calculs annexes" id="calc" onclick="ouvre_calc_fr()"></input>
-
-	<input type="submit" value="E Noire" id="calc" onclick="ouvre_calc_Noire_fr()"></input>
+	<input type="submit" value="Adjunct computation" id="calc"></input>
+	</form>
 </div>
 	
 
@@ -82,39 +78,41 @@
 	<div class="inp">
 	<label>T<sub>0</sub>(K) =</label>
 	<!-- Onchange pour actuliser les paramètre envoyés par le formulaire a chaque changement -->
-	<input id="T0" type="text" value="2.7255" onChange="document.getElementById('T0calc').value = this.value"></input>
+	<input id="T0" type="text" value="2.7255" onChange="document.getElementById('T0_calc').value = this.value"></input>
 	</div>
 	
 	<div class="inp">
 	<label>&nbsp;&nbsp; H<sub>0</sub> =  </label>
-	<input id="H0" type="text" value="67.74" onChange="document.getElementById('HOcalc').value = this.value"></input>
+	<input id="H0" type="text" value="67.74" onChange="document.getElementById('HO_calc').value = this.value"></input>
 	</div>
 	
 	<div class="inp">
 	<label>Ω<sub>m0</sub> = </label>
-	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Omcalc').value = this.value"></input>
+	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Om_calc').value = this.value"></input>
 	</div>
 	
 	<div class="inp">
 	<label>Ω<sub>Λ0</sub> = </label>
-	<input id="omegalambda0" type="text" value="0.6911" onChange="document.getElementById('Olcalc').value = this.value"></input>
+	<input id="omegalambda0" type="text" value="0.6911" onChange="document.getElementById('Ol_calc').value = this.value"></input>
     </div>
 </div>
 
 
 <div id="coche_sim">
-	<input id="grille" type="checkbox" checked="checked"> Afficher Grille </input>
-	<input id="univ_plat"  type="checkbox" name="univ_plat">Univers plat(Ω<sub>k</sub> = 0) </input>
+	<input id="grille" type="checkbox" checked="checked"> Show grill </input>
+	<input id="univ_plat"  type="checkbox" name="univ_plat">Flat Universe(Ω<sub>k</sub> = 0) </input>
 </div>
+
+
 <div id="type_sim">
 	<select id="liste">
-		<option>Matière et Lambda</option>
-		<option>Matière, Lambda et RFC</option>
-		<option>Matière, Lambda, RFC et Neutrinos</option>
+		<option>Matter and Lambda</option>
+		<option>Matter, Lambda and RFC</option>
+		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
 </div>
 <div id="trace_box">
-<input type="button" id="trace" onClick="lance_calc();" value="Tracer"></input>
+<input type="button" id="trace" onClick="lance_calc();" value="Draw"></input>
 <div id="gif" style="position:relative;display: inline-block;margin-left: 13px;"></div>
 </div>
 
@@ -132,8 +130,8 @@
 &Omega;<sub>k0</sub> = <span id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value"></span><br />
 <span id="resultat_ageunivers"></span><br />
 <span id="resultat_bigcrunch"></span><br />
-Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-<a id="dl" download="Cosmograve.png" href="#">Enregistrer Graphique en </a>
+Duration of the Universe = <span id="resultat_dureeuniv"></span><br />
+<a id="dl" download="Cosmograve.png" href="#">Save graphic </a>
 <select id="type" size="1">
 	<option value="png">png
 	<option value="bmp">bmp
@@ -145,7 +143,7 @@ Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
 		
 <!-- GRAPHIQUE-->
 <div id="graphique">
-	<svg id="graphique_svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet"></svg>
+	<svg id="graphique_svg" viewBox="0 0 750 500" preserveAspectRatio="xMinYMin meet"></svg>
 </div>
 
 <!-- Canvas -->
@@ -154,8 +152,8 @@ Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
 </div>
 
 
-<script src="./js/univers_plat_min.js"></script>
-<script src="./js/canvas_h0neg_min.js"></script>
+<script src="../js/univers_plat_min.js"></script>
+<script src="../js/canvas_h0neg_min.js"></script>
 <script type="text/javascript">
 
 canvas  = document.getElementById('canvas');
@@ -163,7 +161,7 @@ context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
 
-document.getElementById("dl").addEventListener('click', dlCanvas, false);
+//document.getElementById("dl").addEventListener('click', dlCanvas, false);
 	
 //genere le premier graphique des generatrices et lance le 1er calcul
 update_modele();
@@ -175,7 +173,5 @@ myImg.onmousedown = GetCoordinates;
 </script>
 <br/>
 <p style="float:right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
-
-
 </body>
 </html>

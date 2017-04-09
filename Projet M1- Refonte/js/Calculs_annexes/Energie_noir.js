@@ -11,43 +11,43 @@ function calc_energie_noire() {
 	t0 = Number(document.getElementById("T0_annexes").value);
 	h0 = Number(document.getElementById("H0_annexes").value); 
 	omegam0 = Number(document.getElementById("omegam0_annexes").value);
-	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
-	omegalambda0 = omegalambda0.toExponential();
-	Or = document.getElementById("resultat_omegar0_annexes").value;
+	omegaDE0 = Number(document.getElementById("omegaDE0_annexes").value)
+	a = document.getElementById("resul_omegar0");
 	
 	
+
 	Or = 0;
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else if (document.getElementById("resultat_omegar0_annexes").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else {
 	}
 	
-	
+	a.value =Or;
+	a.innerHTML = Or;
 	//calcul de omegak
-	omegak0 = 1-Or-omegam0-omegalambda0;
+	omegak0 = 1-Or-omegam0-omegaDE0;
 	document.getElementById("resultat_omegak0_annexes").innerHTML = omegak0;
-	alert(omegak0);
-	omegade0 = omegalambda0;
+	
 
 	
 	//Energie Noire
-	w0 = Number(document.getElementById("w0").value);
-	w1 = Number(document.getElementById("w1").value);
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
 	
 	
-	alert("debut dm");
+
 // dm ........................................................................
-	z1 = 1e8;
-	z2 = 1e8;
+	z1 = Number(document.getElementById("z1").value);
+	z2 = Number(document.getElementById("z2").value);
 	//definition du type d'annee
 	if(typeannee == "Sidérale"){
 		nbrjours = 365.256363051;
@@ -68,22 +68,20 @@ function calc_energie_noire() {
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
 	if (omegak0>0){
-		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
-		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
+		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps);
+		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps);
 
 		dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
 		dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
 
 		}else if (omegak0==0){
 
-		dm1=(c/(H0parsec) * simpson(0, Number(z1), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps));
-		dm2=(c/(H0parsec) * simpson(0, Number(z2), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps));
-			alert(dm1);
+		dm1=(c/(H0parsec) * simpson(0, Number(z1), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps));
+		dm2=(c/(H0parsec) * simpson(0, Number(z2), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps));
 
 		}else{
-
-		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
-		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), Enoire, omegam0, Number(omegalambda0), Number(Or),Eps);
+		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps);
+		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), Enoire, omegam0, Number(omegaDE0), Number(Or),Eps);
 		
 		dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
 		dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
@@ -93,7 +91,7 @@ function calc_energie_noire() {
 	dda=dm1/(1+Number(z1));
 	dl=dm*(1+(z2-z1));
 	
-	alert("fin dm");
+
 // TEMPS ................................................
 	w = 0;
 	v = 0;
@@ -112,13 +110,13 @@ function calc_energie_noire() {
         if(Or > 0)      { 
 
         if(z2 <= 5e6){  
-                     if(omegalambda0 >= Olambdalim) {
-                     tempsReception = simpson(1/(1+z2), 1, temps_parcours,Number(Or), omegam0,Number(omegak0),Number(omegalambda0)) ;//<-----------------------------A  VOIR
+                     if(omegaDE0 >= Olambdalim) {
+                     tempsReception = simpson(1/(1+z2), 1, temps_parcours,Number(Or), omegam0,Number(omegak0),Number(omegaDE0)) ;//<-----------------------------A  VOIR
                      }else{
-		     tempsReception = simpson(Number(z2), 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
+		     tempsReception = simpson(Number(z2), 5e6, Enoire_temps, omegam0, Number(omegaDE0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
 	}else{
-                     if(omegalambda0 >= Olambdalim) {
-                     tempsReception = simpson(0, 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z2,2));//<-----------------------------
+                     if(omegaDE0 >= Olambdalim) {
+                     tempsReception = simpson(0, 5e6, Enoire_temps, omegam0, Number(omegaDE0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z2,2));//<-----------------------------
                      }else{
           	     tempsReception = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z2, 2)))   };//<------------------------------
 	}
@@ -126,13 +124,13 @@ function calc_energie_noire() {
 
 
         if(z1 <= 5e6){  
-                     if(omegalambda0 >= Olambdalim) {
-                     tempsEmission = simpson(0, z1, fonction_integrale_enoire, omegam0, Number(omegalambda0), Number(Or),Eps);//<-----------------------------
+                     if(omegaDE0 >= Olambdalim) {
+                     tempsEmission = simpson(0, z1, Enoire_temps, omegam0, Number(omegaDE0), Number(Or),Eps);//<-----------------------------
                      }else{
-		     tempsEmission = simpson(Number(z1), 5e6, fonction_integrale_enoire	, omegam0, Number(omegalambda0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
+		     tempsEmission = simpson(Number(z1), 5e6, Enoire_temps	, omegam0, Number(omegaDE0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
 	}else{
-                     if(omegalambda0 >= Olambdalim) {
-                     tempsEmission = simpson(0, 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z1,2));//<-----------------------------
+                     if(omegaDE0 >= Olambdalim) {
+                     tempsEmission = simpson(0, 5e6, Enoire_temps, omegam0, Number(omegaDE0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z1,2));//<-----------------------------
                      }else{
           	     tempsEmission = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z1, 2)))   };//<------------------------------
 	}
@@ -144,12 +142,12 @@ function calc_energie_noire() {
        if(Or == 0 && omegam0 != 0)      {  
 
         if(z2 <= 5e6){
-		tempsReception = simpson(Number(z2), 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), 0.,Eps)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<-----------------------
+		tempsReception = simpson(Number(z2), 5e6, Enoire_temps, omegam0, Number(omegaDE0), 0.,Eps)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<-----------------------
 	}else{
 		tempsReception = (1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(z2, 3/2)));//<------------------------------
 	}
 	if(z1 <= 5e6){
-		tempsEmission = simpson(Number(z1), 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), 0.,Eps)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<--------------------------
+		tempsEmission = simpson(Number(z1), 5e6, Enoire_temps, omegam0, Number(omegaDE0), 0.,Eps)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<--------------------------
 	}else{
 		tempsEmission = (1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(z1, 3/2)));//<---------------------------------------
 	}
@@ -160,12 +158,12 @@ function calc_energie_noire() {
         if(Or == 0 && omegam0== 0 && omegak0 != 0)      {  
 
         if(z2 <= 5e6){
-		tempsReception = simpson(Number(z2), 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), 0.,Eps)+1/(Math.pow(omegak0, 1/2)*5e6);//<-----------------------
+		tempsReception = simpson(Number(z2), 5e6, Enoire_temps, omegam0, Number(omegaDE0), 0.,Eps)+1/(Math.pow(omegak0, 1/2)*5e6);//<-----------------------
 	}else{
 		tempsReception = 1/(Math.pow(omegak0, 1/2)*z2);//<------------------------------
 	}
 	if(z1 <= 5e6){
-		tempsEmission = simpson(Number(z1), 5e6, fonction_integrale_enoire, omegam0, Number(omegalambda0), 0.,Eps)+1/(Math.pow(omegak0, 1/2)*5e6);//<--------------------------
+		tempsEmission = simpson(Number(z1), 5e6, Enoire_temps, omegam0, Number(omegaDE0), 0.,Eps)+1/(Math.pow(omegak0, 1/2)*5e6);//<--------------------------
 	}else{
 		tempsEmission = 1/(Math.pow(omegak0, 1/2)*z1);//<---------------------------------------
 	}
@@ -174,8 +172,8 @@ function calc_energie_noire() {
 					  
 	if(Or == 0 && omegam0== 0 && omegak0 == 0)      {  
 
-       			tempsReception =Math.log(1+z2)/Math.pow(omegalambda0, 1/2) ;//<------------------------------
-			    tempsEmission = Math.log(1+z1)/Math.pow(omegalambda0, 1/2);//<---------------------------------------
+       			tempsReception =Math.log(1+z2)/Math.pow(omegaDE0, 1/2) ;//<------------------------------
+			    tempsEmission = Math.log(1+z1)/Math.pow(omegaDE0, 1/2);//<---------------------------------------
 	            }				  
 
 
@@ -188,19 +186,19 @@ function calc_energie_noire() {
 	
 	agebetween = tempsReception - tempsEmission;
 	agebetween_sec = tempsReception_sec - tempsEmission_sec;
-	alert("fin");
+	
 	
 		Tz1=t0*(1+Number(z1));
 	Tz1 = Tz1.toExponential(nbr_precision);
-	Omz1=omegam0*Math.pow(1+Number(z1),3)/Enoire_norm(Number(z1),omegam0, Number(omegalambda0), Or);
+	Omz1=omegam0*Math.pow(1+Number(z1),3)/Enoire_norm(Number(z1),omegam0, Number(omegaDE0), Or);
 	Omz1 = Omz1.toExponential(nbr_precision);
-	Olz1=Number(omegalambda0)/Enoire_norm(Number(z1),omegam0, Number(omegalambda0), Or);
+	Olz1=Number(omegaDE0)/Enoire_norm(Number(z1),omegam0, Number(omegaDE0), Or);
 	Olz1 = Olz1.toExponential(nbr_precision);
-	Orz1=Or*Math.pow(1+Number(z1),4)/Enoire_norm(Number(z1),omegam0, Number(omegalambda0), Or);
+	Orz1=Or*Math.pow(1+Number(z1),4)/Enoire_norm(Number(z1),omegam0, Number(omegaDE0), Or);
 	Orz1 = Orz1.toExponential(nbr_precision);
-	Okz1=omegak0*Math.pow(1+Number(z1),2)/Enoire_norm(Number(z1),omegam0, Number(omegalambda0), Or);
+	Okz1=omegak0*Math.pow(1+Number(z1),2)/Enoire_norm(Number(z1),omegam0, Number(omegaDE0), Or);
 	Okz1 = Okz1.toExponential(nbr_precision);
-	Hz1=h0*Math.pow(Enoire_norm(Number(z1),omegam0, Number(omegalambda0), Or),0.5);
+	Hz1=h0*Math.pow(Enoire_norm(Number(z1),omegam0, Number(omegaDE0), Or),0.5);
 	Hz1 = Hz1.toExponential(nbr_precision);
 
 
@@ -277,50 +275,44 @@ function calc_energie_noire() {
 	document.getElementById("Orz1").innerHTML = Orz1;
 	document.getElementById("Okz1").innerHTML = Okz1;
 	document.getElementById("Hz1").innerHTML = Hz1;
-	alert("tamere");
+	
 }
 
-// ENERGIE
+// ENERGIE Noire
 
-function a() {
-	alert(omegaDE(1));
+
+function Enoire_norm(x,omegam0, omegaDE0, Or){
+	omegak0 = 1 - Or - omegam0 -omegaDE0;
+	return (omegaDE0*Ya(x) + omegak0*(Math.pow((1.+x),2)) + omegam0*(Math.pow((1.+x),3)) + Or*(Math.pow((1.+x),4)));
+}
+function Enoire(x,omegam0, omegaDE0, Or) {
+	omegak0 = 1 - Or - omegam0 -omegaDE0;
+	return 1/Math.pow((omegaDE0*Ya(x) + omegak0*(Math.pow((1.+x),2)) + omegam0*(Math.pow((1.+x),3)) + Or*(Math.pow((1.+x),4))),1/2);
+
+}
+
+function Enoire_temps(x,omegam0, omegaDE0, Or){
+	return Enoire(x,omegam0,omegaDE0,Or)/(1+x);
 }
 
 
-function Enoire(x,omegam0, omegalambda0, Or) {
-	omegak0 = 1-Or-omegalambda0-omegam0;
-	f =omegaDE(x)*Ya(x)+ omegak0/(x*x) + omegam0/Math.pow(x,3) + Or/Math.pow(x,4); // OMEGADE0 ......;
-	return 1/Math.pow(f,0.5);
-}
-
-
-function Enoire_norm(x,omegam0, omegalambda0, Or) {
-	omegak0 = 1-Or-omegalambda0-omegam0;
-	f = omegaDE(x)*Ya(x) + omegak0/(x*x) + omegam0/Math.pow(x,3) + Or/Math.pow(x,4); // OMEGADE0 ......;
-	return f;
-}
-function fonction_integrale_enoire(x, omegam0, omegalambda0, Or){
-	return (1.0/(1.0+x))*Enoire(x,omegam0,omegalambda0,Or);
-}
 
 // Ya(x)
 
-function Ya(x){
-	w0 = Number(document.getElementById("w0").value);
-	w1 = Number(document.getElementById("w1").value);
+function Ya_a(x){
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
 	
-	return Math.exp(-3*(w1+w0+1)*Math.log(x) -3*w1*(1-x));
+	
+	return Math.exp(-3*(w1+w0+1)*Math.log(x) -(3*w1*(1-x)));
 }
 
-function omegaDE(x){
-	w0 = Number(document.getElementById("w0").value);
-	w1 = Number(document.getElementById("w1").value);
-	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
-	if(w1==0 && w0==-1){
-		return omegalambda0;
-		
-	}
-	else {
-		return Ya(x)*omegalambda0;
-	}
+function Ya(x){
+	w0 = Number(document.getElementById("omega0_annexes").value);
+	w1 = Number(document.getElementById("omega1_annexes").value);
+	
+	
+	return Math.exp(-3*(w1+w0+1)*Math.log(1/(1+x)) -(3*w1*(1-(1/(1+x)))));
 }
+
+

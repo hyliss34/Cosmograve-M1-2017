@@ -12,6 +12,17 @@ function appa_grav_fr()
 		theo.setAttribute('data','./Data-pages/theorie_gravitation.html');
 	}
 
+function ang_appa_grav_ang()
+	{
+		theo=document.getElementById("theorie");
+		theo.setAttribute('data','../Data-pages/theo_grav_ang.html');
+	}
+function ang_appa_grav_fr()
+	{
+		theo=document.getElementById("theorie");
+		theo.setAttribute('data','../Data-pages/theorie_gravitation.html');
+	}
+
 //COSMOLOGIE
 function appa_cosmo_ang()
 	{
@@ -23,6 +34,18 @@ function appa_cosmo_fr()
 		theo=document.getElementById("theorie");
 		theo.setAttribute('data','./Data-pages/theorie_cosmologie.html');
 	}
+function angv_appa_fr()
+	{
+		theo=document.getElementById("theorie");
+		theo.setAttribute('data','../Data-pages/theorie_cosmologie.html');
+	}
+
+	function angv_appa_ang()
+	{
+		theo=document.getElementById("theorie");
+		theo.setAttribute('data','../Data-pages/theo_cosmo_ang.html');
+	}
+	
 
 //INDEX
 

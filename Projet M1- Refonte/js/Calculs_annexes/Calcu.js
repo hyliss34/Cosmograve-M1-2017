@@ -44,7 +44,6 @@ function calcu(){
 		}else{
 		nbrjours = 365.2425;
 	}
-	
 	Eps = 0.00001;
 
 	//calcul de h0 par secondes et par gigaannees

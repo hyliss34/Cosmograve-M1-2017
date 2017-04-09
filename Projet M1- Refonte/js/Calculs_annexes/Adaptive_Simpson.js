@@ -1,6 +1,6 @@
 //formule utilis?e pour le calcul de l'age de l'univers
 function fonction_integrale(x, omegam0, omegalambda0, Or){
-	return (1.0/(1.0+x)) * Math.pow(Or*Math.pow(1.0+x, 4) + omegam0*Math.pow(1.0+x, 3) - (omegalambda0 + Or + omegam0 - 1.0)*Math.pow(1.0+x, 2) + omegalambda0, -1.0/2);
+	return (1.0/(1.0+x)) * Math.pow(Or*Math.pow(1.0+x, 4) + omegam0*Math.pow(1.0+x, 3) - (omegalambda0 + Or + omegam0 - 1.0)*Math.pow(1.0+x, 2) + omegalambda0, (-1.0/2));
 }
 
 //formule utilis?e pour le calcul de distance metrique
@@ -8,9 +8,15 @@ function fonction_dm(x, omegam0, omegalambda0, Or){
 	return 1.0/Math.pow((Or*Math.pow((1.0+x),4)+omegam0*Math.pow((1+x),3)+(1-Or-omegam0-omegalambda0)*Math.pow((1+x),2)+omegalambda0),(1.0/2.0));
 }
 
-// pour calculer les omegas pour une valeur de z
+// pour calculer les bornes de la région sur laquelle l'intégrale des fonctions ci-dessus est définie.
 function fonction_E(x,omegam0, omegalambda0, Or){
-	return (Or*Math.pow(1.0+x,4)+omegam0*Math.pow(1.0+x,3)+(1-omegam0-omegalambda0-Or)*Math.pow(1.0+x,2)+omegalambda0) ;}
+	return (Number(Or)*Math.pow((1+x),4) + Number(omegam0)*Math.pow((1+x),3) + (1-Number(omegam0)-Number(Or)-Number(omegalambda0))*Math.pow((1+x),2) + Number(omegalambda0));
+}
+
+function derive_fonction_E(x,omegam0, omegalambda0, Or){
+	return (Or*(Math.pow(1.0+x,2) + 8*x + 2) + 3 *omegam0*x + omegam0 -2*omegalambda0 + 2);
+}
+	
 
 
 

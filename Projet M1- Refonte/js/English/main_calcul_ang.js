@@ -41,17 +41,18 @@ function calcul(){   // fonction principale de cosmograve
 	
 	//on calcule omegar si besoin
 	Or = 0;
+
 	if (document.getElementById("liste").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
 		Or=1.68*Or;
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else if (document.getElementById("liste").options[1].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
 		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-		Or = Or.toExponential();
+		Or = Or.toExponential(3);
 		} else {
 	}
 	
@@ -92,7 +93,7 @@ function calcul(){   // fonction principale de cosmograve
 		}else{
 		Or = 0;
 	}
-	
+	Eps = 0.00001;
 	omegak0_afficher = Number(omegak0).toFixed(6);
 	
 	//affiche les imformations sur les paramètres cosmologiques de la simulation
@@ -104,9 +105,9 @@ function calcul(){   // fonction principale de cosmograve
 	if(omegam0 != 0 && omegalambda0 != 1){
 		//calcul de l'age de l'univers
 		if(Or != 0 && t0 >= 2){
-			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or)) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)));
+			age_sec = simpson(0, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or)) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)),Eps);
 		}else{
-			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+			age_sec = simpson(0, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps);
 		}
 		age_sec = age_sec*(1./H0parsec);
 		//on le passe en gigaannees
