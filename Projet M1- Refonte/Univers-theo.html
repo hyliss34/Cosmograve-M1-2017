@@ -6,27 +6,66 @@
 	<link rel="stylesheet" href="Css/theo.css"/>
 
 	<script src="./js/Langues.js"></script>
+<!-- MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+																								-->
+<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/ie8-core.min.css">
+    <link rel="stylesheet" href="css/ie8-layout.min.css">
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+    <script src="js/Menu/rem.min.js"></script>
+
+</head>
+
 <body>
 
-<ul class="topnav">
-  <li><a href="index.html">Home</a></li>
-  <li class="deroule">
-  	<a class="active" href="#news">Univers</a>
-	<div class="deroule-contenu">
-		<a href="Univers-theo.html">Theorie</a>
-		<a href="Simulation_univers.html">Simulation</a>
-	</div>
-  </li>
-  <li class="deroule">
-	<a href="#">Trajectoires</a>
-	<div class="deroule-contenu">
-		<a href="Trajectoire-the.html">Theorie</a>
-		<a href="Simulation_trajectoire.html">Simulation</a>
-	</div>
-  </li> 
-</ul>
+
+<header>
+    <h1>Cosmograve</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Univers</a>
+            <ul>
+                <li><a href="Univers-theo.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers.html">Standard</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Noire</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectoire</a>
+            <ul>
+                <li><a href="Trajectoire-the.html">Theorie</a></li>
+				<li><a href="Simulation_trajectoire.html">Simulation</a></li>
+            </ul>
+        </li>
+       
+    </ul>
+</nav>
+<br/>
 	<input type="button" id="ang" value="English" onclick="appa_cosmo_ang()">
 	<input type="button" id="fr" value="Français" onclick="appa_cosmo_fr()"/>
 	<object id="theorie" type="text/html" data="./Data-pages/theorie_cosmologie.html" width="100%" height="100%"></object>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/Menu/nav.jquery.min.js"></script>
+<script>
+    $('.nav').nav();
+</script>
+
 </body>
 </html>
