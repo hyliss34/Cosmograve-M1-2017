@@ -47,6 +47,7 @@ ul.topnav li a.active {background-color: #4CAF50;}
 
 .deroule:hover .deroule-contenu {display: block;}
 
+
 /* Responsive Design  (adapté aux Smartphones)*/
 @media screen and (max-width: 600px){
     ul.topnav li.right, 
@@ -54,6 +55,8 @@ ul.topnav li a.active {background-color: #4CAF50;}
 	.deroule-contenu {width:100%;}
 	
 }
+#pasla ul {display:none;}
+#pasla #simm:active ul {display:block;}
 
 
 /* ----------------------------------------------------------------------------*/
