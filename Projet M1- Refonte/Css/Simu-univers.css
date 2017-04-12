@@ -30,6 +30,12 @@ html, body {
 	display: block;
 	width:100%;
 }
+#trace,#calc{margin-top:5px;}
+#para {
+	margin-right:5px;
+	margin-top:10px;
+	margin-left:5px;
+}
 #para {
 	float:right;
 	width:30px;
@@ -52,39 +58,47 @@ html, body {
 	border:1px double black;
 }
 /* Style des boutons */
+.myButton {
+	-moz-box-shadow:inset 0px 0px 4px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 0px 4px 0px #f5978e;
+	box-shadow:inset 0px 0px 4px 0px #f5978e;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+	background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
+	background-color:#f24537;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:7px 23px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+	background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:-ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537',GradientType=0);
+	background-color:#c62d1f;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
 
-
-input[type="button"], input[type=submit], input[type=reset], button, .button {
-	padding: 5px 15px;
-	margin: 3px 4px;
-	color: #171717;
-	font-size: 13px;
-	cursor: pointer;
-	background: #A2A2A2;
-	background: linear-gradient(top, #A2A2A2 0%, #898989 100%);
-	background: -moz-linear-gradient(top, #A2A2A2 0%, #898989 100%);
-	background: -webkit-linear-gradient(top, #A2A2A2 0%, #898989 100%);
-	background: -o-linear-gradient(top, #A2A2A2 0%, #898989 100%);
-	border: 1px solid #4D4D4D;
-	border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-o-border-radius: 8px;
-	box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
-	-moz-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
-	-webkit-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
-	-o-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
-	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.50);
-}
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button:hover {
-	background: linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
-	background: -moz-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
-	background: -webkit-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
-	background: -o-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
-}
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button:active{
-	opacity:0.8;
-}
 
 /*------*/
 

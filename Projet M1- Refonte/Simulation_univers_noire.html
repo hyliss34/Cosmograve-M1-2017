@@ -3,7 +3,6 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width"/>
 	<link rel="stylesheet" href="Css/Simu-univers.css"/>
-	<link rel="stylesheet" href="Css/menu.css"/>
 	
 	
 	<script src="./js/Spin.js"></script>
@@ -81,7 +80,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 <!-- Boutons Calculs annexes et params -->
 <div id="Boutons_top_right" >
-		<input id="para"  type="button"  OnClick="param()"></input>
+		<input id="para" type="button"  OnClick="param()"></input>
 	<!-- paramètre tracer -->
 	<input type="hidden" id="T0calc" name="T0_calc" value="2.7255"/>
 	<input type="hidden" id="H0calc"  name="H0_calc" value="67.74"/>
@@ -99,7 +98,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" value="Calculs annexes Noire" id="calc" onclick="ouvre_calc_Noire_fr()"></input>
+	<input type="submit" class="myButton" value="Calculs annexes Noire" id="calc" onclick="ouvre_calc_Noire_fr()"></input>
 
 </div>
 	
@@ -146,7 +145,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	</select>
 </div>
 <div id="trace_box">
-<input type="button" id="trace" onClick="Lancer_calc();" value="Tracer"></input>
+<input type="button" id="trace" class="myButton" onClick="Lancer_calc();" value="Tracer"></input>
 <div id="gif" style="position:relative;display: inline-block;margin-left: 13px;"></div>
 </div>
 
