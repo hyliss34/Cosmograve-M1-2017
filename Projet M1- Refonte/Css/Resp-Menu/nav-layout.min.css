@@ -58,8 +58,8 @@ header {
     z-index: 901;
     padding-left: 10px;
     line-height: 4.4rem;
-    background: #26201C;
-    color: #A69A94
+    background: #e34e11;
+    color:white;
 }
 header h1 {
     margin: 0;
@@ -81,7 +81,7 @@ header h1:before {
     cursor: pointer;
     text-decoration: none;
     line-height: 4.4rem;
-    background: #26201C;
+    background: #e34e11;
     color: white;
 }
 .nav-button:before,
@@ -134,7 +134,7 @@ header h1:before {
 .nav li.nav-active>a,
 .nav li:hover>a {
     color: white;
-    background: #2E2722
+    background: #493e36;
 }
 .nav .nav-submenu>ul {
     margin-left: 10px
