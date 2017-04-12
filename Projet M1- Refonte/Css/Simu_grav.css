@@ -80,6 +80,12 @@ svg{
 	width:100%;
 	float:right;}
 
+canvas{
+	display:block;
+	position:absolute;
+
+}
+
 /* Entre 1700 et 1320 pixels les deux bouton de trajectoires redescendent */
 
 @media screen and (min-width:1320px) and (max-width:1700px) 

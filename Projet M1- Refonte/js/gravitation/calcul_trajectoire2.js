@@ -43,17 +43,15 @@ function animate(){
 			if(Rebond){
 				r_part = r_phy;
 				phi = -(phi + 2*Math.PI);
-				console.log(L);
-				console.log(phi);
 
 			}
 			else {
-
-
-			console.log("ici");
+	
+			
+				
 			// FAIRE BOUM
 			arret();
-			Interv = setInterval(animate_explo,10);
+			Interv = setInterval(animate_explo,1000/30);
 			}
 
 		}
@@ -321,21 +319,29 @@ function trajectoire() {
 	}
 }
 
-var taille =0;
+var i =0;
+var stop =0;
 function animate_explo(){
-	context.beginPath();
-	context.fillStyle = '#000000';
-	context.arc(posX1, posY1, taille, 0, Math.PI*2);
-	context.lineWidth="1";
-	context.fill();
+
+	if(i>17){i=i-17;} // bouclage
+	cyx=document.getElementById("can_explo").getContext("2d");
+	cyx.clearRect(0,0,550,450);
+	ima = new Image();
+	ima.src = "Images/explo/explo_0"+i+".png";
+	cyx.drawImage(ima,posX1-90,posY1-100);
 
 
-	if(taille < 30){
-		taille = taille +1;
+	if(i <18 ){
+		i = i +1;
+		stop = stop +1;
 	}
-	if(taille>29){
+	else {
+		cyx.clearRect(0,0,550,450);
+		clearInterval(Interv);
+	}
+	if(stop >50){
+		cyx.clearRect(0,0,550,450);
 		clearInterval(Interv);}
 	}
-
 
 
