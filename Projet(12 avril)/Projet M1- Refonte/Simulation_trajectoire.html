@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<link rel="stylesheet"  href="./Css/Simu_grav.css">
+		<link rel="stylesheet"  href="./Css/menu.css">
+		
+		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+		<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  		<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script src="./Lib/jquery-1.12.3.min.js"></script>
+		<script src="./Lib/math.min.js"></script>
+		<script src="./Lib/d3.js"></script>
+		<script src="./Lib/snap.svg.js"></script>
+		<script src="./Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+		<script src="./js/gravitation/calcul_trajectoire2.js"></script>
+		<script src="./js/gravitation/equation3d.js"></script>
+		<script src="./js/gravitation/Runge_Kutta2.js"></script>
+		<script src="./js/gravitation/stopper.js"></script>
+		<script src="./js/gravitation/graphe_potentiel.js"></script>
+		<script type="text/javascript">
+			pause = true;
+			debut = true;
+		</script>
+		<!-- MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+																								-->
+<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/ie8-core.min.css">
+    <link rel="stylesheet" href="css/ie8-layout.min.css">
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+    <script src="js/Menu/rem.min.js"></script>
+
+</head>
+
+<body>
+
+
+<header>
+    <h1>Cosmograve</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Univers</a>
+            <ul>
+                <li><a href="Univers-theo.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers.html">Standard</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Noire</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectoire</a>
+            <ul>
+                <li><a href="Trajectoire-the.html">Theorie</a></li>
+				<li><a href="Simulation_trajectoire.html">Simulation</a></li>
+            </ul>
+        </li>
+       
+    </ul>
+</nav>
+			<br/>
+
+			<div id="formulaire">
+				<form name="params" id="parametres" action="" method="post" autocomplete="off">
+
+									<span id="masse">
+										<label for="M">M (kg) =</label>
+										<input id="M" value="3e30" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayons">
+									<span id="rayon">
+										<label for="r0">r<sub>0</sub> (m) =</label>
+										<input id="r0" value="5e4" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayon_phy">
+										<label for="r_phy">r<sub>physique</sub> (m) =</label>
+										<input id="r_phy" value="1" align="left" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+									<span id="vitesses">
+									<span id="vitesse1">
+										<label for="vphi">V<sub>&Phi;</sub> (m.s<sup>-1</sup>) =</label>
+										<input id="vphi" value="5.1e7" maxlength="10" type="text" size="10">
+									</span>
+									<span id="vitesse2">
+										<label for="vr">V<sub>r</sub> (m.s<sup>-1</sup>) =</label>
+										<input id="vr" value="0" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+
+									<span id="buts">
+									<span id="bouton" onclick="trajectoire()">
+										<button type="button">Start</button>
+									</span>
+									
+									<span id="bouton">
+										<button type="button" onclick="pau()">Pause</button>
+									</span>
+
+									<span id="bouton">
+      									<input type="button" id="clear" value="Reset">
+    								</span>
+	
+									<span id="plusvite">
+										<button type="button">Plus</button>
+									</span>
+
+									<span id="moinsvite">
+										<button type="button">Moins</button>
+									</span>
+									</span>
+									<span id="radio_button">
+										 <input type="radio" name="traj" value="complet" checked >Trajectoire complete 
+  										 <input type="radio" name="traj" value="simple" >Trajectoire simple
+									</span>
+									</br>
+
+								<span id="rebond">Rebond:
+									<input type="radio" name ="bond" value = "oui">oui
+									<input type="radio" name="bond" value= "non" checked>non
+								</span>
+							
+				</form>
+			</div>
+			
+
+			<div id="information">
+
+							<!-- Vitesse de la particule = <span id="vp"></span> m/s<br /> -->
+							Gradient d'accélération = <span id="ga"></span>g/m  <span id="DivClignotante"></span><br />
+							Temps écoulé pour la particule = <span id="tp"></span>s<br />
+							E = <span id="E"></span><br />
+					
+
+
+							$\frac{2GM}{c^{2}}= $<span id="m"> 0</span>m<br />
+							L = <span id="L"></span>m<br />
+							r = <span id="r_par"></span>m<br />
+							
+			</div>
+
+			<div id="graphique2">
+				<svg id="grsvg_2" viewbox="0 0 550 460" preserveAspectRatio="xMinYMin meet"></svg>
+			</div>
+			
+			<div id="canvas">
+				<canvas id="myCanvas" style=" z-index: 0;" width="550" height="450" >
+			
+					Votre navigateur ne supporte pas canvas.
+					
+				</canvas>
+				<canvas id="can_explo" style="z-index: 1;" width="550" height="450" > </canvas>	
+			</div>
+
+			<p style="float:right;position:absolute;top:100%;left:90%;"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/Menu/nav.jquery.min.js"></script>
+<script>
+    $('.nav').nav();
+</script>			
+	</body>
+</html>

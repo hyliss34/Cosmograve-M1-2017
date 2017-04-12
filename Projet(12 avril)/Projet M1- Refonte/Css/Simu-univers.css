@@ -1,0 +1,146 @@
+
+
+/* ----------------------------------------------------------------------------*/
+                            /*Simulation Univers */
+/* Mise en page de base adapté aux mobiles et balises pour les écrans plus grand ainsi la lecture mobile demande moins de ressources */
+
+
+
+
+/* Enregistrer graphique */
+#dl,#type {display: none;}
+
+html, body {
+}
+
+.inp {
+	text-align: center;
+	display:inline-block;
+	width:95%;
+}
+
+#type_sim,#coche_sim,#trace_box {
+	text-align: center;
+}
+/* Bouton haut droite */
+#para,#calc_a,#calc {display: inline-block;}
+
+#Boutons_top_right {
+	float:right;
+	display: block;
+	width:100%;
+}
+#para {
+	float:right;
+	width:30px;
+	height:30px;
+	border:hidden;
+	background: url("../Images/48698.svg");
+	background-repeat: no-repeat;
+	background-size:auto;
+}
+#calc {float: right;}
+#modele {
+	width:200px;
+	height:200px;
+}
+
+#grille,#univ_plat {
+	display: inline-block;
+}
+#liste {
+	border:1px double black;
+}
+/* Style des boutons */
+
+
+input[type="button"], input[type=submit], input[type=reset], button, .button {
+	padding: 5px 15px;
+	margin: 3px 4px;
+	color: #171717;
+	font-size: 13px;
+	cursor: pointer;
+	background: #A2A2A2;
+	background: linear-gradient(top, #A2A2A2 0%, #898989 100%);
+	background: -moz-linear-gradient(top, #A2A2A2 0%, #898989 100%);
+	background: -webkit-linear-gradient(top, #A2A2A2 0%, #898989 100%);
+	background: -o-linear-gradient(top, #A2A2A2 0%, #898989 100%);
+	border: 1px solid #4D4D4D;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-moz-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-webkit-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-o-box-shadow:0px 0px 0px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.50);
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button:hover {
+	background: linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
+	background: -moz-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
+	background: -webkit-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
+	background: -o-linear-gradient(top, #bcbcbc 0%, #A2A2A2 100%);
+}
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button:active{
+	opacity:0.8;
+}
+
+/*------*/
+
+@media all and (min-width:1050px) and (min-device-width:1050px) {
+	#information {
+		width:35%;
+	}
+	#graphique_svg {
+		width:100%;
+		height:500px;
+	}
+	#graphique {
+		float:right;
+		margin-top:-140px;
+		margin-right:20px;
+		width:60%;
+	}
+	
+	#modele{
+		width:30%;
+		height:500px;
+		margin-top:5px;
+	}
+	#dl,#type{display: inline-block;}
+	
+}
+
+/*
+@media screen and (max-width:1050px) {
+	#information{
+		border:2px solid blue;
+		width:50%;
+		height:300px;
+		padding-top::;0px;
+	}
+	#canvas {
+		
+		height: 100%;
+		float:right;
+	}
+	#modele {
+		border:2px solid black;
+		position:relative;
+		margin-top:-900px;	
+		float:right;
+		width:48%;
+		height:300px;
+	}
+	#graphique {
+		border:2px solid red;
+		width:100%;
+	}
+}
+*/
+
+
+
+	
+
