@@ -81,7 +81,7 @@ header h1:before {
     cursor: pointer;
     text-decoration: none;
     line-height: 4.4rem;
-    background: #e34e11;
+    background: #c62d1f;
     color: white;
 }
 .nav-button:before,
@@ -108,12 +108,12 @@ header h1:before {
 .nav {
     padding-top: 4.4rem;
     line-height: 4.4rem;
-    background: #e34e11;
+    background: #c62d1f;
     color: white;
 }
 .nav ul {
     border-radius: 0 0 6px 6px;
-    background: #e34e11;
+    background: #c62d1f;
 }
 .nav ul ul {
     background: #2f2722

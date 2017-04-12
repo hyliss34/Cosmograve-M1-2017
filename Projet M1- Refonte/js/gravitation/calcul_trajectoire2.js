@@ -17,7 +17,7 @@ function animate(){
 		diametre_particule = 2;
 	}
 
-	Bond = document.params.bond;
+	Bond = document.getElementsByName("reb");
 
 	if (Bond[0].checked){
 		Rebond = true;
@@ -25,7 +25,8 @@ function animate(){
 	else {
 		Rebond = false;
 	}
-
+	
+	
 	//Tracé de la particule
 	context.beginPath();
 	context.fillStyle = '#008B8B';

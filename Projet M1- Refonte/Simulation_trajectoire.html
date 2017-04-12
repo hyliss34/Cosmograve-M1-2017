@@ -4,7 +4,6 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<link rel="stylesheet"  href="./Css/Simu_grav.css">
-		<link rel="stylesheet"  href="./Css/menu.css">
 		
 		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
 		<script type="text/javascript" async
@@ -108,35 +107,36 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 									<span id="buts">
 									<span id="bouton" onclick="trajectoire()">
-										<button type="button">Start</button>
+										<button type="button" class="myButton">Start</button>
 									</span>
 									
 									<span id="bouton">
-										<button type="button" onclick="pau()">Pause</button>
+										<button type="button" onclick="pau()" class="myButton">Pause</button>
 									</span>
 
 									<span id="bouton">
-      									<input type="button" id="clear" value="Reset">
+      									<input type="button" id="clear" class="myButton" value="Reset">
     								</span>
 	
 									<span id="plusvite">
-										<button type="button">Plus</button>
+										<button type="button" class="myButton">Plus</button>
 									</span>
 
 									<span id="moinsvite">
-										<button type="button">Moins</button>
+										<button type="button" class="myButton">Moins</button>
 									</span>
 									</span>
 									<span id="radio_button">
 										 <input type="radio" name="traj" value="complet" checked >Trajectoire complete 
   										 <input type="radio" name="traj" value="simple" >Trajectoire simple
 									</span>
-									</br>
 
-								<span id="rebond">Rebond:
+<span id="rebond">Rebond:
 									<input type="radio" name ="bond" value = "oui">oui
 									<input type="radio" name="bond" value= "non" checked>non
 								</span>
+  							
+							
 							
 				</form>
 			</div>
