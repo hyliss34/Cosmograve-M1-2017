@@ -18,14 +18,15 @@ function animate(){
 		diametre_particule = 2;
 	}
 
-	//Bond = document.getElementsByName("reb");
+	Bond = document.getElementsByName("reb");
 
-	//if (Bond[0].checked){
-		//Rebond = true;
-	//}
-	//else {
-		//Rebond = false;
-	//}
+	if (Bond[0].checked){
+		Rebond = true;
+		
+	}
+	else {
+		Rebond = false;
+	}
 	
 	
 	//Tracé de la particule
