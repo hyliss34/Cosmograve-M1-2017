@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<link rel="stylesheet"  href="./Css/Simu_grav.css">
-		
-		<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
-		<script type="text/javascript" async
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<link rel="stylesheet"  href="./Css/Simu_grav.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+	<script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  		<script type="text/x-mathjax-config">
+	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
-		<script src="./Lib/jquery-1.12.3.min.js"></script>
-		<script src="./Lib/math.min.js"></script>
-		<script src="./Lib/d3.js"></script>
-		<script src="./Lib/snap.svg.js"></script>
-		<script src="./Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-		<script src="./js/gravitation/calcul_trajectoire2.js"></script>
-		<script src="./js/gravitation/equation3d.js"></script>
-		<script src="./js/gravitation/Runge_Kutta2.js"></script>
-		<script src="./js/gravitation/stopper.js"></script>
-		<script src="./js/gravitation/graphe_potentiel.js"></script>
-		<script type="text/javascript">
+
+	<script src="./Lib/jquery-1.12.3.min.js"></script>
+	<script src="./Lib/math.min.js"></script>
+	<script src="./Lib/d3.js"></script>
+	<script src="./Lib/snap.svg.js"></script>
+	<script src="./Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="./js/gravitation/calcul_trajectoire2.js"></script>
+	<script src="./js/gravitation/equation3d.js"></script>
+	<script src="./js/gravitation/Runge_Kutta2.js"></script>
+	<script src="./js/gravitation/stopper.js"></script>
+	<script src="./js/gravitation/graphe_potentiel.js"></script>
+	<script type="text/javascript">
 			pause = true;
 			debut = true;
 		</script>
-		<!-- MENUS 
+	<!-- MENUS 
 Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
 																								-->
-<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
-<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
-<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
-<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
-
-  <!--[if lt IE 9]>
+	<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+	<!--[if lt IE 9]>
     <link rel="stylesheet" href="css/ie8-core.min.css">
     <link rel="stylesheet" href="css/ie8-layout.min.css">
     <script src="js/html5shiv.min.js"></script>
     <![endif]-->
-    <script src="js/Menu/rem.min.js"></script>
-
+	<script src="js/Menu/rem.min.js"></script>
+	<!-- Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 
 <body>
@@ -78,29 +82,29 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 			<br/>
 
 			<div id="formulaire">
-				<form name="params" id="parametres" action="" method="post" autocomplete="off">
+			  <form name="params" id="parametres" action="" method="post" autocomplete="off">
 
 									<span id="masse">
-										<label for="M">M (kg) =</label>
+									<label for="M">M (kg) =</label>
 										<input id="M" value="3e30" align="left" maxlength="10" type="text" size="10">
 									</span>
 									<span id="rayons">
 									<span id="rayon">
-										<label for="r0">r<sub>0</sub> (m) =</label>
+									<label for="r0">r<sub>0</sub> (m) =</label>
 										<input id="r0" value="5e4" align="left" maxlength="10" type="text" size="10">
 									</span>
 									<span id="rayon_phy">
-										<label for="r_phy">r<sub>physique</sub> (m) =</label>
+									<label for="r_phy">r<sub>physique</sub> (m) =</label>
 										<input id="r_phy" value="1" align="left" maxlength="10" type="text" size="10">
 									</span>
 									</span>
 									<span id="vitesses">
 									<span id="vitesse1">
-										<label for="vphi">V<sub>&Phi;</sub> (m.s<sup>-1</sup>) =</label>
+									<label for="vphi">V<sub>&Phi;</sub> (m.s<sup>-1</sup>) =</label>
 										<input id="vphi" value="5.1e7" maxlength="10" type="text" size="10">
 									</span>
 									<span id="vitesse2">
-										<label for="vr">V<sub>r</sub> (m.s<sup>-1</sup>) =</label>
+									<label for="vr">V<sub>r</sub> (m.s<sup>-1</sup>) =</label>
 										<input id="vr" value="0" maxlength="10" type="text" size="10">
 									</span>
 									</span>
@@ -127,18 +131,14 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 									</span>
 									</span>
 									<span id="radio_button">
-										 <input type="radio" name="traj" value="complet" checked >Trajectoire complete 
-  										 <input type="radio" name="traj" value="simple" >Trajectoire simple
-									</span>
-
-<span id="rebond">Rebond:
-									<input type="radio" name ="bond" value = "oui">oui
-									<input type="radio" name="bond" value= "non" checked>non
-								</span>
-  							
-							
-							
-				</form>
+									<input type="radio" id="r1" name="traj" checked/>
+    								<label for="r1"><span></span>Trajectoire complete</label>
+    
+    								<input type="radio" id="r2" name="traj" />
+    								<label for="r2"><span></span>Trajectoire simple</label>
+    								</span>
+  									&nbsp;&nbsp; Rebond:
+</form>
 			</div>
 			
 
