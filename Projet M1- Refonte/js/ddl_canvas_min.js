@@ -1,4 +1,5 @@
 ﻿function dlCanvas() {
+	alert("ok");
     svg = $("svg").parent().html();
     canvg("canvas_1", svg);
     canvas_1 = document.getElementById("canvas_1");

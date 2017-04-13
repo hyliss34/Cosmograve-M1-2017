@@ -9,72 +9,76 @@
     <meta name="description" content="">
 
     <title>Responsive Navigation</title>
-
-    <link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
-    <link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
-    <link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
-    <link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
-
-    <!--[if lt IE 9]>
-    <link rel="stylesheet" href="css/ie8-core.min.css">
-    <link rel="stylesheet" href="css/ie8-layout.min.css">
-    <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-    <script src="js/Menu/rem.min.js"></script>
+	<script src="js/test-save.js"></script>
 
 </head>
 
 <body>
-
-<header>
-    <h1>Cosmograve</h1>
-</header>
-
-<a href="#" class="nav-button">Menu</a>
-
-<nav class="nav">
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li class="nav-submenu"><a href="#">Univers</a>
-            <ul>
-                <li><a href="#">Theorie</a></li>
-                <li class="nav-submenu"><a href="#">Simulation</a>
-                    <ul>
-                        <li><a href="#">Water</a></li>
-                        <li class="nav-submenu"><a href="#">Cola</a>
-                            <ul>
-                                <li class="nav-submenu nav-left"><a href="#">Coca Cola</a>
-                                    <ul>
-                                        <li><a href="#">Standard</a></li>
-                                        <li><a href="#">Energie Noire</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Pepsi</a></li>
-                                <li><a href="#">River</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Lemonade</a></li>
-                    </ul>
-                </li>
-      
-            </ul>
-        </li>
-        <li class="nav-submenu"><a href="#">Trajectoire</a>
-            <ul>
-                <li><a href="#">Theorie</a></li>
-				<li><a href="#">Simulation</a></li>
-            </ul>
-        </li>
-       
-    </ul>
-</nav>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/Menu/nav.jquery.min.js"></script>
+<div id="svg">
+	
+	
+</div>
+<div id="savedataurl"></div>
+	<button id="save">Sava</button>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-    $('.nav').nav();
+	
+
+var width = 960,
+    height = 500;
+
+var m = 5, // number of series
+    n = 90; // number of values
+
+// Generate random data into five arrays.
+var data = d3.range(m).map(function() {
+  return d3.range(n).map(function() {
+    return Math.random() * 100 | 0;
+  });
+});
+
+var x = d3.scale.linear()
+    .domain([0, n - 1])
+    .range([0, width]);
+
+var y = d3.scale.ordinal()
+    .domain(d3.range(m))
+    .rangePoints([0, height], 1);
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+
+var area = d3.svg.area()
+    .interpolate("basis")
+    .x(function(d, i) { return x(i); })
+    .y0(function(d) { return -d / 2; })
+    .y1(function(d) { return d / 2; });
+
+var svg = d3.select("#svg").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.selectAll("path")
+    .data(data)
+  .enter().append("path")
+    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; })
+    .style("fill", function(d, i) { return color(i); })
+    .attr("d", area);
+
+
+
+
+d3.select("#save").on("click", function(){
+  var html = d3.select("svg")
+        .attr("version", 1.1)
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+	alert("ok");
+  //console.log(html);
+  var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+  var img = '<img src="'+imgsrc+'">'; 
+  d3.select("#savedataurl").html(img);
+
+});
 </script>
-</body>
 </html>

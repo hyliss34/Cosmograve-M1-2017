@@ -115,6 +115,3 @@ function retour() {
 	window.close("Paramètres.html");
 }
 
-function test() {
-	alert("TEST");
-}

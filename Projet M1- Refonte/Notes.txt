@@ -18,4 +18,5 @@ Changements au 08/04/2017
 	3 ou 4-Version anglaise equivalente à la francaise (bien entendu cela se fera une fois TOUTES les fonctionnalités demandées installées et fonctionnelles sur la version francaise)
 	4 Ou 3- Version Mobile adaptée + Gestion compelete du fenetrage (Responsive).
 	5-Organisation des fichiers (reduction de la taille du dossier)
+	6- Mode emploi 
 	

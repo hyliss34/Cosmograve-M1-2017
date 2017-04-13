@@ -10,7 +10,7 @@
 	<script src="./Lib/Spin/spin-min.js"></script>
 	<script src="./Lib/Spin/spin.js"></script>
 	
-
+	
 	<!--<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">-->
 	<!--<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">-->
 	<script src="./js/Get_para.js"></script>
@@ -19,7 +19,6 @@
 	<script src="./js/graphique_min.js"></script>
 	<script src="./js/integrale.js"></script>
 	<script src="./js/rungekutta.js"></script>
-	<script src="./js/ddl_canvas_min.js"></script>
 	<script src="./js/canvas_h0neg_min.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
@@ -152,7 +151,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 </div>
 
-<canvas id="canvas_1" style="display : none;" width="750px"></canvas>
+<canvas id="canvas_1"  width="750px"></canvas>
 <!-- INFOS -->
 
 <div id="information">
@@ -163,21 +162,17 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 <span id="resultat_ageunivers"></span><br />
 <span id="resultat_bigcrunch"></span><br />
 Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-<a id="dl" download="Cosmograve.png" href="#">Enregistrer Graphique en </a>
-<select id="type" size="1">
-	<option value="png">png
-	<option value="bmp">bmp
-	<option value="jpeg">jpeg
-	<option value="pdf">pdf
-</select>
+
 		</div>
 
-		
 <!-- GRAPHIQUE-->
 <div id="graphique">
-	<svg id="graphique_svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet"></svg>
+	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet"></svg>
 </div>
+<div id="savegraphe" style="background: white;"></div>
 
+
+<canvas id="Canv_enr" width="760px" height="500px" style="display:none;"></canvas>
 <!-- Canvas -->
 <div id="modele">
 	<canvas id="canvas" width="298" height="400"></canvas>
@@ -193,12 +188,11 @@ context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
 
-document.getElementById("dl").addEventListener('click', dlCanvas, false);
-	
+
 //genere le premier graphique des generatrices et lance le 1er calcul
 update_modele();
 calcul();
-
+Save_graph();
 //lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 var myImg = document.getElementById("canvas");
 myImg.onmousedown = GetCoordinates;
