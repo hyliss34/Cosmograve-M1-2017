@@ -47,10 +47,19 @@ html, body {
 }
 #calc {float: right;}
 #modele {
-	width:200px;
-	height:200px;
+	float:left;
+	width:100%;
 }
 
+.tg {
+	float:right;
+	width:100%;
+	margin-bottom: 80px;}
+#savegraphe{
+	text-align: center;
+	width:100%;}
+#graphique {
+	width:100%;}
 #grille,#univ_plat {
 	display: inline-block;
 }
@@ -98,61 +107,57 @@ html, body {
 	position:relative;
 	top:1px;
 }
-
+/* Resultats table */
+.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;float:right;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg .tg-gzvi{font-weight:bold;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-rkjz{font-weight:bold;font-size:15px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-cgnp{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border-bottom: none;}
+.tg .tg-m3ec{font-weight:bold;font-size:15px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-zfe1{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
+.tg .tg-i8gg{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
+.tg .tg-zkmu{font-weight:bold;font-style:italic;font-size:15px;text-align:center;vertical-align:top;border:none;}
+.tg .tg-btvk{font-weight:bold;font-size:16px;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
 
 /*------*/
 
-@media all and (min-width:1050px) and (min-device-width:1050px) {
+@media only screen and (min-width: 960px) {
 	#information {
 		width:35%;
 	}
 	#graphique_svg {
 		width:100%;
-		height:500px;
+		height:100%;
 	}
 	#graphique {
-		float:right;
-		margin-top:-140px;
+		float:left;
+		margin-top:0px;
 		margin-right:20px;
 		width:60%;
 	}
 	
 	#modele{
+		float:right;
 		width:30%;
 		height:500px;
 		margin-top:5px;
 	}
 	#dl,#type{display: inline-block;}
-	
+	.tg {
+		margin-top:10%;
+		width:30%;
+	}
+	#savegraphe {
+		text-align: center;
+		width:30%;
+		margin-top: -50px;
+	}
+	footer {width:100%;}
 }
 
-/*
-@media screen and (max-width:1050px) {
-	#information{
-		border:2px solid blue;
-		width:50%;
-		height:300px;
-		padding-top::;0px;
-	}
-	#canvas {
-		
-		height: 100%;
-		float:right;
-	}
-	#modele {
-		border:2px solid black;
-		position:relative;
-		margin-top:-900px;	
-		float:right;
-		width:48%;
-		height:300px;
-	}
-	#graphique {
-		border:2px solid red;
-		width:100%;
-	}
-}
-*/
+
+
 
 
 
