@@ -10,8 +10,7 @@
 /* Enregistrer graphique */
 #dl,#type {display: none;}
 
-html, body {
-}
+body {height:100%;}
 
 .inp {
 	text-align: center;
@@ -146,14 +145,14 @@ input[type="text"]{
 
 	#graphique_svg {
 		width:100%;
-		padding:20% 0% 0% 0%;	
+		padding:30px 0% 0% 0%;	
 	}
 	#graphique {
+		margin-left: 20px;
 		float:left;
 		margin-top:0px;
 		margin-right:20px;
-		width:60%;
-		bottom:0;
+		width:55%;
 	}
 	
 	#modele{
