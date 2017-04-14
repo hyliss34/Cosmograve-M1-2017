@@ -64,7 +64,7 @@
     }
     .nav ul ul li.nav-left>ul {
         left: auto;
-        right: 95%
+        right: 95%;
     }
     .nav-no-js .nav li:hover>ul {
         display: block

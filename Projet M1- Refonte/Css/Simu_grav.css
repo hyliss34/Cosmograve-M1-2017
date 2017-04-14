@@ -80,11 +80,7 @@ svg{
 	width:100%;
 	float:right;}
 
-canvas{
-	display:block;
-	position:absolute;
 
-}
 
 /* On/off */
 .wrapper {
@@ -290,7 +286,17 @@ input[type="radio"] + label span {
 input[type="radio"]:checked + label span {
     background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
 }
-/* OUI/NON */
+
+input[type="text"]{
+	border-radius: 3px;
+	border:thin;
+	height:20px;
+	-moz-box-shadow: 2px 2px 2px 1px #656565;
+	-webkit-box-shadow: 2px 2px 2px 1px #656565;
+	-o-box-shadow: 2px 2px 2px 1px #656565;
+	box-shadow: 2px 2px 2px 1px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=4);
+}
 
 /* BOUTONS 
 Source: http://www.bestcssbuttongenerator.com/  */
@@ -338,11 +344,26 @@ Source: http://www.bestcssbuttongenerator.com/  */
 }
 
 
+/* TABLEAU */
+
+.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;margin:auto;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg .tg-lu81{font-size:14px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-uxay{font-size:14px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-f74v{font-size:14px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3531ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-y329{font-weight:bold;font-size:15px;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
+
+
+
+
+
+
+
 #reb_label {
 	padding-bottom: 20px;
 	display:inline-block;
 }
-
 
 
 
@@ -362,6 +383,7 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#information {
 		margin: 0 auto;
 	}
+	
 
 
 }
@@ -385,11 +407,12 @@ Source: http://www.bestcssbuttongenerator.com/  */
 		margin: 0 auto;
 	}
 	
+	
 
 }
 
 /* En dessous de 1050 px */
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 960px) {
 	#vitesse {
 		display: inline-block;
 	}
@@ -400,6 +423,9 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	}
 	#rayons,#vitesse,#buts {
 		display: block;
+	}
+	#masse,#rayon,#rayon_phy,#vitesse2 {
+		display:block;
 	}
 	#information {
 		margin:0 auto;
@@ -413,32 +439,23 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#graphique2 {
 		width:100%;
 		text-align: center;
-	}
-	#canvas{
-		text-align: center;
-		width:100%;}
-	
-}
-
-@media all and (max-device-width: 600px){
-	html {
-		width:100%;	
-	}
-	#masse,#rayon,#rayon_phy,#vitesse2 {
-		display:block;
-	}
-
-	/* On affiche pas le graphique sur mobile car probleme de taille (à regler)*/
-	#graphique2 {
 		display:none;
-		float:none;
-		margin: 0 auto;
 	}
-	#myCanvas {
-		width:100%;
-		display:block;
-		margin:0 auto;
+	#myCanvas{width:100%;}
+	#canvas{
 		
+		text-align: center;
+		margin:0 9% 0 10%;
+		width:80%;
 	}
 	
+	.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;margin:auto;width:80%;}
+.tg td{font-family:Arial, sans-serif;font-size:11px;padding:5px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg th{font-family:Arial, sans-serif;font-size:11px;font-weight:normal;padding:5px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
+.tg .tg-lu81{font-size:11px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-uxay{font-size:11px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-f74v{font-size:11px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3531ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-y329{font-weight:bold;font-size:11px;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
+	
 }
+

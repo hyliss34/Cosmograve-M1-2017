@@ -58,7 +58,7 @@ header {
     z-index: 901;
     padding-left: 10px;
     line-height: 4.4rem;
-    background: #e34e11;
+    background: #c62d1f;
     color:white;
 }
 header h1 {
@@ -81,7 +81,7 @@ header h1:before {
     cursor: pointer;
     text-decoration: none;
     line-height: 4.4rem;
-    background: #e34e11;
+    background: #c62d1f;
     color: white;
 }
 .nav-button:before,

@@ -152,20 +152,33 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 			</div>
 			
 
-			<div id="information">
-
-							<!-- Vitesse de la particule = <span id="vp"></span> m/s<br /> -->
-							Gradient d'accélération = <span id="ga"></span>g/m  <span id="DivClignotante"></span><br />
-							Temps écoulé pour la particule = <span id="tp"></span>s<br />
-							E = <span id="E"></span><br />
-					
-
-
-							$\frac{2GM}{c^{2}}= $<span id="m"> 0</span>m<br />
-							L = <span id="L"></span>m<br />
-							r = <span id="r_par"></span>m<br />
-							
-			</div>
+			
+<table class="tg">
+  <tr style="border-bottom:1px solid black;">
+    <th class="tg-y329" style="border-right:1px solid black">L (m)</th>
+    <th class="tg-y329" style="border-right:1px solid black">r (m)</th>
+    <th class="tg-y329" style="border-right:1px solid black">E (J)</th>
+    <th class="tg-y329">$\frac{2GM}{c^{2}}$ (m)</th>
+  </tr>
+  <tr style="border-bottom:1px solid black">
+    <td class="tg-lu81" style="border-right:1px solid black" id="L">0</td>
+    <td class="tg-f74v" style="border-right:1px solid black" id="r_par">0</td>
+    <td class="tg-f74v" style="border-right:1px solid black" id="E">0</td>
+    <td class="tg-f74v" id="m">0</td>
+  </tr>
+  <tr>
+    <td class="tg-y329" colspan="4">Gradient d'accélaration &nbsp;<span id="DivClignotante"></span></td>
+  </tr>
+  <tr>
+    <td class="tg-uxay" colspan="4" id="ga">0</td>
+  </tr>
+  <tr>
+    <td class="tg-y329" colspan="4">Temps écoulé pour la particule</td>
+  </tr>
+  <tr>
+    <td class="tg-lu81" colspan="4" id="tp">0</td>
+  </tr>
+</table>
 
 			<div id="graphique2">
 				<svg id="grsvg_2" viewbox="0 0 550 460" preserveAspectRatio="xMinYMin meet"></svg>
@@ -177,10 +190,9 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 					Votre navigateur ne supporte pas canvas.
 					
 				</canvas>
-				<canvas id="can_explo" style="z-index: 1;" width="550" height="450" > </canvas>	
 			</div>
 
-			<p style="float:right;position:absolute;top:100%;left:90%;"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+			<p style="float:right;top:100%;left:90%;width:100%;text-align: right;"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/Menu/nav.jquery.min.js"></script>
 <script>
