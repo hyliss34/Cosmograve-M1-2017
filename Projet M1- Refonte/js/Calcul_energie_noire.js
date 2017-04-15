@@ -118,12 +118,14 @@ function Calc(){
 	
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
-	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
+	document.getElementById("resultat_ageunivers_ga").innerHTML = "Pas de Big Bang";
+	document.getElementById("resultat_ageunivers_s").innerHTML = "Pas de Big Bang";
 	document.getElementById("resultat_bigcrunch").innerHTML = "Pas de Big Crunch";
 	document.getElementById("resultat_dureeuniv").innerHTML = "";
 	
 	if(age >= 0){
-		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga = "+age_sec_afficher+" s";
+		document.getElementById("resultat_ageunivers_ga").innerHTML = age_afficher;
+		document.getElementById("resultat_ageunivers_s").innerHTML = age_sec_afficher;
 		}else{
 		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
 		age = 0;

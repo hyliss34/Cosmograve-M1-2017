@@ -259,24 +259,16 @@ function calcul(){   // fonction principale de cosmograve
 
 
 function Save_graph() {
+	svgd = $("#graphique_svg");
+	svg = svgd[0].outerHTML;
+	canv = document.getElementById("Canv_enr");
+	im = canv.toDataURL('image/png');
+	canvg(canv,svg);
 	
-	var svgString = new XMLSerializer().serializeToString(document.querySelector('svg'));
+	im = canv.toDataURL('image/png');
+    
 	
-	var canvas = document.getElementById("Canv_enr");
-	var ctx = canvas.getContext("2d");
-	var DOMURL = self.URL || self.webkitURL || self;
-	var img = new Image();
-	var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
-	var url = DOMURL.createObjectURL(svg);
-	
-	img.onload = function() {
-		ctx.drawImage(img, 0, 0);
-    var png = canvas.toDataURL("image/jpeg");
-
-    document.querySelector('#savegraphe').innerHTML = '<a href="'+url+'" download="Graphique">'+'<img style="display:none" width="30px" height="30px" src="'+url+'" />'+'<input type="submit" class="myButton" value="Enregistrer graphique"></input>'+'</a>';
-    DOMURL.revokeObjectURL(png);
-	};
-	img.src = url;
-	
+	$("#tel").attr('href',im);
+	document.getElementById("tel").click();
 }
 

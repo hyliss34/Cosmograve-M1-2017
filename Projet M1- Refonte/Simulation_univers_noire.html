@@ -15,7 +15,6 @@
 	<script src="./js/graphique_min.js"></script>
 	<script src="./js/integrale.js"></script>
 	<script src="./js/rungekutta_noire.js"></script>
-	<script src="./js/ddl_canvas_min.js"></script>
 	<script src="./js/canvas_h0neg_min.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
@@ -156,22 +155,44 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 <canvas id="canvas_1" style="display : none;" width="750px"></canvas>
 <!-- INFOS -->
 
-<div id="information">
-&Omega;<sub>m0</sub> = <span id="resultat_omegam0" ></span><br />
-&Omega;<sub>r0</sub> = <span id="resultat_omegar0" onChange="document.getElementById('Or_calc').value = this.value"></span><br />
-&Omega;<sub>DE0</sub> = <span id="resultat_omegarlambda0"></span><br />
-&Omega;<sub>k0</sub> = <span id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value"></span><br />
-<span id="resultat_ageunivers"></span><br />
-<span id="resultat_bigcrunch"></span><br />
-Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-<a id="dl" download="Cosmograve.png" href="#">Enregistrer Graphique en </a>
-<select id="type" size="1">
-	<option value="png">png
-	<option value="bmp">bmp
-	<option value="jpeg">jpeg
-	<option value="pdf">pdf
-</select>
-		</div>
+<table class="tg">
+  <tr>
+    <th class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>m0</sub></th>
+    <th class="tg-cgnp">&Omega;<sub>r0</sub></th>
+  </tr>
+  <tr>
+    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegam0">Resultat</td>
+    <td class="tg-m3ec" id="resultat_omegar0">Resultat</td>
+  </tr>
+  <tr>
+    <td class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>&Lambda;0</sub></td>
+    <td class="tg-cgnp">&Omega;<sub>k0</sub></td>
+  </tr>
+  <tr>
+    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegarlambda0" onChange="document.getElementById('Or_calc').value = this.value">Resultat</td>
+    <td class="tg-rkjz" id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value">t</td>
+  </tr>
+  <tr>
+    <td class="tg-cgnp" colspan="2">Temps depuis le Big Bang</td>
+  </tr>
+  <tr>
+    <td class="tg-zfe1">(Ga)</td>
+    <td class="tg-i8gg">(s)</td>
+  </tr>
+  <tr style="border-bottom:1px solid black;">
+    <td class="tg-rkjz" style="border-right: 1px solid black;" id="resultat_ageunivers_ga">res1</td>
+    <td class="tg-gzvi" id="resultat_ageunivers_s">res2</td>
+  </tr>
+  <tr>
+    <td class="tg-zkmu" colspan="2" id="resultat_bigcrunch">Big bang</td>
+  </tr>
+  <tr>
+    <td class="tg-btvk" colspan="2" id="titre_dureeuniv">Durée de l'univers</td>
+  </tr>
+  <tr>
+    <td class="tg-rkjz" colspan="2" id="resultat_dureeuniv">Res</td>
+  </tr>
+</table>
 
 		
 <!-- GRAPHIQUE-->
@@ -194,14 +215,15 @@ context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
 
-document.getElementById("dl").addEventListener('click', dlCanvas, false);
 	
 //genere le premier graphique des generatrices et lance le 1er calcul
 Lancer_calc();
-
+//Save_graph();
 </script>
 <br/>
-<p style="float:right;bottom:0%;display: block;"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+<footer>
+<p style="float:right;width:100%;text-align: right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+</footer>
 
 <script src="js/Menu/nav.jquery.min.js"></script>
 <script>

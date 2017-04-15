@@ -15,7 +15,7 @@ function graphique_creation() {
         }).y(function(a) {
             return d(a.close)
         }),
-        b = d3.select("#graphique_svg").style("font-size", "12px").attr("width",wid).attr("height",hei).append("g").attr("transform", "translate(50,30)"),
+        b = d3.select("#graphique_svg").style("fill","none").style("font-size", "12px").attr("width",wid).attr("height",hei).append("g").attr("transform", "translate(50,30)"),
         f = d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d")),
         g = d3.svg.axis().scale(d).orient("left").ticks(10);
     data.forEach(function(a) {
@@ -43,9 +43,21 @@ function graphique_creation() {
         "stroke-width": "1px",
         "shape-rendering": "crispEdges"
     }).call(g);
-    b.append("text").attr("class", "legend_titre").attr("x", 175).attr("y", -15).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.3em").text("Evolution du facteur d'\u00e9chelle r\u00e9duit");
-    b.append("text").attr("class", "legend_axe").attr("x", 355).attr("y", 415).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.2em").text("t (Ga)");
-    b.append("text").attr("class", "legend_axe").attr("x", -200).attr("y", -37).attr("dy", ".3em").attr("transform", "rotate(-90)").style("font-weight", "bold").style("font-size", "1.2em").text("a (t)");
+    b.append("text").attr("class", "legend_titre").attr("x", 175).attr("y", -15).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.3em").text("Evolution du facteur d'\u00e9chelle r\u00e9duit").style({
+		stroke: "black",
+        fill: "black",
+        "stroke-width": "0.5px",
+        "shape-rendering": "crispEdges"});
+    b.append("text").attr("class", "legend_axe").attr("x", 355).attr("y", 415).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.2em").text("t (Ga)").style({
+		stroke: "black",
+        fill: "black",
+        "stroke-width": "0.5px",
+        "shape-rendering": "crispEdges"});
+    b.append("text").attr("class", "legend_axe").attr("x", -200).attr("y", -37).attr("dy", ".3em").attr("transform", "rotate(-90)").style("font-weight", "bold").style("font-size", "1.2em").text("a (t)").style({
+		stroke: "black",
+        fill: "none",
+        "stroke-width": "0.5px",
+        "shape-rendering": "crispEdges"});
     b.append("path").style("stroke", "steelblue").style("stroke-width", "2").style("fill", "none").attr("class", "line").attr("d", e(data));
 
 };

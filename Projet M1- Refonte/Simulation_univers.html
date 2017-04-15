@@ -9,6 +9,10 @@
 	<script src="./Lib/Spin/spin-min.js"></script>
 	<script src="./Lib/Spin/spin.js"></script>
 	
+	<!-- Enregistrement graphique -->
+	<script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
+	<script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
+	<script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
 	
 	<!--<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">-->
 	<!--<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">-->
@@ -101,8 +105,6 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	
 	<!-- Envoi -->
 	<input type="submit" class="myButton" value="Calculs annexes" id="calc" onclick="ouvre_calc_fr()" ></input>
-
-	<input type="submit" class="myButton" value="E Noire" id="calc" onclick="ouvre_calc_Noire_fr()" style="margin-right: 3px;"></input>
 </div>
 	
 
@@ -196,10 +198,11 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 <!-- GRAPHIQUE-->
 <div id="graphique">
-	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet"></svg>
+	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet" fill="black"></svg>
 </div>
-<div id="savegraphe" style="background: white;float:right;"></div>
+<div id="savegraphe" style="background: white;float:right;"><input type="submit" class="myButton" value="Enregistrer graphique" onclick="Save_graph()"></div>
 
+<a id="tel" href="#" download="Graphique" style="display:none;"></a>
 
 <canvas id="Canv_enr" width="760px" height="500px" style="display:none;"></canvas>
 <!-- Canvas -->
@@ -216,12 +219,12 @@ canvas  = document.getElementById('canvas');
 context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
+	
 
 
 //genere le premier graphique des generatrices et lance le 1er calcul
 update_modele();
 calcul();
-Save_graph();
 //lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 var myImg = document.getElementById("canvas");
 myImg.onmousedown = GetCoordinates;
