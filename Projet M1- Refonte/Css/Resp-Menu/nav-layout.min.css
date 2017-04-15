@@ -159,14 +159,15 @@ header h1:before {
     content: "\25BC"
 }
 @media only screen and (min-width: 960px) {
-    header {
+	ader {
         display: none;
     }
     body {
         padding: 0!important
     }
     header {
-        position: relative
+        position: relative;
+		display:none;
     }
     header h1:before {
         content: "\E001"

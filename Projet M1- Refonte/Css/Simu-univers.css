@@ -48,6 +48,7 @@ body {height:100%;}
 #modele {
 	float:left;
 	width:100%;
+	display:none;
 }
 
 .tg {
@@ -58,8 +59,10 @@ body {height:100%;}
 	text-align: center;
 	width:100%;}
 #graphique {
-	height:100%;
-	width:100%;}
+	width:100%;
+	
+}
+#graphique_svg{margin:auto;}
 #grille,#univ_plat {
 	display: inline-block;
 }
@@ -152,10 +155,11 @@ input[type="text"]{
 		float:left;
 		margin-top:0px;
 		margin-right:20px;
-		width:55%;
+		width:50%;
 	}
 	
 	#modele{
+		display:block;
 		float:right;
 		width:30%;
 		height:500px;
@@ -170,8 +174,8 @@ input[type="text"]{
 	#savegraphe {
 		margin-right: 14px;
 		text-align: center;
-		width:30%;
-		margin-top: -50px;
+		width:100%;
+		margin-top: -5px;
 	}
 	footer {width:100%;}
 	
