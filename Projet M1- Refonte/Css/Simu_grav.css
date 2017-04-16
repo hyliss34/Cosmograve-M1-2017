@@ -7,6 +7,7 @@
 }
 body {
 	background-color: #D8D8D8;
+	height:100%;
 }
 label{
 	font-weight 	:	bold;
@@ -17,21 +18,10 @@ label{
 #parametres{
 	text-align		:	center;
 }
-#graphique2{
-	margin-right	:	50px;
-	margin-top		:	2%;
-	float			:	right;
-}
-#information{
-	margin-top		:	1%;
-	margin-left		:	3%;
-	border			:	1px black solid;
-	padding			:	10px;
-	width			:	280px;
-}
+
 #canvas{
 	float			:	left;
-	margin-top		:	1%;
+	margin-top		:	10%;
 	width:48%;
 }
 #plus{
@@ -69,16 +59,12 @@ svg{
 	height			:	100%;
 }
 #graphique2 {
-	text-align: center;
+	display:block;
+	margin-top:10%;
 	width:50%;
-	height:50%;
 	float:right;
-	margin:auto;
 }
-#svg_2{
 
-	width:100%;
-	float:right;}
 
 
 
@@ -373,16 +359,17 @@ Source: http://www.bestcssbuttongenerator.com/  */
 
 @media screen and (min-width:1320px) and (max-width:1700px) 
 {
-	#radio_button,#rebond {
+	#rad_button,#rebond {
 		display:inline-block;
 	}
 	#masse {
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-	#information {
-		margin: 0 auto;
+	.tg {
+		border:1px solid black;
 	}
+
 	
 
 
@@ -403,10 +390,7 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#masse {
 		margin-bottom:5px ;
 	}
-	#information {
-		margin: 0 auto;
-	}
-	
+
 	
 
 }
@@ -427,10 +411,7 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#masse,#rayon,#rayon_phy,#vitesse2 {
 		display:block;
 	}
-	#information {
-		margin:0 auto;
-		margin-top:5px;
-	}
+
 	#buts {
 		margin-top:5px;
 		margin-bottom: 5px;

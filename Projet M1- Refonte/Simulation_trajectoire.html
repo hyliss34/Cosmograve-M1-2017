@@ -176,12 +176,13 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     <td class="tg-y329" colspan="4">Temps écoulé pour la particule (s)</td>
   </tr>
   <tr>
-    <td class="tg-lu81" colspan="4" id="tp">0</td>
+    <td class="tg-lu81" colspan="4" id="tp" style="border-bottom:1px solid black;">0</td>
   </tr>
 </table>
+			<br/>
 
-			<div id="graphique2">
-				<svg id="grsvg_2" viewbox="0 0 550 460" preserveAspectRatio="xMinYMin meet"></svg>
+			<div id="graphique2" style='margin-top: 35px;'>
+				<svg id="grsvg_2"></svg>
 			</div>
 			
 			<div id="canvas">
@@ -196,6 +197,15 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/Menu/nav.jquery.min.js"></script>
 <script>
+	function resize(){
+		$('#grsvg_2').empty();
+		graphique_creation_pot();
+	}
+	
+	d3.select(window).on('resize',resize);
+	
+	
+	
     $('.nav').nav();
 </script>			
 	</body>
