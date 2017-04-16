@@ -198,17 +198,22 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 <!-- GRAPHIQUE-->
 <div id="graphique">
-	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" preserveAspectRatio="xMinYMin meet" fill="black"></svg>
+	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" fill="black"></svg>
 </div>
-<div id="savegraphe" style="background: white;float:right;"><input type="submit" class="myButton" value="Enregistrer graphique" onclick="Save_graph()"></div>
 
-<a id="tel" href="#" download="Graphique" style="display:none;"></a>
 
-<canvas id="Canv_enr" width="760px" height="500px" style="display:none;"></canvas>
 <!-- Canvas -->
 <div id="modele">
 	<canvas id="canvas" width="298" height="400"></canvas>
 </div>
+
+<!-- Sauvegarde graphique -->
+<input type="submit" id="enr" class="myButton" value="Enregistrer graphique" onclick="Save_graph()">
+
+<a id="tel" href="#" download="Graphique" style="display:none;"></a>
+
+<canvas id="Canv_enr" width="760px" height="500px" style="display:none;"></canvas>
+
 
 
 <script src="./js/univers_plat_min.js"></script>
@@ -225,9 +230,20 @@ graphique  = document.getElementById('graphique');
 //genere le premier graphique des generatrices et lance le 1er calcul
 update_modele();
 calcul();
+	
+	
 //lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 var myImg = document.getElementById("canvas");
 myImg.onmousedown = GetCoordinates;
+	
+//
+function resize(){
+	$("#graphique_svg").empty();
+	graphique_creation();
+	
+}
+	
+d3.select(window).on('resize',resize);
 </script>
 <br/>
 <footer>

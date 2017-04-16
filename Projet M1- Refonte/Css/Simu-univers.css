@@ -50,19 +50,17 @@ body {height:100%;}
 	width:100%;
 	display:none;
 }
+#enr {margin:0 35% 0 35%;}
 
 .tg {
 	width:80%;
 	margin:9% 10% 0% 10%;
 	margin-bottom: 80px;}
-#savegraphe{
-	text-align: center;
-	width:100%;}
+
 #graphique {
 	width:100%;
-	
 }
-#graphique_svg{margin:auto;}
+
 #grille,#univ_plat {
 	display: inline-block;
 }
@@ -136,7 +134,7 @@ input[type="text"]{
 .tg .tg-gzvi{font-weight:bold;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
 .tg .tg-rkjz{font-weight:bold;font-size:12px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
 .tg .tg-cgnp{font-weight:bold;font-size:13px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border-bottom: none;}
-.tg .tg-m3ec{font-weight:bold;font-size:12px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top;border:none;}
+.tg .tg-m3ec{font-weight:bold;font-size:12px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
 .tg .tg-zfe1{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
 .tg .tg-i8gg{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
 .tg .tg-zkmu{font-weight:bold;font-style:italic;font-size:12px;text-align:center;vertical-align:top;border:none;}
@@ -146,37 +144,31 @@ input[type="text"]{
 
 @media only screen and (min-width: 960px) {
 
-	#graphique_svg {
-		width:100%;
-		padding:30px 0% 0% 0%;	
-	}
+
 	#graphique {
 		margin-left: 20px;
 		float:left;
 		margin-top:0px;
-		margin-right:20px;
-		width:50%;
+		width:56%;
 	}
 	
 	#modele{
-		display:block;
 		float:right;
+		display:block;
 		width:30%;
-		height:500px;
-		margin-top:5px;
+		margin-right: 20px;
+		margin-top:0;
 	}
+	#canvas {margin: 0% 0% 0% 18%;}
 	#dl,#type{display: inline-block;}
 	.tg {
+		margin-top:0px;
 		margin-right: 20px;
-		margin-top:30px;
+		margin-bottom:0;
 		width:30%;
 	}
-	#savegraphe {
-		margin-right: 14px;
-		text-align: center;
-		width:100%;
-		margin-top: -5px;
-	}
+	#enr{margin-left:22%;}
+	
 	footer {width:100%;}
 	
 	

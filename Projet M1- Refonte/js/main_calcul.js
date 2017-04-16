@@ -252,7 +252,10 @@ function calcul(){   // fonction principale de cosmograve
 	
 
 	//on creer le graphique
+	
+
 	graphique_creation();
+
 	setTimeout(stop_spin,300);
 	
 }
