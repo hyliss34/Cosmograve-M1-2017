@@ -420,7 +420,7 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#graphique2 {
 		width:100%;
 		text-align: center;
-		display:none;
+		display:block;
 	}
 	#myCanvas{width:100%;}
 	#canvas{

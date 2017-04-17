@@ -109,7 +109,7 @@ function graphique_creation_pot(){
 	.attr("y", height+margin.top)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
-	.text("r");
+	.text("r (km)");
 	
 	svg.append("text")
 	.attr("class", "legend_axe")

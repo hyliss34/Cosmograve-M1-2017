@@ -30,7 +30,7 @@ function ouvre_calc_fr(){
 	sessionStorage.setItem("nb",nbre);
 
 	// Ouverture de la fenêtre
-	window.open("Calculs.html","c","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no,left=500");
+	window.open("Calculs.html","childWindow","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no,left=500");
 
 }
 function ouvre_calc_Noire_fr(){
@@ -63,7 +63,7 @@ function ouvre_calc_Noire_fr(){
 	sessionStorage.setItem("nb",nbre);
 
 	// Ouverture de la fenêtre
-	window.open("Calculs_noire.html","c","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no,left=500");
+	window.open("Calculs_noire.html","childWindow","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no,left=500");
 
 }
 

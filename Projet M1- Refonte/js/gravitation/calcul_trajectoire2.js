@@ -71,7 +71,7 @@ function animate(){
 
 		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
 		data2 = [];
-		data2.push({date:r_part,close:V});
+		data2.push({date:r_part/1000,close:V});
 		update_graphique_2();
 		
 		dt = E*dtau*(1/(1-2*m/r_part));
@@ -310,11 +310,11 @@ function trajectoire() {
 		for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
 			
 			V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
-			data1.push({date:r,close:V});
+			data1.push({date:r/1000,close:V});
 			
 		}
 		V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
-		data2.push({date:rmax,close:V});
+		data2.push({date:rmax/1000,close:V});
 		
 		graphique_creation_pot();
 	}else{

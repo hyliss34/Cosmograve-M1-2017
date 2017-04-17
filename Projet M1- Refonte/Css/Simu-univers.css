@@ -10,9 +10,6 @@
 /* Enregistrer graphique */
 
 
-body {
-	height:100%;}
-
 .inp {
 	text-align: center;
 	display:inline-block;
@@ -46,20 +43,24 @@ body {
 	background-size:auto;
 }
 #calc {float: right;}
-#modele {
-	float:left;
+#enre{
+	display:none;
 	width:100%;
+	text-align: center;
+}
+#enr{margin:auto;}
+#modele {
 	display:none;
 }
-#enr {margin:0 35% 0 35%;}
-
+#w1{display:block;}
 .tg {
 	width:80%;
 	margin:9% 10% 0% 10%;
-	margin-bottom: 80px;}
+	margin-bottom: 20px;}
 
 #graphique {
-	width:100%;
+	text-align: center;
+	max-width:100%;
 }
 
 #grille,#univ_plat {
@@ -78,8 +79,9 @@ select {
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=4);
 }
 input[type="text"]{
-	border-radius: 3px;
-	border:thin;
+	-webkit-appearance: none;
+	border-radius: 1px;
+	border:thin black;
 	height:20px;
 	-moz-box-shadow: 2px 2px 2px 1px #656565;
 	-webkit-box-shadow: 2px 2px 2px 1px #656565;
@@ -144,8 +146,10 @@ input[type="text"]{
 /*------*/
 
 @media only screen and (min-width: 960px) {
-
-
+	
+	#w1{display: inline-block;}
+	input[type="text"]{border:thin black;}
+	#enre{display:block;}
 	#graphique {
 		margin-left: 20px;
 		float:left;

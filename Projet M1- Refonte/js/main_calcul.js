@@ -67,7 +67,9 @@ function calcul(){   // fonction principale de cosmograve
 	PosX -= 1.5;
 	PosY -= 1.5;
 	
+	if(window.innerWidth>960){
 	update_point();
+	}
 
 	//on calcule omegak
 	omegak0 = 1-Or-omegam0-omegalambda0;

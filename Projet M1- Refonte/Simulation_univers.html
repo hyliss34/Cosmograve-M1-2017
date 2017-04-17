@@ -1,7 +1,7 @@
-<html>
+<html id="h">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 	<link rel="stylesheet" href="Css/Simu-univers.css"/>
 	<title>Simulation Univers</title>
 	
@@ -208,7 +208,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 </div>
 
 <!-- Sauvegarde graphique -->
-<input type="submit" id="enr" class="myButton" value="Enregistrer graphique" onclick="Save_graph()">
+<div id="enre"><input type="submit" id="enr" class="myButton" value="Enregistrer graphique" onclick="Save_graph()"></div>
 
 <a id="tel" href="#" download="Graphique" style="display:none;"></a>
 
@@ -228,7 +228,9 @@ graphique  = document.getElementById('graphique');
 
 
 //genere le premier graphique des generatrices et lance le 1er calcul
+if(window.innerWidth>960){
 update_modele();
+}
 calcul();
 	
 	
