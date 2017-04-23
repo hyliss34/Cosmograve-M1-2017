@@ -1,83 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="nav-no-js">
+<html>
 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
+
 <title>Responsive Navigation</title>
 <script src="js/test-save.js"></script>
-<link rel="stylesheet" href="Css/Menu-test.css" />
 
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <body>
 
-
-
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:none;}
-.tg .tg-gzvi{font-weight:bold;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
-.tg .tg-rkjz{font-weight:bold;font-size:15px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;color:#3166ff;text-align:center;vertical-align:top;border:none;}
-.tg .tg-cgnp{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border-bottom: none;}
-.tg .tg-m3ec{font-weight:bold;font-size:15px;font-family:"Trebuchet MS", Helvetica, sans-serif !important;;background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top;border:none;}
-.tg .tg-zfe1{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
-.tg .tg-i8gg{font-style:italic;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
-.tg .tg-zkmu{font-weight:bold;font-style:italic;font-size:15px;text-align:center;vertical-align:top;border:none;}
-.tg .tg-btvk{font-weight:bold;font-size:16px;background-color:#fd6864;color:#efefef;text-align:center;vertical-align:top;border:none;}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>m0</sub></th>
-    <th class="tg-cgnp">&Omega;<sub>r0</sub></th>
-  </tr>
-  <tr>
-    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegam0">Resultat</td>
-    <td class="tg-m3ec" id="resultat_omegar0">Resultat</td>
-  </tr>
-  <tr>
-    <td class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>&Lambda;0</sub></td>
-    <td class="tg-cgnp">&Omega;<sub>k0</sub></td>
-  </tr>
-  <tr>
-    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegarlambda0" onChange="document.getElementById('Or_calc').value = this.value">Resultat</td>
-    <td class="tg-rkjz" id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value">t</td>
-  </tr>
-  <tr>
-    <td class="tg-cgnp" colspan="2">Temps depuis le Big Bang</td>
-  </tr>
-  <tr>
-    <td class="tg-zfe1">(Ga)</td>
-    <td class="tg-i8gg">(s)</td>
-  </tr>
-  <tr style="border-bottom:1px solid black;">
-    <td class="tg-rkjz" style="border-right: 1px solid black;" id="resultat_ageunivers">res1</td>
-    <td class="tg-gzvi">res2</td>
-  </tr>
-  <tr>
-    <td class="tg-zkmu" colspan="2" id="resultat_bigcrunch">Big bang</td>
-  </tr>
-  <tr>
-    <td class="tg-btvk" colspan="2">Durée de l'univers</td>
-  </tr>
-  <tr>
-    <td class="tg-rkjz" colspan="2" id="resultat_dureeuniv">Res</td>
-  </tr>
-</table>
-<div id="information">
-&Omega;<sub>m0</sub> = <span id="resultat_omegam0" ></span><br />
-&Omega;<sub>r0</sub> = <span id="resultat_omegar0" onChange="document.getElementById('Or_calc').value = this.value"></span><br />
-&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
-&Omega;<sub>k0</sub> = <span id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value"></span><br />
-<span id="resultat_ageunivers"></span><br />
-<span id="resultat_bigcrunch"></span><br />
-Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-
-		</div>
-
-
-
+<div id="graph" style="width:50%;"></div>
+  
+<script>
+	window.onresize = function() {
+    Plotly.Plots.resize(Plotly.d3.select("#graph").node());
+};
+	trace();
+</script>
 </body>
 </html>

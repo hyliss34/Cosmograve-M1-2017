@@ -69,7 +69,10 @@ function Calc(){
 
 	//on calcule omegak
 	omegak0 = 1-Or-omegam0-omegaDE0;
-	
+	if(document.getElementById("univ_plat").checked){
+		omegak0=0;
+		console.log(omegak0);
+	}
 	Or = parseFloat(Or).toFixed(10);
 	omegak0 = omegak0.toFixed(10);
 

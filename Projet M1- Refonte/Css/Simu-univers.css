@@ -43,24 +43,26 @@
 	background-size:auto;
 }
 #calc {float: right;}
-#enre{
-	display:none;
-	width:100%;
-	text-align: center;
-}
-#enr{margin:auto;}
+
 #modele {
 	display:none;
 }
-#w1{display:block;}
+#w1{display:block;
+}
+
+
 .tg {
-	width:80%;
-	margin:9% 10% 0% 10%;
+	position: relative;
+	z-index:0;
+	width:99%;
+	margin: 20px auto;
 	margin-bottom: 20px;}
 
 #graphique {
-	text-align: center;
-	max-width:100%;
+	z-index:0;
+	width:90%;
+	margin:0% 4% 0% 4%;
+	height:100vh;
 }
 
 #grille,#univ_plat {
@@ -79,7 +81,6 @@ select {
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=4);
 }
 input[type="text"]{
-	-webkit-appearance: none;
 	border-radius: 1px;
 	border:thin black;
 	height:20px;
@@ -149,12 +150,11 @@ input[type="text"]{
 	
 	#w1{display: inline-block;}
 	input[type="text"]{border:thin black;}
-	#enre{display:block;}
 	#graphique {
-		margin-left: 20px;
 		float:left;
-		margin-top:0px;
-		width:56%;
+		width:55%;
+		height:90vh;
+		margin-top:10vh
 	}
 	
 	#modele{
@@ -172,7 +172,6 @@ input[type="text"]{
 		margin-bottom:0;
 		width:30%;
 	}
-	#enr{margin-left:22%;}
 	
 	footer {width:100%;}
 	

@@ -9,6 +9,9 @@
 	<script src="./Lib/Spin/spin-min.js"></script>
 	<script src="./Lib/Spin/spin.js"></script>
 	
+	<!-- Librairie pour le graphique -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	
 	<!-- Enregistrement graphique -->
 	<script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
 	<script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
@@ -19,10 +22,8 @@
 	<script src="./js/Get_para.js"></script>
 	<script src="./js/main_calcul.js"></script>
 	<script src="./js/canvas_min.js"></script>
-	<script src="./js/graphique_min.js"></script>
 	<script src="./js/integrale.js"></script>
 	<script src="./js/rungekutta.js"></script>
-	<script src="./js/canvas_h0neg_min.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
@@ -66,7 +67,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
                 <li class="nav-submenu"><a href="#">Simulation</a>
                     <ul>
                         <li><a href="Simulation_univers.html">Standard</a></li>
-						<li ><a href="Simulation_univers_noire.html">Energie Noire</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Sombre</a></li>
                     </ul>
                 </li>
       
@@ -75,7 +76,12 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
         <li class="nav-submenu"><a href="#">Trajectoire</a>
             <ul>
                 <li><a href="Trajectoire-the.html">Theorie</a></li>
-				<li><a href="Simulation_trajectoire.html">Simulation</a></li>
+				<li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_trajectoire.html">Standard</a></li>
+						<li ><a href="Simulation_trajectoire_photons.html">Photon</a></li>
+                    </ul>
+                </li>
             </ul>
         </li>
        
@@ -154,7 +160,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 <canvas id="canvas_1"  width="750px" style="display:none;"></canvas>
 <!-- INFOS -->
-<div id="tab">
+<div id="tg_contains">
 <table class="tg">
   <tr>
     <th class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>m0</sub></th>
@@ -194,11 +200,12 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
   </tr>
 </table>
 </div>
-		
+
+<input value="aidvbai" type="button" style="visibility: hidden"></input>	
 
 <!-- GRAPHIQUE-->
 <div id="graphique">
-	<svg id="graphique_svg" xmlns="http://www.w3.org/2000/svg" fill="black"></svg>
+	
 </div>
 
 
@@ -207,12 +214,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<canvas id="canvas" width="298" height="400"></canvas>
 </div>
 
-<!-- Sauvegarde graphique -->
-<div id="enre"><input type="submit" id="enr" class="myButton" value="Enregistrer graphique" onclick="Save_graph()"></div>
 
-<a id="tel" href="#" download="Graphique" style="display:none;"></a>
-
-<canvas id="Canv_enr" width="760px" height="500px" style="display:none;"></canvas>
 
 
 
@@ -225,7 +227,9 @@ context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
 	
-
+	window.onresize = function() {
+    Plotly.Plots.resize(Plotly.d3.select("#graphique").node());
+};
 
 //genere le premier graphique des generatrices et lance le 1er calcul
 if(window.innerWidth>960){
@@ -237,15 +241,7 @@ calcul();
 //lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 var myImg = document.getElementById("canvas");
 myImg.onmousedown = GetCoordinates;
-	
-//
-function resize(){
-	$("#graphique_svg").empty();
-	graphique_creation();
-	
-}
-	
-d3.select(window).on('resize',resize);
+
 </script>
 <br/>
 <footer>

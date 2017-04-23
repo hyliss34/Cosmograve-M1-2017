@@ -26,6 +26,16 @@
 			pause = true;
 			debut = true;
 		</script>
+		
+		
+		
+		
+		
+		 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
 	<!-- MENUS 
 Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
 																								-->
@@ -181,7 +191,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 </table>
 			<br/>
 
-			<div id="graphique2" style='margin-top: 35px;'>
+			<div id="graphique2" style='margin-top: 35px;width:500px;height:400px;'>
 				<svg id="grsvg_2"></svg>
 			</div>
 			
@@ -196,15 +206,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 			<p style="float:right;top:100%;left:90%;width:100%;text-align: right;"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/Menu/nav.jquery.min.js"></script>
-<script>
-	function resize(){
-		$('#grsvg_2').empty();
-		graphique_creation_pot();
-	}
-	
-	d3.select(window).on('resize',resize);
-	
-	
+<script>	
 	
     $('.nav').nav();
 </script>			

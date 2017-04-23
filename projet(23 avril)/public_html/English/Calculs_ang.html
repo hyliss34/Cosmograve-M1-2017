@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet" href="../Css/Index.css">
+<link rel="stylesheet" href="../Css/calc.css">
+
+
+<!-- fonction de calcul pour mobile-->
+<script src="../js/Calculs_annexes/calcu_mob.js"></script>
+<!-- ----------------------------- -->
+<!-- Calcul Annexes -->
+<script src="../js/Calculs_annexes/bisection_root_finder.js"></script>
+<script src="../js/Calculs_annexes/calcu.js"></script>
+<script src="../js/Calculs_annexes/Adaptive_Simpson.js"></script>
+<script src="../js/Get_para.js"></script>
+<!--<script src="js/integrale.js"></script>-->
+
+<!-- Scripts pour le chargement -->
+<script src="../Lib/jquery-1.12.3.min.js"></script>
+<script src="../js/Spin.js"></script>
+<script src="../Lib/Spin/spin-min.js"></script>
+<script src="../Lib/Spin/spin.js"></script>
+
+<script>
+	window.onload = function charg_params(){
+	var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    T0 = unescape(temp[1]);
+    temp = parameters[1].split("=");
+    H0 = unescape(temp[1]);
+   	temp = parameters[2].split("=");
+	omegam0 = unescape(temp[1]);
+	temp = parameters[3].split("=");
+	omegalambda0 = unescape(temp[1]);
+	temp = parameters[4].split("=");
+	Or = unescape(temp[1]);
+	temp = parameters[5].split("=");
+	omegak0 = unescape(temp[1]);
+	temp = parameters[6].split("=");
+	k = unescape(temp[1]);
+	temp = parameters[7].split("=");
+	h = unescape(temp[1]);
+	temp = parameters[8].split("=");
+	G = unescape(temp[1]);
+	temp = parameters[9].split("=");
+	c = unescape(temp[1]);
+	temp = parameters[10].split("=");
+	typeannee = unescape(temp[1]);
+	temp = parameters[11].split("=");
+	nbr = unescape(temp[1]);
+	
+		
+	document.getElementById("T0_annexes").value = T0;
+	document.getElementById("H0_annexes").value = H0;
+	document.getElementById("omegam0_annexes").value = omegam0;
+	document.getElementById("omegalambda0_annexes").value = omegalambda0;
+	document.getElementById("resultat_omegar0_annexes").value = Or;
+	document.getElementById("resultat_omegak0_annexes").value = omegak0;
+	document.getElementById("k_p").value = k;
+	document.getElementById("h_p").value = h;
+	document.getElementById("G_p").value = G;
+	document.getElementById("c_p").value = c;
+	document.getElementById("typeannee").value = typeannee;
+	document.getElementById("nbr_precision").value = nbr;
+	
+	};
+</script>
+<head>
+<meta charset="UTF-8">
+<title>Calculs</title>
+</head>
+
+<body>
+
+
+<header>
+	<h2>Adjunct Computation</h2>
+</header>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<!-- Paramètres de base cachés -->
+
+	<input type="hidden" id="k_p" value="1.38064852e-23" ></input>
+	<input type="hidden" id="h_p" value="6.62607004e-34"></input>
+	<input type="hidden" id="G_p" value="6.67385e-11"></input>
+	<input type="hidden" id="c_p" value="299792458"></input>
+	<input type="hidden" id="typeannee" value="Grégorienne" />
+	<input type="hidden" id="nbr_precision" value="4" />
+
+
+<div id="tabs-1">
+<strong><span style="color:black;">Cosmological parameters :</strong></span>
+
+<div>
+	<label for="T0_annexes">T<sub>0</sub> =</label>
+	<input id="T0_annexes" style="color:blue"></input> K
+</div>
+
+<div>
+	<label for="H0_annexes">H<sub>0</sub> =</label>
+	<input id="H0_annexes" style="color:blue" ></input> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
+</div>
+
+<div>
+	<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
+	<input id="omegam0_annexes" style="color:blue"></input>
+</div>
+
+<div>
+	<label for="omegalambda0_annexes">&Omega;<sub>&Lambda;0</sub> =</label>
+	<input id="omegalambda0_annexes" style="color:blue"></input>
+</div>
+
+<div>
+	<select id="resultat_omegar0_annexes" style="color:blue">
+		<option>Matière et Lambda</option>
+		<option>Matière, Lambda et RFC</option>
+		<option>Matière, Lambda, RFC et Neutrinos</option>
+	</select>
+	<br/>
+	<label for="resul_omegar0">&Omega;<sub>r0</sub> =</label>
+	<span id="resul_omegar0" style="color:blue;"></span>
+</div>
+
+<div>
+	<label for="resultat_omegak0_annexes">&Omega;<sub>k0</sub> =</label>
+	<span id="resultat_omegak0_annexes" style="color:blue"></span>
+</div>
+
+
+
+<form id="nouvellesDonnees" action="" method="post">
+	<div class="desact_retour">
+		<label for="z1">z<sub>1</sub> =</label>
+		<input id="z1" value="0" maxlength="13" type="text">
+	</div>
+	<div class="desact_retour">
+		<label for="z2">z<sub>2</sub> =</label>
+		<input id="z2" value="0" maxlength="13" type="text"> 
+	</div>
+
+<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();">Calcul</button>
+
+	<span style="display:none;color:blue;" id="resul_tps"></span>
+<div id="gif" class="spinner" style="position:relative;display:inline-block;"></div>
+
+</div>
+</form>
+
+<br />
+<div>
+<strong><span style="color: #ff0000;"> z limited to 1e8 for dm computation and to 1e30 for t computation</span></strong>							
+	<div>
+		<label for="dm1">d<sub>m1</sub> =</label>
+		<span id="dm1" style="color:blue"></span> m = <span id="dm1_pc" style="color:blue"></span> pc
+	</div>
+	<div>
+		<label for="dm2">d<sub>m2</sub> =</label>
+		<span id="dm2" style="color:blue"></span> m = <span id="dm2_pc" style="color:blue"></span> pc
+	</div>
+	<div>
+		<label for="dm">d<sub>m2</sub> - d<sub>m1</sub> =</label>
+		<span id="dm" style="color:blue"></span> m = <span id="dm_pc" style="color:blue"></span> pc
+	</div>
+
+	<div>
+		<label for="tempsEmission">t<sub>1</sub>=</label>
+		<span id="tempsEmission" style="color:blue"></span> a = <span id="tempsEmission_sec" style="color:blue"></span> s
+	</div>
+
+	<div>
+		<label for="tempsReception">t<sub>2</sub>=</label>
+		<span id="tempsReception" style="color:blue"></span> a = <span id="tempsReception_sec" style="color:blue"></span> s
+	</div>
+
+	<div>
+		<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
+		<span id="agebetween" style="color:blue"></span> a = <span id="agebetween_sec" style="color:blue"></span> s
+	</div>
+
+	<div>  </br> </div>                                  
+	<strong><span style="color:black;">Les paramètres cosmologiques à z1 :</strong></span>
+
+	<div>
+		<label for="Hz1">H(z<sub>1</sub>) =</label>
+		<span id="Hz1" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup> 
+	</div>
+
+
+
+	<div>
+		<label for="Tz1">T(z<sub>1</sub>) =</label>
+		<span id="Tz1" style="color:blue"></span> K 
+	</div>
+
+
+
+	<div>
+		<label for="Omz1">Omegam(z<sub>1</sub>) =</label>
+		<span id="Omz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Olz1">Omegalambda(z<sub>1</sub>) =</label>
+		<span id="Olz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Orz1">Omegar(z<sub>1</sub>) =</label>
+		<span id="Orz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Okz1">Omegak(z<sub>1</sub>) =</label>
+		<span id="Okz1" style="color:blue"></span>  
+	</div>
+
+
+
+	<div>
+		<p>The 2 following computations uses z<sub>1</sub>,</p>
+		<div class="desact_retour">
+			<label for="diametre">D =</label>
+			<input id="diametre" value="" maxlength="17" type="text">  (m)
+			<input type="button" value="--> θ" onClick="calcultheta();">
+		</div>
+		<div class="desact_retour">
+			<input type="button" value="D <--" onClick="calculD();">
+			<label for="theta">θ =</label>
+			<input id="theta" value="" maxlength="17" type="text"> (Seconde d'arc)
+		</div>
+	</div>
+</div>
+	
+ <br />
+ 		<p><strong> Inverse calculations</strong></p>
+ 		 <div class="desact_retour">
+ 		 	<label for="dm_racine_dm">d<sub>m</sub> =</label>
+ 		 	<input id="dm_racine_dm" value="0" maxlength="26" type="text"> (m)
+ 		 	<label for="z_racine_dm">Z =</label>
+ 		 	<span id="z_racine_dm" style="color:blue"></span> <!--= <span id="dm1_pc" style="color:blue"></span> pc-->
+ 		 </div>
+ 		 <br/>
+        <div class="desact_retour">
+          <label for="t_racine_em">t<sub>emission</sub> =</label>
+          <input id="t_racine_em" value="0" maxlength="26" type="text"> (s)
+          <label for="z_racine_t_em">   Z<sub>1</sub> =</label>
+          <span id="z_racine_t_em" style="color:blue"></span> <!--= <span id="dm1_pc" style="color:blue"></span> pc-->
+        </div>
+        <br />
+        <div class="desact_retour">
+          <label for="t_racine_rec">t<sub>reception</sub> =</label>
+          <input id="t_racine_rec" value="0" maxlength="26" type="text"> (s)
+          <label for="z_racine_t_rec"> Z<sub>2</sub>=</label>
+          <span id="z_racine_t_rec" style="color:blue"></span> <!--= <span id="dm1_pc" style="color:blue"></span> pc-->
+        </div>
+        <div id="plus"><button type="button" onclick="inverse();">Calcul</button> 
+        </div>
+<br/>
+<span style="text-align: center;width:100%;"><input type="button" value="Retour" onClick="retour_simu()"/></span>
+<br/>
+<p style="float:right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>	
+</body>
+</html>

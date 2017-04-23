@@ -67,8 +67,7 @@ function calcul(){   // fonction principale de cosmograve
 	
 	PosX -= 1.5;
 	PosY -= 1.5;
-	
-	update_point();
+
 
 	//on calcule omegak
 	omegak0 = 1-Or-omegam0-omegalambda0;
@@ -121,14 +120,17 @@ function calcul(){   // fonction principale de cosmograve
 	}
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
-	document.getElementById("resultat_ageunivers").innerHTML = "No Big Bang";
+	document.getElementById("resultat_ageunivers_ga").innerHTML = "No Big Bang";
+	document.getElementById("resultat_ageunivers_s").innerHTML = "No Big Bang";
 	document.getElementById("resultat_bigcrunch").innerHTML = "No Big Crunch";
 	document.getElementById("resultat_dureeuniv").innerHTML = "";
 	
 	if(age >= 0){
-		document.getElementById("resultat_ageunivers").innerHTML = "Time since Big Bang = "+age_afficher+" Ga = "+age_sec_afficher+" s";
+		document.getElementById("resultat_ageunivers_ga").innerHTML = age_afficher;
+		document.getElementById("resultat_ageunivers_s").innerHTML = age_sec_afficher;
 		}else{
-		document.getElementById("resultat_ageunivers").innerHTML = "No Big Bang";
+		document.getElementById("resultat_ageunivers_ga").innerHTML = "No Big Bang";
+		document.getElementById("resultat_ageunivers_s").innerHTML = "No Big Bang";
 		age = 0;
 	}
 	
@@ -250,4 +252,62 @@ function calcul(){   // fonction principale de cosmograve
 	graphique_creation();
 	setTimeout(stop_spin,300);
 	
+}
+function graphique_creation(){
+	chart = d3.select("#graphique_svg");
+    wid1 = window.innerWidth;
+    hei1 = window.innerHeight;
+	
+	if(wid1 > 960){
+		wid = wid1*0.5;
+		hei= wid*2/3;
+	}
+	else{
+		wid = wid1*0.8;
+		hei = wid*2/3;
+	}
+	
+	
+    c = d3.scale.linear().range([0, wid]);
+    d = d3.scale.linear().range([hei, 0]);
+    e = d3.svg.line().x(function(a) {return c(a.date)}).y(function(a) {return d(a.close)});
+    b = d3.select("#graphique_svg").style("font-size", "12px").attr("width",wid+100).attr("height",hei+100).append("g").attr("transform", "translate(40,40)");
+    f = d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d"));
+    g = d3.svg.axis().scale(d).orient("left").ticks(10);
+
+    data.forEach(function(a) {
+        a.date = a.date;
+        a.close = +a.close
+    });
+    c.domain(d3.extent(data, function(a) {
+        return a.date
+    }));
+    d.domain([0, d3.max(data, function(a) {
+        return a.close
+    })]);
+    b.append("g").attr("class", "x axis").attr("transform", "translate(0,"+hei+')').style({
+        stroke: "black",
+        fill: "none",
+        "stroke-width": "1px",
+        "shape-rendering": "crispEdges"
+    }).call(f);
+    
+    1 == document.getElementById("grille").checked && (b.selectAll("line.x").data(c.ticks(10)).enter().append("line").attr("class",
+        "x").attr("x1", c).attr("x2", c).attr("y1", 0).attr("y2", hei).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"), b.selectAll("line.y").data(d.ticks(8)).enter().append("line").attr("class", "y").attr("x1", 0).attr("x2", wid).attr("y1", d).attr("y2", d).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"));
+    b.append("g").attr("class", "y axis").style({
+        stroke: "black",
+        fill: "none",
+        "stroke-width": "1px",
+        "shape-rendering": "crispEdges"
+    }).call(g);
+    b.append("text").attr("class", "legend_titre").attr("x", wid/2-100).attr("y", -15).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.3em").text("Evoluation of the reduce scale factor");
+    b.append("text").attr("class", "legend_axe").attr("x", wid/2).attr("y", hei+35).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.2em").text("t (Ga)");
+    b.append("text").attr("class", "legend_axe").attr("x", -hei/1.7).attr("y", -35).attr("dy", ".3em").attr("transform", "rotate(-90)").style("font-weight", "bold").style("font-size", "1.2em").text("a (t)");
+    b.append("path").style("stroke", "steelblue").style("stroke-width", "2").style("fill", "none").attr("class", "line").attr("d", e(data));
+
+}
+
+function resize(){
+	$("#graphique_svg").empty();
+	graphique_creation();
 }

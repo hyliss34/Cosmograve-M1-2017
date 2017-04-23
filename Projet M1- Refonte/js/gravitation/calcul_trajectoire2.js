@@ -70,9 +70,9 @@ function animate(){
 		}
 
 		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
-		data2 = [];
-		data2.push({date:r_part/1000,close:V});
-		update_graphique_2();
+		//data2 = [];
+		//data2.push({date:r_part/1000,close:V});
+		//update_graphique_2();
 		
 		dt = E*dtau*(1/(1-2*m/r_part));
 		temps_observateur += dt;
@@ -307,44 +307,60 @@ function trajectoire() {
 		document.getElementById("L").innerHTML = L.toExponential(3);
 		document.getElementById("E").innerHTML = E.toExponential(3);
 		
+		
+		data3=[];
 		for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
 			
+			data1=[];
 			V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
-			data1.push({date:r/1000,close:V});
+			data1.push(r);
+			data1.push(V);
+			data3.push(data1);
 			
 		}
 		V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
-		data2.push({date:rmax/1000,close:V});
+		data2.push({date:rmax,close:V});
+		 
 		
-		graphique_creation_pot();
+		frame = [{name : 'Graphe', data: [{x: [],y: []}]}];
+		
+		
+		
+		
+		myConfig= {
+      "type": "line",
+      "series": [{
+        "values": data3
+      },]
+		};
+		
+		render(myConfig);
+		
+		
+		
+		
+		
+		
+		
+		
 	}else{
 		myInterval = setInterval(animate,1000/300);
 	}
 }
 
-var i =0;
-var stop =0;
-function animate_explo(){
-
-	if(i>17){i=i-17;} // bouclage
-	cyx=document.getElementById("can_explo").getContext("2d");
-	cyx.clearRect(0,0,550,450);
-	ima = new Image();
-	ima.src = "Images/explo/explo_0"+i+".png";
-	cyx.drawImage(ima,posX1-90,posY1-100);
 
 
-	if(i <18 ){
-		i = i +1;
-		stop = stop +1;
-	}
-	else {
-		cyx.clearRect(0,0,550,450);
-		clearInterval(Interv);
-	}
-	if(stop >50){
-		cyx.clearRect(0,0,550,450);
-		clearInterval(Interv);}
-	}
 
+
+
+
+/* Lance le rendu du graphe */
+function render(dataa){
+	zingchart.render({
+      id: 'grraphique2',
+      data: dataa,
+      height: "100%",
+      width: "100%"
+    });
+}
 

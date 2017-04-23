@@ -21,6 +21,7 @@ function calcul(){   // fonction principale de cosmograve
 	omegam0 = Number(document.getElementById("omegam0").value);
 	omegalambda0 = Number(document.getElementById("omegalambda0").value);
 	
+	frame = [{name : 'Graphe', data: [{x: [],y: []}]}];
 	
 	//on recupere le bon nombre de jour par an.
 	if(typeannee == "Sidérale"){
@@ -73,7 +74,10 @@ function calcul(){   // fonction principale de cosmograve
 
 	//on calcule omegak
 	omegak0 = 1-Or-omegam0-omegalambda0;
-	
+	if(document.getElementById("univ_plat").checked){
+		omegak0=0;
+	}
+
 	Or = parseFloat(Or).toFixed(10);
 	omegak0 = omegak0.toFixed(10);
 
@@ -175,6 +179,8 @@ function calcul(){   // fonction principale de cosmograve
 	yrunge = 1;
 	yrunge2 = 1;
 	data = [];
+	data_x=[];
+	data_y=[];
 	if(omegam0 == 0 && omegalambda0 == 1){
 		while (yrunge2 > 0.01 && yrunge2 < 5.){
 			
@@ -183,7 +189,8 @@ function calcul(){   // fonction principale de cosmograve
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
-			data.push({date:age+m/H0engannee,close:yrunge2});
+			data_x.push(age+m/H0engannee);
+			data_y.push(yrunge2);
 			m=m-pas;
 		}
 		}else{
@@ -193,11 +200,13 @@ function calcul(){   // fonction principale de cosmograve
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
-			data.push({date:age+m/H0engannee,close:yrunge2});
+			data_x.push(age+m/H0engannee);
+			data_y.push(yrunge2);
 			m=m-pas;
 		}
 	}
-	data.reverse();
+	data_x.reverse();
+	data_y.reverse();
 	
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
@@ -212,7 +221,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.25){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer enti\350rement pour raison de stabilit\351.")}
 			i=i+pas;
 		}
@@ -220,7 +230,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			i=i+pas;
 		}
 		alert("Proche s\351paratrice");
@@ -228,7 +239,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			i=i+pas;
 		}
 	}
@@ -254,26 +266,35 @@ function calcul(){   // fonction principale de cosmograve
 	
 
 	//on creer le graphique
+	frame[0].data[0].x=data_x;
+	frame[0].data[0].y=data_y;
+
+	maxx = Math.max(data_x);
+	maxy = Math.max(data_y);
+	minx = Math.min(data_x);
+	miny = Math.min(data_y);
+	tracer1 = [{
+	x: frame[0].data[0].x,
+  	y: frame[0].data[0].y,
+  	line: {simplify: false},
+	}];
+
+
+	Plotly.newPlot('graphique',tracer1, {
+		title: "Evolution du facteur d'\u00e9chelle r\u00e9duit",
+		
+	xaxis: {range: [minx-1,maxx+1],
+		   title: 't (Ga)'},
+	yaxis: {range: [miny,maxy+1],
+		   title: 'a(t)'}
+	});
 	
-
-	graphique_creation();
-
+	
+	
 	setTimeout(stop_spin,300);
 	
 }
 
 
-function Save_graph() {
-	svgd = $("#graphique_svg");
-	svg = svgd[0].outerHTML;
-	canv = document.getElementById("Canv_enr");
-	im = canv.toDataURL('image/png');
-	canvg(canv,svg);
-	
-	im = canv.toDataURL('image/png');
-    
-	
-	$("#tel").attr('href',im);
-	document.getElementById("tel").click();
-}
+
 
