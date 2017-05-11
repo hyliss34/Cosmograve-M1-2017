@@ -11,7 +11,16 @@
 </head>
 
 <body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-98631213-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 <header>
 	<h2>Paramètres</h2>
 </header>
@@ -62,7 +71,7 @@
 <br/>
 <br/>
 <div id="boutons_params" style="display:block;width:300px;">
-<input type="button" value="Enregistrer" onclick="enregis()"></input>
+<input type="button" value="Enregistrer" onclick="enregis();ga('send', 'event', 'button', 'click', 'Paramètres Enregistrer');"></input>
 <input type="button" value="Reset" onclick="Reset_para()"></input>
 <input type="button" value="Retour" onclick="retour()"></input>
 </div>

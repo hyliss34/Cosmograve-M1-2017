@@ -14,18 +14,20 @@ function fonction_E(x,omegam0, omegalambda0, Or){
 }
 
 function derive_fonction_E(x,omegam0, omegalambda0, Or){
-	return (Or*(Math.pow(1.0+x,2) + 8*x + 2) + 3 *omegam0*x + omegam0 -2*omegalambda0 + 2);
+  return (4 * Number(Or)*Math.pow((1+x),3) + 3 * Number(omegam0)*Math.pow((1+x),2) + 2 * (1-Number(omegam0)-Number(Or)-Number(omegalambda0))*(1+x));
 }
 	
 
 
 
-//fonction de l'equation de simpson 
-function simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or, eps){
+//fonction: lancement de l'intégration de SImpson 
+function simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or){
+	eps = 0.000001;      //tolérance d'érreur de l'intégral
 	whole = inetgrate_area_simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or);
-    return recursive_asr(bornInf, bornSup, fonction, omegam0, omegalambda0, Or, eps, whole);
+	return recursive_asr(bornInf, bornSup, fonction, omegam0, omegalambda0, Or, eps, whole);
 }
 
+//formule mathématique de simpson
 function inetgrate_area_simpson(bornInf, bornSup, fonction, omegam0, omegalambda0, Or){
 
 	var centre = (bornInf+bornSup)/2.0;

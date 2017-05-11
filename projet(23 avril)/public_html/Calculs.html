@@ -18,7 +18,7 @@
 <script src="./js/Spin.js"></script>
 <script src="./Lib/Spin/spin-min.js"></script>
 <script src="./Lib/Spin/spin.js"></script>
-
+<title>Calculs Annexes</title>
 <script>
 	window.onload = function charg_params(){
 	document.getElementById("T0_annexes").value = sessionStorage.getItem("T0");
@@ -41,7 +41,16 @@
 </head>
 
 <body>
+<script>
+	
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-98631213-1', 'auto');
+  ga('send', 'pageview');
+</script>
 <header>
 	<h2>Calculs Annexes</h2>
 </header>
@@ -114,7 +123,9 @@
 		<input id="z2" value="0" maxlength="13" type="text"> 
 	</div>
 
-<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();">Calcul</button>
+
+
+<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();ga('send', 'event', 'button', 'click', 'Calcul Annexe normal');">Calcul</button>
 	<span style="display:none;color:blue;" id="resul_tps"></span>
 <div id="gif" class="spinner" style="position:relative;display:inline-block;"></div>
 
@@ -230,11 +241,11 @@
           <label for="z_racine_t_rec"> Z<sub>2</sub>=</label>
           <span id="z_racine_t_rec" style="color:blue"></span> 
         </div>
-        <div id="plus"><button type="button" onclick="inverse();">Calcul</button> 
+        <div id="plus"><button type="button" onclick="inverse();ga('send', 'event', 'button', 'click', 'Calcul Annexe Inverse');">Calcul</button> 
 		<span id="z_lim" style="color:blue"></span> 
         </div>
 <br/>
-<span style="bottom:20px;right:10%;position: fixed;"><input type="button" value="Retour" onClick="retour_simu()"/></span>
+<span style="bottom:20px;right:10%;position: fixed;"><input type="button" value="Retour" onClick="retour_simu();"/></span>
 <br/>
 </div>
 <p style="float:right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>	
