@@ -1,11 +1,11 @@
-<!doctype html>
+<!Doctype html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <link rel="stylesheet" href="../Css/Index.css">
 <link rel="stylesheet" href="../Css/calc.css">
-<title>Calculs Energie Noire anglais</title>
+<title>Calcul Annexe Energie Sombre Anglais</title>
 <!-- ----------------------------- -->
 <!-- Calcul Annexes -->
 <script src="../js/Calculs_annexes/Energie_noir.js"></script>
@@ -13,7 +13,7 @@
 <script src="../js/Calculs_annexes/calcu.js"></script>
 <script src="../js/Calculs_annexes/Adaptive_Simpson.js"></script>
 <script src="../js/Get_para.js"></script>
-<!--<script src="js/integrale.js"></script>-->
+<script src="../js/Update_Constants.js"></script>
 
 <!-- Scripts pour le chargement -->
 <script src="../Lib/jquery-1.12.3.min.js"></script>
@@ -54,7 +54,7 @@
 
 </script>
 <header>
-	<h2>Adjunct computation Dark Energy</h2>
+	<h2>Adjuct computation Dark energy</h2>
 </header>
 
 <br/>
@@ -88,12 +88,12 @@
 
 <div>
 	<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
-	<input id="omegam0_annexes" style="color:blue"></input>
+	<input id="omegam0_annexes" style="color:blue" onChange="update_omegar0();"></input>
 </div>
 
 <div>
 	<label for="omegaDE0_annexes">&Omega;<sub>DE0</sub> =</label>
-	<input id="omegaDE0_annexes" style="color:blue" value="0.6911"></input>
+	<input id="omegaDE0_annexes" style="color:blue" value="0.6911" onChange="update_omegar0();"></input>
 </div>
 
 <div>
@@ -107,14 +107,15 @@
 
 
 <div>
-	<select id="resultat_omegar0_annexes" style="color:blue">
-		<option>Matter and Lambda</option>
+	<select id="resultat_omegar0_annexes" style="color:blue" onChange="update_omegar0();">
+		<option selected>Matter and Lambda</option>
 		<option>Matter, Lambda and RFC</option>
 		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calcul();">Flat Universe(Ω<sub>k</sub> = 0)
 	<br/>
 	<label for="resul_omegar0">&Omega;<sub>r0</sub> =</label>
-	<span id="resul_omegar0" style="color:blue;"></span>
+	<span id="Orr" style="color:blue;"></span>
 </div>
 
 <div>
@@ -135,14 +136,15 @@
 		<input id="z2" value="0" maxlength="13" type="text"> 
 	</div>
 
-<div id="plus"><button id="bcalc_ord" type="button" onclick="calc_energie_noire();ga('send', 'event', 'button', 'click', 'Calcul Annexe Energie Sombre Normal Anglais');">Calcul</button>
+<div id="plus"><button id="bcalc_ord" type="button" onclick="calc_energie_noire();ga('send', 'event', 'button', 'click', 'Calcul Annexe Energie Sombre Normal');">Calcul</button>
 	<span style="display:none;color:blue;" id="resul_tps"></span>
 <div id="gif" class="spinner" style="position:relative;display:inline-block;"></div>
 
 </div>
 
 <br />
-							
+
+<strong><span style="color: #ff0000;"> z limited to 1e8</span></strong>							
 	<div>
 		<label for="dm1">d<sub>m1</sub> =</label>
 		<span id="dm1" style="color:blue"></span> m = <span id="dm1_pc" style="color:blue"></span> pc
@@ -172,7 +174,7 @@
 	</div>
 
 	<div>  </br> </div>                                  
-	<strong><span style="color:black;">Les paramètres cosmologiques à z1 :</strong></span>
+	<strong><span style="color:black;">Cosmological parameters at z1</strong></span>
 
 	<div>
 		<label for="Hz1">H(z<sub>1</sub>) =</label>
@@ -253,9 +255,15 @@
         <div id="plus"><button type="button" onclick="inverse();">Calcul</button> 
         </div>-->
 <br/>
-<span style="text-align: center;width:100%;"><input type="button" value="Retour" onClick="retour_noire()"/></span>
+<span style="bottom:20px;right:10%;position: fixed;"><input type="button" value="Back" onClick="retour_noire();"/></span>
 <br/>
 </div>
-<p style="float:right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>	
+<p style="float:right"><script type="text/javascript" src="https://counter9.fcs.ovh/private/counter.js?c=5ymlqqmnjqrd4d5b1pw83454tbdgb9nx"></script>
+<br><noscript><a href="https://www.compteurdevisite.com" title="compteur visiteur"><img src="https://counter9.fcs.ovh/private/compteurdevisite.php?c=5ymlqqmnjqrd4d5b1pw83454tbdgb9nx" border="0" title="compteur visiteur" alt="compteur visiteur"></a></noscript> </p>
+
+	<script>
+		update_omegak0();
+		update_omegar0();
+	</script>	
 </body>
 </html>

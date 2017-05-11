@@ -171,7 +171,8 @@ function calcul(){   // fonction principale de cosmograve
 	m = 0;
 	yrunge = 1;
 	yrunge2 = 1;
-	data = [];
+	data_x=[];
+	data_y=[];
 	if(omegam0 == 0 && omegalambda0 == 1){
 		while (yrunge2 > 0.01 && yrunge2 < 5.){
 			
@@ -180,7 +181,8 @@ function calcul(){   // fonction principale de cosmograve
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
-			data.push({date:age+m/H0engannee,close:yrunge2});
+			data_x.push(age+m/H0engannee);
+			data_y.push(yrunge2);
 			m=m-pas;
 		}
 		}else{
@@ -190,15 +192,17 @@ function calcul(){   // fonction principale de cosmograve
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
-			data.push({date:age+m/H0engannee,close:yrunge2});
+			data_x.push(age+m/H0engannee);
+			data_y.push(yrunge2);
 			m=m-pas;
 		}
 	}
-	data.reverse();
+	data_x.reverse();
+	data_y.reverse();
 	
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
-	pas = 0.00001;
+	pas = 0.001;
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
 	k1 = [0,0,0,0];
@@ -209,7 +213,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.25){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			if(yrunge >= 50){alert("Universe with Big Crunch, Not entirely calculated for stablity reasons.")}
 			i=i+pas;
 		}
@@ -217,7 +222,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			i=i+pas;
 		}
 		alert("Close to the separator");
@@ -225,7 +231,8 @@ function calcul(){   // fonction principale de cosmograve
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0engannee,close:yrunge});
+			data_x.push(age+i/H0engannee);
+			data_y.push(yrunge);
 			i=i+pas;
 		}
 	}
@@ -249,65 +256,127 @@ function calcul(){   // fonction principale de cosmograve
 	
 	
 	//on creer le graphique
-	graphique_creation();
+	
+
+graph = $("#graphique");
+	Plotly.purge(graph);
+	graph.empty();
+	wid = graph.width();
+	hei = wid*2/3;
+	document.getElementById("graphique").style.height = hei;
+	
+	frame = [{name : 'Graphe', data: [{x: [],y: []}]}];
+	frame[0].data[0].x=data_x;
+	frame[0].data[0].y=data_y;
+
+	maxx = getMaxTableau(data_x);
+	maxy = getMaxTableau(data_y);
+	minx = getMinTableau(data_y);
+	miny = getMinTableau(data_y);
+	
+	console.log(miny+" "+maxy);
+	tracer1 = [{
+	x: frame[0].data[0].x,
+  	y: frame[0].data[0].y,
+  	line: {simplify: false},
+	}];
+	
+	if(window.innerWidth>960){
+	annots = [{
+		x: 0,
+		xref:'paper',
+		xanchor:'center',
+		y: 1,
+		yref:'paper',
+		yanchor:'bottom',
+		text: '<b>Inputs</b><br>'+'T<sub>0</sub>:'+t0+'<br>'+'H<sub>0:</sub>'+h0+'<br>'+'w<sub>m0</sub>:'+omegam0+'<br>w<sub>L0</sub>:'+omegalambda0,
+ 
+		showarrow:false,
+	},
+	{"xref": "paper", "yref": "paper", "text": "<b>Outputs<\/b><br>w<sub>r0<\/sub>:0<br>w<sub>k0:<\/sub>0<br>T<sub>BB<\/sub>:1.3803e+1(Ga)", "y":1, "x": 1,xanchor:'center',yanchor:'bottom', "showarrow": false}];
+	}
+	else {
+		annots=[];
+	}
+	// tracer
+	var img_png = d3.select('#png');
+	var img_jpg = d3.select('#jpg');
+	var img_svg = d3.select('#svg-1');
+	
+	Plotly.newPlot('graphique',tracer1, {
+		title: "<b>Reduce scale factor evolution</b>",
+		
+	xaxis: {range: [minx,maxx],
+		   title: 't (Ga)'},
+		
+		
+	yaxis: {range: [miny,maxy],
+		   title: 'a(t)'},
+	annotations: annots,
+	},{displaylogo: false});
+	
+	Plotly.newPlot('graphique_enr',tracer1, {
+		title: "<b>Reduce scale factor evolution</b>",
+		
+	xaxis: {range: [minx,maxx],
+		   title: 't (Ga)'},
+		
+		
+	yaxis: {range: [miny,maxy],
+		   title: 'a(t)'},
+	annotations: annots,
+	},{displaylogo: false}).then(function(gd){
+    Plotly.toImage(gd)
+      .then(function(url){
+        img_png.attr("href", url);
+        return Plotly.toImage(gd,{format:'png'})
+		}).then(function(url){
+        img_jpg.attr("href", url);
+        return Plotly.toImage(gd,{format:'jpeg'})
+		}).then(function(url){
+        img_jpg.attr("href", url);
+        return Plotly.toImage(gd,{format:'jpeg'})
+		}).then(function(url){
+		img_svg.attr("href", url);
+		return Plotly.toImage(gd,{format:'svg'})})
+		.then(function(url){
+		img_svg.attr("href", url);
+		return Plotly.toImage(gd,{format:'svg'})
+	})
+	
+	
+	});
+		
+      
+		
+	
 	setTimeout(stop_spin,300);
 	
 }
-function graphique_creation(){
-	chart = d3.select("#graphique_svg");
-    wid1 = window.innerWidth;
-    hei1 = window.innerHeight;
-	
-	if(wid1 > 960){
-		wid = wid1*0.5;
-		hei= wid*2/3;
+
+
+function enre(){
+	format=document.getElementById("format_enr");
+	png=document.getElementById("png");
+	jpg=document.getElementById("jpg");
+	svg=document.getElementById("svg-1");
+		if(format.options[0].selected){
+			png.click();
+		} 
+	else if(format.options[1].selected){
+			jpg.click();
 	}
 	else{
-		wid = wid1*0.8;
-		hei = wid*2/3;
+			svg.click();
 	}
-	
-	
-    c = d3.scale.linear().range([0, wid]);
-    d = d3.scale.linear().range([hei, 0]);
-    e = d3.svg.line().x(function(a) {return c(a.date)}).y(function(a) {return d(a.close)});
-    b = d3.select("#graphique_svg").style("font-size", "12px").attr("width",wid+100).attr("height",hei+100).append("g").attr("transform", "translate(40,40)");
-    f = d3.svg.axis().scale(c).orient("bottom").ticks(8).tickFormat(d3.format("d"));
-    g = d3.svg.axis().scale(d).orient("left").ticks(10);
-
-    data.forEach(function(a) {
-        a.date = a.date;
-        a.close = +a.close
-    });
-    c.domain(d3.extent(data, function(a) {
-        return a.date
-    }));
-    d.domain([0, d3.max(data, function(a) {
-        return a.close
-    })]);
-    b.append("g").attr("class", "x axis").attr("transform", "translate(0,"+hei+')').style({
-        stroke: "black",
-        fill: "none",
-        "stroke-width": "1px",
-        "shape-rendering": "crispEdges"
-    }).call(f);
-    
-    1 == document.getElementById("grille").checked && (b.selectAll("line.x").data(c.ticks(10)).enter().append("line").attr("class",
-        "x").attr("x1", c).attr("x2", c).attr("y1", 0).attr("y2", hei).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"), b.selectAll("line.y").data(d.ticks(8)).enter().append("line").attr("class", "y").attr("x1", 0).attr("x2", wid).attr("y1", d).attr("y2", d).style("stroke", "grey").style("stroke-width", "1").style("shape-rendering", "crispEdges").style("fill", "none"));
-    b.append("g").attr("class", "y axis").style({
-        stroke: "black",
-        fill: "none",
-        "stroke-width": "1px",
-        "shape-rendering": "crispEdges"
-    }).call(g);
-    b.append("text").attr("class", "legend_titre").attr("x", wid/2-100).attr("y", -15).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.3em").text("Evolution of the reduce scale factor");
-    b.append("text").attr("class", "legend_axe").attr("x", wid/2).attr("y", hei+35).attr("dy", ".3em").attr("transform", "rotate(0)").style("font-weight", "bold").style("font-size", "1.2em").text("t (Ga)");
-    b.append("text").attr("class", "legend_axe").attr("x", -hei/1.7).attr("y", -35).attr("dy", ".3em").attr("transform", "rotate(-90)").style("font-weight", "bold").style("font-size", "1.2em").text("a (t)");
-    b.append("path").style("stroke", "steelblue").style("stroke-width", "2").style("fill", "none").attr("class", "line").attr("d", e(data));
-
+			
 }
 
-function resize(){
-	$("#graphique_svg").empty();
-	graphique_creation();
+
+// Recherche max et min dans un tableau
+function getMaxTableau(tableauNumerique) {
+    return Math.max.apply(null, tableauNumerique);
+}
+function getMinTableau(tableauNumerique) {
+    return Math.min.apply(null, tableauNumerique);
 }

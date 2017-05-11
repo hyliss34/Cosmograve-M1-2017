@@ -145,14 +145,14 @@ function update_omegak0_simu(){
 	if(document.getElementById("omegalambda0")!=null){
 		omegalambda0 = Number(document.getElementById("omegalambda0").value);
 		omegak0=1-Or-omegalambda0-omegam0;
-		if(omegak0<1e-9){omegak0=0;}
+		if(Math.abs(omegak0)<1e-9){omegak0=0;}
 		document.getElementById("resultat_omegarlambda0").innerHTML=omegalambda0.toExponential(3);
 		document.getElementById("resultat_omegak0").innerHTML = omegak0.toExponential(3);
 	}
 	else{
 		omegaDE0=Number(document.getElementById("omegaDE0").value);
 		omegak0=1-Or-omegaDE0-omegam0;
-		if(omegak0<1e-9){omegak0=0;}
+		if(Math.abs(omegak0)<1e-9){omegak0=0;}
 		document.getElementById("resultat_omegaDE0").innerHTML=omegaDE0.toExponential(3);
 		document.getElementById("resultat_omegak0").innerHTML=omegak0.toExponential(3);
 		

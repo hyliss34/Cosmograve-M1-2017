@@ -9,10 +9,13 @@
 	<script src="../Lib/Spin/spin-min.js"></script>
 	<script src="../Lib/Spin/spin.js"></script>
 	
+	<!-- Librairie pour le graphique -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	
 	<script src="../js/English/Calcul_energie_noire_ang.js"></script>
 	<script src="../js/Get_para.js"></script>
 	<script src="../js/integrale.js"></script>
-	<script src="../js/rungekutta_noire.js"></script>
+	<script src="../js/Simulation_Univers/Noir/rungekutta_noire.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
@@ -29,12 +32,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 <link rel="stylesheet" href="../Css/Resp-Menu/nav-core.min.css">
 <link rel="stylesheet" href="../Css/Resp-Menu/nav-layout.min.css">
 
-  <!--[if lt IE 9]>
-    <link rel="stylesheet" href="css/ie8-core.min.css">
-    <link rel="stylesheet" href="css/ie8-layout.min.css">
-    <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-    <script src="../js/Menu/rem.min.js"></script>
+<script src="../js/Menu/rem.min.js"></script>
 
 </head>
 
@@ -76,7 +74,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
                 <li><a href="Trajectoire_theo_ang.html">Theorie</a></li>
 				<li class="nav-submenu"><a href="#">Simulation</a>
                     <ul>
-                        <li><a href="Simulation_trajectoire_ang.html">Normal</a></li>
+                        <li><a href="Simulation_trajectoire_ang.html">Massive Particle</a></li>
 						<li ><a href="Simu_photons_ang.html">Photons</a></li>
                     </ul>
                 </li>
@@ -108,12 +106,14 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" class="myButton" value="Adjunct computation" id="calc" onclick="ouvre_calc_ang()"></input>
+	<input type="submit" class="myButton" value="Adjunct computation" id="calc" onclick="ouvre_calc_Noire_ang()"></input>
 
 </div>
 	
 
+<div id="params">
 <div class="text-center">
+<center style="font-size:16px;"><strong>Inputs</strong></center>
 	<div class="inp">
 	<label>T<sub>0</sub>(K) =</label>
 	<!-- Onchange pour actuliser les paramètre envoyés par le formulaire a chaque changement -->
@@ -127,12 +127,12 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	
 	<div class="inp">
 	<label>Ω<sub>m0</sub> = </label>
-	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Omcalc').value = this.value"></input>
+	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Omcalc').value = this.value;update_omegar0_simu();document.getElementById('resultat_omegam0').innerHTML=this.value;"></input>
 	</div>
 	
 	<div class="inp">
 	<label>Ω<sub>DE0</sub> = </label>
-	<input id="omegaDE0" type="text" value="0.6911" onChange="document.getElementById('Olcalc').value = this.value"></input>
+	<input id="omegaDE0" type="text" value="0.6911" onChange="document.getElementById('Olcalc').value = this.value;update_omegar0_simu();"></input>
     </div>
     <div class="inp">
 	<label>&omega;<sub>0</sub> = </label>
@@ -144,39 +144,48 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
 
 <div id="coche_sim">
-	<input id="grille" type="checkbox" checked="checked"> Show grid</input>
-	<input id="univ_plat"  type="checkbox" name="univ_plat">Flat Universe(Ω<sub>k</sub> = 0) </input>
+	<input id="grille" type="checkbox" checked="checked">Show grid </input>
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat()">Flat universe(Ω<sub>k</sub> = 0) </input>
 </div>
 <div id="type_sim">
-	<select id="liste">
+	<select id="liste" onchange="update_omegar0_simu();">
 		<option>Matter and Lambda</option>
 		<option>Matter, Lambda and RFC</option>
 		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
 </div>
 <div id="trace_box">
-<input type="button" id="trace" class="myButton" onClick="Lancer_calc();" value="Draw"></input>
+<input type="button" id="trace" class="myButton" onClick="Lancer_calc();" value="Plot"></input>
 <div id="gif" style="position:relative;display: inline-block;margin-left: 13px;"></div>
 </div>
-
-
-
 </div>
 
 <canvas id="canvas_1" style="display : none;" width="750px"></canvas>
 <!-- INFOS -->
+<div id="tg-contains" style="margin-top:30px;">
 
-<table class="tg">
+<center style="font-size:16px;"><strong>Outputs</strong></center>
+<center>
+&Omega;<sub>r0</sub>= <span id="resultat_omegar0"></span> <br/>
+&Omega;<sub>k0</sub>= <span id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value"></span> <br/>
+<u><strong>Time since Big Bang</strong></u><br/>
+<span id="resultat_ageunivers_ga"></span>(Ga)&nbsp;=<span id="resultat_ageunivers_s">1.09884e+3</span>(s) <br/>
+<i><span id="resultat_bigcrunch">Pas</span></i> <br/>
+<u><strong>Universe duration</strong></u> <br/>
+<span id="resultat_dureeuniv">res</span>
+
+
+<table class="tg" style="display:none;">
   <tr>
     <th class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>m0</sub></th>
     <th class="tg-cgnp">&Omega;<sub>r0</sub></th>
   </tr>
   <tr>
-    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegam0">Result</td>
-    <td class="tg-m3ec" id="resultat_omegar0">Result</td>
+    <td class="tg-m3ec" style="border-right: 1px solid black;" id="resultat_omegam0">Resultat</td>
+    <td class="tg-m3ec" id="resultat_omegar0">Resultat</td>
   </tr>
   <tr>
-    <td class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>&Lambda;0</sub></td>
+    <td class="tg-cgnp"  style="border-right: 1px solid black;">&Omega;<sub>DE0</sub></td>
     <td class="tg-cgnp">&Omega;<sub>k0</sub></td>
   </tr>
   <tr>
@@ -184,7 +193,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     <td class="tg-rkjz" id="resultat_omegak0" onChange="document.getElementById('Ok_calc').value = this.value">t</td>
   </tr>
   <tr>
-    <td class="tg-cgnp" colspan="2">Time since Big Bang</td>
+    <td class="tg-cgnp" colspan="2">Temps depuis le Big Bang</td>
   </tr>
   <tr>
     <td class="tg-zfe1">(Ga)</td>
@@ -198,19 +207,35 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     <td class="tg-zkmu" colspan="2" id="resultat_bigcrunch">Big bang</td>
   </tr>
   <tr>
-    <td class="tg-btvk" colspan="2" id="titre_dureeuniv">Universe duration</td>
+    <td class="tg-btvk" colspan="2" id="titre_dureeuniv">Durée de l'univers</td>
   </tr>
   <tr>
     <td class="tg-rkjz" colspan="2" id="resultat_dureeuniv">Res</td>
   </tr>
 </table>
+</div>
 
 		
 <!-- GRAPHIQUE-->
-<div id="graphique">
-	<svg id="graphique_svg" ></svg>
+<center>
+<div style="margin:100px auto;">
+<div id="graphique_sombre" >
 </div>
-
+</div>
+</center>
+<!-- Enregistrer -->
+<div style="display:none;" id="graphique_enr"></div>
+<div id="enregistrer_sbr">
+<strong>Enregistrer en: </strong>
+<select id="format_enr"> 
+	<option selected>png</option>
+	<option>jpg</option>
+	<option>svg</option>
+</select>&nbsp;
+	<button class="myButton" onclick="enre();">Enregistrer</button></div>
+	<a id="png" download="Graphique" style="display:none"></a>
+	<a id="jpg" download="Graphique-jpg" style="display:none"></a>
+	<a id="svg-1" download="Graphique-svg" style="display:none"></a>
 <!-- Canvas -->
 <div id="modele" style="visibility: hidden;">
 	<canvas id="canvas" width="298" height="400"></canvas>
@@ -225,6 +250,9 @@ context = canvas.getContext('2d');
 
 graphique  = document.getElementById('graphique');
 
+	window.onresize = function() {
+    Plotly.Plots.resize(Plotly.d3.select("#graphique_sombre").node());
+};
 	
 //genere le premier graphique des generatrices et lance le 1er calcul
 Lancer_calc();
@@ -238,6 +266,13 @@ d3.select(window).on('resize',resize);
 
 <script src="../js/Menu/nav.jquery.min.js"></script>
 <script>
+	document.onkeydown=checkkey;
+	function checkkey(e){
+		e = e || window.event;
+		if(e.keyCode=='13'){
+			lance_calc();
+		}
+	}
     $('.nav').nav();
 </script>
 </body>

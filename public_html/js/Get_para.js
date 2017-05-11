@@ -71,10 +71,64 @@ function ouvre_calc_Noire_fr(){
 }
 
 function ouvre_calc_Noire_ang(){
+	k = document.getElementById("k_p").value ;
+	c = document.getElementById("c_p").value ;
+	G = document.getElementById("G_p").value;
+	h = document.getElementById("h_p").value;
+	type = document.getElementById("typeannee").value;
+	nbre = document.getElementById("nbr_precision").value;
+	T0 = document.getElementById("T0calc").value;
+	H0 = document.getElementById("H0calc").value;
+	Om = document.getElementById("Omcalc").value;
+	Ol = document.getElementById("Olcalc").value;
+	Or = document.getElementById("Orcalc").value;
+	Ok = document.getElementById("Okcalc").value;
+
+	// Stockage des valeurs
+	sessionStorage.setItem("T0",T0);
+	sessionStorage.setItem("H0",H0);
+	sessionStorage.setItem("Om",Om);
+	sessionStorage.setItem("Ol",Ol);
+	sessionStorage.setItem("Or",Or);
+	sessionStorage.setItem("Ok",Ok);
+	sessionStorage.setItem("k",k);
+	sessionStorage.setItem("c",c);
+	sessionStorage.setItem("G",G);
+	sessionStorage.setItem("h",h);
+	sessionStorage.setItem("type",type);
+	sessionStorage.setItem("nb",nbre);
+
 	window.open("Calculs_noire_ang.html","childWindow","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=yes,left=500");
 }
 
 function ouvre_calc_ang(){
+	k = document.getElementById("k_p").value ;
+	c = document.getElementById("c_p").value ;
+	G = document.getElementById("G_p").value;
+	h = document.getElementById("h_p").value;
+	type = document.getElementById("typeannee").value;
+	nbre = document.getElementById("nbr_precision").value;
+	T0 = document.getElementById("T0calc").value;
+	H0 = document.getElementById("H0calc").value;
+	Om = document.getElementById("Omcalc").value;
+	Ol = document.getElementById("Olcalc").value;
+	Or = document.getElementById("Orcalc").value;
+	Ok = document.getElementById("Okcalc").value;
+
+	// Stockage des valeurs
+	sessionStorage.setItem("T0",T0);
+	sessionStorage.setItem("H0",H0);
+	sessionStorage.setItem("Om",Om);
+	sessionStorage.setItem("Ol",Ol);
+	sessionStorage.setItem("Or",Or);
+	sessionStorage.setItem("Ok",Ok);
+	sessionStorage.setItem("k",k);
+	sessionStorage.setItem("c",c);
+	sessionStorage.setItem("G",G);
+	sessionStorage.setItem("h",h);
+	sessionStorage.setItem("type",type);
+	sessionStorage.setItem("nb",nbre);
+
 	window.open("Calculs_ang.html","childWindow","width=600,height=650,toolbar=no,location=no,directories=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=yes,left=500");
 }
 
@@ -122,6 +176,7 @@ function retour_simu(){
 
 function retour_noire(){
 	window.close("Calculs_noire.html");
+	widow.close("Calculs_noire_ang.html");
 }
 function retour() {
 	window.close("Paramètres.html");

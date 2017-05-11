@@ -30,7 +30,7 @@ function calc_energie_noire() {
 	H0parsec = H0parsec;
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
-	a = document.getElementById("resul_omegar0");
+	a = document.getElementById("Orr");
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
 		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
