@@ -66,17 +66,22 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
                 </li>
             </ul>
         </li>
+     	<li><a href="Apropos.html">A propos</a></li>
        
     </ul>
 </nav>
+
 <br/>
 <div id="btn_langue">
 		<a href="Trajectoire-the.html"><img src="Images/Francais.png" style="float:right" width="70px" height="55px"/></a> &nbsp;
 		<a href="English/Trajectoire_theo_ang.html"><img src="Images/English.png" style="float:right" width="70px" height="55px"/></a>
 	</div>
+
+	
+
 	
 	
-	<div style="width:100%;">
+	<div id="nm" style="width:100%;margin-left:15px;">
 		<!-- <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
 	  tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
@@ -84,7 +89,9 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 </script>
 		<script src="lib/MathJax.js?config=TeX-AMS_HTML-full"></script>
 -->
+
 <p style="text-align: center; font-size:40px"><strong>Gravitation au voisinage d'un trou noir</strong></p>
+                 <details><summary>Theorie generale</summary>
                   <p>&emsp;Dans un cadre relativiste, on souhaite &eacute;tudier le mouvement d'une particule dans le champ de gravitation d'une masse <strong>M</strong>, &agrave; sym&eacute;trie sph&eacute;rique, sans rotation, plac&eacute;e &agrave; l'origine de coordonn&eacute;es spatiales <strong>r</strong>, <strong>&theta;</strong>, <strong>&phi;</strong>.
   <br/>On se place dans un espace-temps vide. La m&eacute;trique utilis&eacute;e est celle de Schwarzschild. Cette m&eacute;trique est une solution des &eacute;quations d'Einstein. Elle d&eacute;crit la g&eacute;om&eacute;trie de l'espace-temps lorsqu'elle est d&eacute;form&eacute;e par le champ gravitationnel d'une masse sph&eacute;rique, statique (sans rotation), non charg&eacute;e et entour&eacute;e de vide. Cette masse peut &ecirc;tre une &eacute;toile, une plan&egrave;te ou un trou noir.
 <br/>La m&eacute;trique de Schwarzschild nous donne :<p/>  
@@ -130,8 +137,24 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
   <p align="center"><object type="image/svg+xml" data="./Images/Theo-grav/dtau.svg" width="400" height="50">Le navigateur ne peut lire ce svg</object></p>
   <p>&emsp;A mesure que l'on s'approche d'un trou noir, les effets de marr&eacute;es deviennent de plus en plus importants. Autrement dit, l'objet va subir un &eacute;tirement de plus en plus importante.</p>
 </p><p align="center"><em>Cet expos&eacute;, comme ceux des versions pr&eacute;c&eacute;dentes s'appuie sur les cours de cosmologie de J-P Cordoni.</em></p>
- 
+ </details>
 	</div>
+	
+<div id="photon" style="margin-left:15px;">
+<details><summary>Partie photon</summary>
+	<p style="text-align: center; font-size:25px"><strong>Particules sans masse: Trajectoires d'un photon</strong></p>
+  <p>La m&eacute;trique de Schwarzschild <strong>ds</strong> serait le produit de la vitesse de la lumi&egrave;re avec <strong>d&tau;</strong> le temps propre. Ce dernier est th&eacute;oriquement mesur&eacute; par une horloge qui suivrait la m&ecirc;me ligne d'univers de la particule observ&eacute;e. La ligne d'univers d'un photon est incontestablement impossible &agrave; suivre et donc <strong>d&tau;</strong> = <strong>ds</strong> = 0.</p>
+  <p>Les int&eacute;grales premi&egrave;res des deux &eacute;quations des g&eacute;od&eacute;sique sont toujours valables si le temps propre est remplac&eacute; par un param&egrave;tre <strong>a</strong>. On travail toujours avec <strong>&theta;</strong> = <strong>&pi;/2</strong> (<strong>d&theta;</strong> = 0). On prend en consid&eacute;ration ce qui pr&eacute;c&egrave;de pour mener la m&eacute;trique de Schwarzschild &agrave; la formule suivante:</p>    
+ <p align="center"><object type="image/svg+xml" data="./Images/Theo-grav/photon1.svg" width="400" height="50">Le navigateur ne peut lire ce svg</object></p>
+  <p align="center"><object type="image/svg+xml" data="./Images/Theo-grav/photon2.svg" width="400" height="50">Le navigateur ne peut lire ce svg</object></p>
+  <p>La d&eacute;riv&eacute;e de (1) donne:</p>
+  <p align="center"><object type="image/svg+xml" data="./Images/Theo-grav/photon3.svg" width="400" height="50">Le navigateur ne peut lire ce svg</object></p>
+  <p>Dans la partie simulation il est demandé à l'utilisateur d'entrer une valeur initiale pour la vitesse tangentielle <strong>v<sub>&phi;</sub>(0)</strong>. Celle-ci permettta de calculer <strong>L</strong> et <strong>v<sub>r</sub>(0)</strong>.</p>
+  <p align="center"><object type="image/svg+xml" data="./Images/Theo-grav/photon4.svg" width="400" height="50">Le navigateur ne peut lire ce svg</object></p>
+  <p>Puisque la valeur de <strong>v<sub>&phi;</sub>(0)</strong> impose une valeur &agrave; <strong>v<sub>r</sub>(0)</strong>, E peut etre calcul&eacute;e dans (1). La trajectoire du photon est trac&eacute;e en appliquant la m&eacute;thode de Runge-Kutta sur (2).</p>
+  
+ </details>
+</div>
 	
 	<footer>
 <p style="float:right;width:100%;text-align: right"><script type="text/javascript" src="https://counter9.fcs.ovh/private/counter.js?c=5ymlqqmnjqrd4d5b1pw83454tbdgb9nx"></script>

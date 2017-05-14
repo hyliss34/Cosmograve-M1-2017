@@ -17,6 +17,7 @@ function GetCoordinates(a) {
 
     b = FindPosition(myImg);
 	
+
     a || (a = window.event);
     if (a.pageX || a.pageY) PosX = a.pageX, PosY = a.pageY;
     else if (a.clientX || a.clientY) PosX = a.clientX + document.body.scrollLeft + document.documentElement.scrollLeft, PosY = a.clientY + document.body.scrollTop + document.documentElement.scrollTop;

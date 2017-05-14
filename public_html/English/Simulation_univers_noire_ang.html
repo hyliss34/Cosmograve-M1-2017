@@ -15,6 +15,7 @@
 	<script src="../js/English/Calcul_energie_noire_ang.js"></script>
 	<script src="../js/Get_para.js"></script>
 	<script src="../js/integrale.js"></script>
+	<script src="../js/Update_Constants.js"></script>
 	<script src="../js/Simulation_Univers/Noir/rungekutta_noire.js"></script>
 	<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
@@ -80,9 +81,11 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
                 </li>
             </ul>
         </li>
+        <li><a href="About.html">About</a></li>
        
     </ul>
 </nav>
+
 
 <!-- ------------- -->
 
@@ -106,11 +109,11 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" class="myButton" value="Adjunct computation" id="calc" onclick="ouvre_calc_Noire_ang()"></input>
+	<button class="myButton" id="calc" onclick="ouvre_calc_Noire_ang()">Adjunct computation</button>
 
 </div>
 	
-
+<center style="font-size:20px;"><strong>Universe evolution simulation (Dark energy)</strong></center>
 <div id="params">
 <div class="text-center">
 <center style="font-size:16px;"><strong>Inputs</strong></center>
@@ -127,35 +130,37 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	
 	<div class="inp">
 	<label>Ω<sub>m0</sub> = </label>
-	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Omcalc').value = this.value;update_omegar0_simu();document.getElementById('resultat_omegam0').innerHTML=this.value;"></input>
+	<input id="omegam0" type="text" value="0.3089" onChange="document.getElementById('Omcalc').value = this.value;update_omegak0_simu_noir();"></input>
 	</div>
 	
 	<div class="inp">
 	<label>Ω<sub>DE0</sub> = </label>
-	<input id="omegaDE0" type="text" value="0.6911" onChange="document.getElementById('Olcalc').value = this.value;update_omegar0_simu();"></input>
+	<input id="omegaDE0" type="text" value="0.6911" onChange="document.getElementById('Olcalc').value = this.value;update_omegak0_simu_noir();"></input>
     </div>
     <div class="inp">
 	<label>&omega;<sub>0</sub> = </label>
 	<input id="omega0" type="text" value="-1"></input>
+	<div id="w-1">
 	<label>&omega;<sub>1</sub> = </label>
 	<input id="omega1" type="text" value="0" ></input>
+	</div>
     </div>
 </div>
 
 
 <div id="coche_sim">
 	<input id="grille" type="checkbox" checked="checked">Show grid </input>
-	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat()">Flat universe(Ω<sub>k</sub> = 0) </input>
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_noir()">Flat universe(Ω<sub>k</sub> = 0) </input>
 </div>
 <div id="type_sim">
-	<select id="liste" onchange="update_omegar0_simu();">
+	<select id="liste" onchange="update_omegar0_simu_noir();">
 		<option>Matter and Lambda</option>
 		<option>Matter, Lambda and RFC</option>
 		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
 </div>
 <div id="trace_box">
-<input type="button" id="trace" class="myButton" onClick="Lancer_calc();" value="Plot"></input>
+<button id="trace" class="myButton" onClick="Lancer_calc();">Plot</button>
 <div id="gif" style="position:relative;display: inline-block;margin-left: 13px;"></div>
 </div>
 </div>
@@ -237,7 +242,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<a id="jpg" download="Graphique-jpg" style="display:none"></a>
 	<a id="svg-1" download="Graphique-svg" style="display:none"></a>
 <!-- Canvas -->
-<div id="modele" style="visibility: hidden;">
+<div id="modele" style="display: none">
 	<canvas id="canvas" width="298" height="400"></canvas>
 </div>
 <div id="enre"><input id="enr" type="button" class="myButton" value="Save graphic"></input></div>
@@ -261,7 +266,8 @@ d3.select(window).on('resize',resize);
 </script>
 <br/>
 <footer>
-<p style="float:right;width:100%;text-align: right"><script type="text/javascript" src="http://www.abcompteur.com/cpt/?code=1/54/17110/1/2&ID=43497119633"></script><noscript><a href="http://www.abcompteur.com/">ABCompteur : compteur gratuit</a></noscript> visites. </p>
+<p style="float:right;width:100%;text-align: right"><script type="text/javascript" src="https://counter9.fcs.ovh/private/counter.js?c=5ymlqqmnjqrd4d5b1pw83454tbdgb9nx"></script>
+<br><noscript><a href="https://www.compteurdevisite.com" title="compteur visiteur"><img src="https://counter9.fcs.ovh/private/compteurdevisite.php?c=5ymlqqmnjqrd4d5b1pw83454tbdgb9nx" border="0" title="compteur visiteur" alt="compteur visiteur"></a></noscript> </p>
 </footer>
 
 <script src="../js/Menu/nav.jquery.min.js"></script>

@@ -59,6 +59,14 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 
   ga('create', 'UA-98631213-1', 'auto');
   ga('send', 'pageview');
+	if (window.performance) {
+  // Gets the number of milliseconds since page load
+  // (and rounds the result since the value must be an integer).
+  var timeSincePageLoad = Math.round(performance.now());
+
+  // Sends the timing hit to Google Analytics.
+  ga('send', 'timing', 'JS Dependencies', 'load', timeSincePageLoad);
+}
 
 </script>
 
@@ -95,9 +103,11 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
                 </li>
             </ul>
         </li>
+     	<li><a href="Apropos.html">A propos</a></li>
        
     </ul>
 </nav>
+
 
 <!-- ------------- -->
 <!-- Boutons Calculs annexes et params -->
@@ -120,7 +130,8 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<input type="hidden" id="nbr_precision"  name="nbr_precison" value="4" />
 	
 	<!-- Envoi -->
-	<input type="submit" class="myButton" value="Calculs annexes" id="calc" onclick="ouvre_calc_fr()" ></input>
+	<button class="myButton" id="calc" onclick="ouvre_calc_fr()" >Calculs annexes</button>
+
 </div><br/>
 <center style="font-size:20px;"><strong>Simulation de l'évolution de l'univers</strong></center>
 <!-- Paramètres  -->
@@ -163,7 +174,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 </div>
 <!-- Bouton Tracer -->
 <div id="trace_box">
-<input type="button" id="trace" class="myButton" onClick="lance_calc();ga('send', 'event', 'button', 'click', 'Tracer graphique univers');" value="Tracer"></input>
+<button id="trace" class="myButton" onClick="lance_calc();ga('send', 'event', 'button', 'click', 'Tracer graphique univers');">Tracer</button>
 <div id="gif" style="position:relative;display: inline-block;margin-left: 13px;"></div>
 </div>
 </div>
@@ -238,6 +249,12 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 	<a id="png" download="Graphique" style="display:none"></a>
 	<a id="jpg" download="Graphique-jpg" style="display:none"></a>
 	<a id="svg-1" download="Graphique-svg" style="display:none"></a>
+	
+	
+	
+	<canvas id="text-canvas" width="500" height="500" style="display:block;"></canvas>
+	
+	
 <script>update_omegar0_simu();</script>
 <script src="./js/Simulation_Univers/univers_plat_min.js"></script>
 <script src="./js/Simulation_Univers/canvas_h0neg_min.js"></script>
@@ -245,12 +262,27 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 Script pour tracer le graphique et le canvas(courbes) au chargement + Retracer du graphique si resize de la fenêtre + update du canvas (courbe) si clic dessus et tracer du graphique correspondant.
 -->
 <script type="text/javascript">
+test = document.getElementById("text-canvas");
+textctx = test.getContext('2d');
+	console.log(textctx);
+	
+img1 = new Image();
+img1.src='/Images/Sepa.png';
+
+
+	
+	
+	
 
 canvas  = document.getElementById('canvas');
 context = canvas.getContext('2d');
+rect = canvas.getBoundingClientRect();
 
 graphique  = document.getElementById('graphique');
-
+canvas.addEventListener("mousedown",function(evt){
+	x=Math.round((evt.clientX-rect.left)/(rect.right-rect.left)*canvas.width);
+	console.log(rect.left+" " +evt.clientX);
+});
 	
 window.onresize = function() {
     Plotly.Plots.resize(Plotly.d3.select("#graphique").node());
@@ -262,7 +294,7 @@ update_modele();
 }
 
 calcul();
-	
+context.drawImage(img1,0,0);	
 	
 //lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 var myImg = document.getElementById("canvas");
@@ -278,11 +310,18 @@ myImg.onmousedown = GetCoordinates;
 <script src="js/Menu/nav.jquery.min.js"></script>
 <script>
 	
+	
 	document.onkeydown=checkkey;
 	function checkkey(e){
 		e = e || window.event;
 		if(e.keyCode=='13'){
 			lance_calc();
+		}
+		if(e.keyCode == '107'){
+			canvas  = document.getElementById('canvas');
+			canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+			canvas.getContext('2d').scale(0.5,0.5);
+			update_modele();
 		}
 	}
     $('.nav').nav();

@@ -176,10 +176,14 @@ function retour_simu(){
 
 function retour_noire(){
 	window.close("Calculs_noire.html");
-	widow.close("Calculs_noire_ang.html");
+	window.close("Calculs_noire_ang.html");
 }
 function retour() {
 	window.close("Paramètres.html");
 }
+
+
+
+
 
 

@@ -65,7 +65,7 @@ function animate(){
 		posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
 		posis =[posX1,posY1];
 
-		console.log(posis);
+
 		
 		if(r_part < 0.0) {
 			r_part = 0.0;
@@ -114,7 +114,7 @@ function animate(){
 		}
 		
 		if(r_part > rmax*1.1) {
-			alert("La Particule sort du champ gravitationnel du corps attractif");
+			alert("La particule s'en va !");
 			arret();
 		}
 		
@@ -161,6 +161,40 @@ function trajectoire() {
 		temps_observateur = 0;
 		bool = true;
 		
+		
+		/* ----- */
+		r1=(L*(L-Math.sqrt(Math.pow(L,2)-12*Math.pow(m,2)))/2*m);
+		r2=(L*(L+Math.sqrt(Math.pow(L,2)-16*Math.pow(m,2)))/4*m);
+		ra=2*m*Math.pow(L,2);
+		rb=((2*m/r0)-1)*Math.pow(L,2);
+		X0 = 1/r0;
+		rc = 2*m - Math.pow(L,2)*X0 +2*m*Math.pow(L*X0,2);
+		DELTA = Math.pow(rb,2)- 4*ra*rc;
+		r3=2*ra/(-rb-Math.sqrt(DELTA));
+		
+	
+		if(L<2*Math.sqrt(3)*m){rmax=r0;}
+		else if(L<=4*m && L>2*Math.sqrt(3)*m){
+			if(Vr(r0)<=Vr(r1) && r0>r1){
+				if(r3>r0){rmax=r3;}
+				else if(r3<r0){rmax=r3;}
+			}
+			else {
+				rmax = r0;
+			}
+		}
+		else if(L>4*m){
+			if(r0<r1){
+				rmax=r0;}
+			else if(r0>r2){
+				if(r3>r0){rmax=r3;}
+				else if(r3<r0){rmax=r3;}
+			}
+			else if(r0>r1 && r0<r2){}
+		}
+		
+
+	
 		// Ici, les positions de départ de la particule, dans son référentiel et dans celui de l'observateur//
 		if ( E > 1 ) { rmax=5*r0; }
 		
@@ -173,6 +207,8 @@ function trajectoire() {
 		j=[0,0,0,0];
 		k2=[0,0,0,0];
 		j2=[0,0,0,0];	
+		
+		
 		
 		
 		
@@ -350,4 +386,8 @@ function animate_explo(){
 		clearInterval(Interv);}
 	}
 
+
+function Vr(r){
+	return (1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
+}
 

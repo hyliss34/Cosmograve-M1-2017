@@ -88,12 +88,12 @@
 
 <div>
 	<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
-	<input id="omegam0_annexes" style="color:blue" onChange="update_omegar0();"></input>
+	<input id="omegam0_annexes" style="color:blue" onChange="update_omegak0_calc_noir();"></input>
 </div>
 
 <div>
 	<label for="omegaDE0_annexes">&Omega;<sub>DE0</sub> =</label>
-	<input id="omegaDE0_annexes" style="color:blue" value="0.6911" onChange="update_omegar0();"></input>
+	<input id="omegaDE0_annexes" style="color:blue" value="0.6911" onChange="update_omegak0_calc_noir();"></input>
 </div>
 
 <div>
@@ -107,12 +107,12 @@
 
 
 <div>
-	<select id="resultat_omegar0_annexes" style="color:blue" onChange="update_omegar0();">
+	<select id="resultat_omegar0_annexes" style="color:blue" onChange="update_omegar0_calc_noir();">
 		<option selected>Matter and Lambda</option>
 		<option>Matter, Lambda and RFC</option>
 		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
-	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calcul();">Flat Universe(Ω<sub>k</sub> = 0)
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calc_noir();">Flat Universe(Ω<sub>k</sub> = 0)
 	<br/>
 	<label for="resul_omegar0">&Omega;<sub>r0</sub> =</label>
 	<span id="Orr" style="color:blue;"></span>

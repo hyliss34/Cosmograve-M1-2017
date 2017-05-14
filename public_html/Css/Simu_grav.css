@@ -361,13 +361,13 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	.tg {
 		border:1px solid black;
 	}
-
+	
 	
 
 
 }
 
-/*Entre 1300 et 1050 les bouton p,m,reset ... */
+/*Entre 1300 et 1050 px */
 
 @media screen and (min-width: 1050px) and (max-width: 1300px) 
 {
@@ -382,12 +382,9 @@ Source: http://www.bestcssbuttongenerator.com/  */
 	#masse {
 		margin-bottom:5px ;
 	}
-
-	
-
 }
 
-/* En dessous de 1050 px */
+/* En dessous de 960 px */
 @media screen and (max-width: 960px) {
 	#vitesse {
 		display: inline-block;

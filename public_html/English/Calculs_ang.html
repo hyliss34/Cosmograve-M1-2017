@@ -92,21 +92,21 @@
 
 <div>
 	<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
-	<input id="omegam0_annexes" style="color:blue" onChange="update_omegar0();"></input>
+	<input id="omegam0_annexes" style="color:blue" onChange="update_omegak0_calc();"></input>
 </div>
 
 <div>
 	<label for="omegalambda0_annexes">&Omega;<sub>&Lambda;0</sub> =</label>
-	<input id="omegalambda0_annexes" style="color:blue" onChange="update_omegar0();"></input>
+	<input id="omegalambda0_annexes" style="color:blue" onChange="update_omegak0_calc();"></input>
 </div>
 
 <div>
-	<select id="resultat_omegar0_annexes" style="color:blue" onchange="update_omegar0();">
+	<select id="resultat_omegar0_annexes" style="color:blue" onchange="update_omegar0_calc();">
 		<option selected>Matter and Lambda</option>
 		<option>Matter, Lambda and RFC</option>
 		<option>Matter, Lambda, RFC and Neutrinos</option>
 	</select>
-	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calcul()">Flat Universe(Ω<sub>k</sub> = 0)
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calc()">Flat Universe(Ω<sub>k</sub> = 0)
 	<br/>
 	<label for="resultat_omegar0_annexes">&Omega;<sub>r0</sub> =</label><span id="Orr" style="color:blue;"></span>
 	
@@ -132,7 +132,7 @@
 
 
 <!-- Bouton calcul -->
-<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();ga('send', 'event', 'button', 'click', 'Calcul Annexe normal');">Calcul</button>
+<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();ga('send', 'event', 'button', 'click', 'C-A-N-A');">Calcul</button>
 	<span style="display:none;color:blue;" id="resul_tps"></span>
 <div id="gif" class="spinner" style="position:relative;display:inline-block;"></div>
 
