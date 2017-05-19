@@ -2,6 +2,13 @@ var Rebond = false;
 var cpt=0;
 var r_part = 0;
 var r_phy=0;
+var Rebond = 0;
+var cpt=0;
+var DTAU =0;
+var i = 1
+var BOND = 0;
+var j = 1; J = 1;
+
 
 function animate(){
 	
@@ -13,7 +20,7 @@ function animate(){
 		// Tracé du Rayon de Schwarzchild.
 		context.beginPath();
 		context.fillStyle = '#FF0000';
-		context.arc(posX3, posY3, (scale_factor*2*m/rmax), 0, Math.PI*2);
+		context.arc(posX3, posY3, (190*m/rmax), 0, Math.PI*2);
 		context.lineWidth="1";
 		context.stroke();
 		
@@ -22,17 +29,8 @@ function animate(){
 		diametre_particule = 2;
 	}
 
-	/*
-	Bond = document.getElementsByName("reb");
-
-	if (Bond[0].checked){
-		Rebond = true;
-		
-	}
-	else {
-		Rebond = false;
-	}
-	*/
+	
+	
 	
 	//Tracé de la particule
 	context.beginPath();
@@ -42,46 +40,80 @@ function animate(){
 	context.fill();
 	
 	if(r0!=0.0) {
-		temps_particule += dtau;
-		r_part = rungekutta(dtau);
-		if ( r_part < r_phy || r_part == 0) {
+		temps_particule += DTAU;
 
-			
-			if(Rebond){
-				trace_traj(
+		r_part = rungekutta(DTAU);
+
+		if ( r_part <= r_phy || r_part == 0) {
+
+
+			if(Rebond!=0){
+				DTAU = temps_chute_libre*20/(1000*n);
+				phi = (phi + 2*Math.PI);
+				r_part = r_phy;
+				BOND = 1;
+				a = Rebond;
 
 			}
 			else {
-				
 			// FAIRE BOUM
+			alert("La particule s'écrase !")
 			arret();
-			Interv = setInterval(animate_explo,1000/30);
+			//Interv = setInterval(Explosion,1000/30);
+			
 			}
 
 		}
+		else {
+			if (BOND != 1){ 
+				phi = phi + (c*L*dtau/Math.pow(r_part,2));
+				e = Math.sqrt(1-a);
+				b = Math.pow(e,2*(n-1));
+				V= Math.pow(c,2)*b*((1-(2*m)/r_part)*(1+Math.pow(L/r_part,2)));
+				posX1 = x2part = scale_factor*r_part*Math.cos(phi)/rmax+canvas.width/2;
+				posY1 = y2part = scale_factor*r_part*Math.sin(phi)/rmax+canvas.height/2;
 
-		phi = phi + (c*L*dtau/Math.pow(r_part,2));
+				if (V<1e-10){
+					alert("La particule s'écrase !");
+					arret();
+					//Interv = setInterval(Explosion,1000/90);
+				}
+				//}
+				DTAU = dtau;
+			}
+			else {
+				
+				DTAU = dtau;
+				r_part = r_phy+1;
+				BOND = 0;
+				if (a == 0) {
+					n = 1;
+				}
+				else {
+					n += 1;
+					$("#grsvg_2").empty();
+					data1 = [];
+					e = Math.sqrt(1-a);
+					b = Math.pow(e,2*(n-1));
 
-		
-		posX1 = x2part = scale_factor*r_part*Math.cos(phi)/rmax+canvas.width/2;
-		posY1 = y2part = scale_factor*r_part*Math.sin(phi)/rmax+canvas.height/2;
-		
-
-		
+					for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
+						V= Math.pow(c,2)*b*((1-(2*m)/r)*(1+Math.pow(L/r,2)));
+						data1.push({date:r,close:V});
+					}
+					graphique_creation_pot();
+				}
+			}
+		}
 		if(r_part < 0.0) {
 			r_part = 0.0;
 		}
 
-		V=(1-(2*m)/r_part)*(1+Math.pow(L/r_part,2))/c*c;
 		data2 = [];
-		V=V*Math.pow(c,2);
 		data2.push({date:r_part,close:V});
 		update_graphique_2();
 		
-		dt = E*dtau*(1/(1-2*m/r_part));
-		temps_observateur += dt;
-		
-		
+		dt = E*DTAU*(1/(1-2*m/r_part));
+		temps_observateur += dtau;
 		
 		vrm=Math.pow(c*E,2)-Math.pow(c,2)*(1-2*m/r_part)*(1+Math.pow(L/r_part,2));
 		vpm=Math.pow(c*L/r_part,2);
@@ -113,11 +145,6 @@ function animate(){
 		}else{
 			
 			document.getElementById('DivClignotante').innerHTML = " Erreur";
-		}
-		
-		if(r_part > rmax*1.1) {
-			alert("La particule s'en va !");
-			arret();
 		}
 		
 	}
@@ -156,6 +183,9 @@ function trajectoire() {
 		
 		phi = 0.0;
 		phi2 = 0.0;
+				a = 0;//Coefficient de restitution de l'énergie
+		e  = Math.sqrt(1-a);//Coefficient de perte
+		n = 1; //Variable qui comptera le nombre de rebond effectués par la particule
 		temps_chute_libre = Math.PI*r0*Math.sqrt(r0/(2*G*M))/2;
 		dtau = temps_chute_libre/1000;
 		E = Math.sqrt(Math.pow(vr/c,2)+(1-2*m/r0)*(1+Math.pow(L/r0,2)));
@@ -169,7 +199,7 @@ function trajectoire() {
 		temps_observateur = 0;
 		bool = true;
 		
-		
+		Rebond = document.getElementById("reb").value/100.0;
 		/* ----- */
 		
 		r1=(L*(L-Math.sqrt(Math.pow(L,2)-12*Math.pow(m,2)))/(2*m));
@@ -400,16 +430,9 @@ function trajectoire() {
 }
 
 
-function trace_traj(x,y){
-	
-	arret();
-	dtau=0;
-	canvas = document.getElementById("myCanvas");
-	context=canvas.getContext("2d");
-	context.clearRect(0,0,canvas.width,canvas.height);
-	
-	
-}
+
+
+
 
 function Vr(r){
 	return (1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
