@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<!-- Css de la page -->
+<link rel="stylesheet" href="../Css/calc.css">
+
+<!-- ----------------------------- -->
+<!-- Scripts de calculs -->
+<script src="../js/Calculs_annexes/bisection_root_finder.js"></script>
+<script src="../js/Calculs_annexes/Calcu.js"></script>
+<script src="../js/Calculs_annexes/Adaptive_Simpson.js"></script>
+<script src="../js/Get_para.js"></script>
+<script src="../js/Update_Constants.js"></script>
+
+<!-- Latex dans Html -->
+	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+
+<!-- Scripts pour le chargement -->
+<script src="../Lib/jquery-1.12.3.min.js"></script>
+<script src="../js/Spin.js"></script>
+<script src="../Lib/Spin/spin-min.js"></script>
+<script src="../Lib/Spin/spin.js"></script>
+<title>Calculs Annexes Anglais</title>
+<!-- Obtention des paramètres de la page simulation -->
+<script>
+	window.onload = function charg_params(){
+	document.getElementById("T0_annexes").value = sessionStorage.getItem("T0");
+	document.getElementById("H0_annexes").value = sessionStorage.getItem("H0");
+	document.getElementById("omegam0_annexes").value = sessionStorage.getItem("Om");
+	document.getElementById("resultat_omegar0_annexes").value = sessionStorage.getItem("Or");
+	document.getElementById("resultat_omegak0_annexes").value = sessionStorage.getItem("Ok");
+	document.getElementById("omegalambda0_annexes").value = sessionStorage.getItem("Ol");
+	document.getElementById("k_p").value = sessionStorage.getItem("k");
+	document.getElementById("h_p").value = sessionStorage.getItem("h");
+	document.getElementById("G_p").value = sessionStorage.getItem("G");
+	document.getElementById("c_p").value = sessionStorage.getItem("c");
+	document.getElementById("typeannee").value = sessionStorage.getItem("type");
+	document.getElementById("nbr_precision").value = sessionStorage.getItem("nb");
+	};
+</script>
+<head>
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+<!-- Script Google Analytics -->
+<script>
+	
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98631213-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- Menus -->
+<header>
+	<h2>Adjunct computation</h2>
+</header>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div id="TOUT">
+
+<!-- Paramètres de base cachés -->
+
+	<input type="hidden" id="k_p" value="1.38064852e-23" ></input>
+	<input type="hidden" id="h_p" value="6.62607004e-34"></input>
+	<input type="hidden" id="G_p" value="6.67385e-11"></input>
+	<input type="hidden" id="c_p" value="299792458"></input>
+	<input type="hidden" id="typeannee" value="Grégorienne" />
+	<input type="hidden" id="nbr_precision" value="4" />
+
+
+<!-- Paramètres généraux -->
+<div id="tabs-1">
+<strong><span style="color:black;">Cosmological parameters :</strong></span>
+
+<div>
+	<label for="T0_annexes">T<sub>0</sub> =</label>
+	<input id="T0_annexes" style="color:blue"></input> K
+</div>
+
+<div>
+	<label for="H0_annexes">H<sub>0</sub> =</label>
+	<input id="H0_annexes" style="color:blue" ></input> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
+</div>
+
+<div>
+	<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
+	<input id="omegam0_annexes" style="color:blue" onChange="update_omegak0_calc();"></input>
+</div>
+
+<div>
+	<label for="omegalambda0_annexes">&Omega;<sub>&Lambda;0</sub> =</label>
+	<input id="omegalambda0_annexes" style="color:blue" onChange="update_omegak0_calc();"></input>
+</div>
+
+<div>
+	<select id="resultat_omegar0_annexes" style="color:blue" onchange="update_omegar0_calc();">
+		<option selected>Matter and Lambda</option>
+		<option>Matter, Lambda and RFC</option>
+		<option>Matter, Lambda, RFC and Neutrinos</option>
+	</select>
+	<input id="univ_plat"  type="checkbox" name="univ_plat" onChange="Omegak0_plat_calc()">Flat Universe(Ω<sub>k</sub> = 0)
+	<br/>
+	<label for="resultat_omegar0_annexes">&Omega;<sub>r0</sub> =</label><span id="Orr" style="color:blue;">0</span>
+	
+</div>
+
+<div>
+	<label for="resultat_omegak0_annexes">&Omega;<sub>k0</sub> =</label>
+	<span id="resultat_omegak0_annexes" style="color:blue"></span>
+</div>
+
+
+
+<!-- z1 et z2 pour le calcul de dm et t2,t1 -->
+Allowed interval for z: <br>
+dm:[
+<span id="z_lim_inf" style="color:blue;">-1</span>:<span id="z_lim" style="color:blue;">$+\infty$</span>]<br/>
+t: [
+<span id="z_lim_t" style="color:blue;">0</span>:<span id="" style="color:blue;">$+\infty$</span>]<br/>
+	<div class="desact_retour">
+		<label for="z1">z<sub>1</sub> =</label>
+		<input id="z1" value="0" maxlength="13" type="text">
+	</div>
+	<div class="desact_retour">
+		<label for="z2">z<sub>2</sub> =</label>
+		<input id="z2" value="0" maxlength="13" type="text"> 
+	</div>
+
+
+<!-- Bouton calcul -->
+<div id="plus"><button id="bcalc_ord" type="button" onclick="lance_calc();ga('send', 'event', 'button', 'click', 'C-alc annexes anglais normal');">Calcul</button>
+	<span style="display:none;color:blue;" id="resul_tps"></span>
+<div id="gif" class="spinner" style="position:relative;display:inline-block;"></div>
+
+</div>
+
+<br />
+<!-- Resultats des calculs -->
+<div>
+<strong><span style="color: #ff0000;"> z limited to 1e8</span></strong>							
+	<div>
+		<label for="dm1">d<sub>m1</sub> =</label>
+		<span id="dm1" style="color:blue"></span> m = <span id="dm1_pc" style="color:blue"></span> pc
+	</div>
+	<div>
+		<label for="dm2">d<sub>m2</sub> =</label>
+		<span id="dm2" style="color:blue"></span> m = <span id="dm2_pc" style="color:blue"></span> pc
+	</div>
+	<div>
+		<label for="dm">d<sub>m2</sub> - d<sub>m1</sub> =</label>
+		<span id="dm" style="color:blue"></span> m = <span id="dm_pc" style="color:blue"></span> pc
+	</div>
+
+	<div>
+		<label for="tempsEmission">t<sub>1</sub>=</label>
+		<span id="tempsEmission" style="color:blue"></span> a = <span id="tempsEmission_sec" style="color:blue"></span> s
+	</div>
+
+	<div>
+		<label for="tempsReception">t<sub>2</sub>=</label>
+		<span id="tempsReception" style="color:blue"></span> a = <span id="tempsReception_sec" style="color:blue"></span> s
+	</div>
+
+	<div>
+		<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
+		<span id="agebetween" style="color:blue"></span> a = <span id="agebetween_sec" style="color:blue"></span> s
+	</div>
+
+	<div>  </br> </div>                                  
+	<strong><span style="color:black;">Cosmological parameters at z1:</strong></span>
+
+	<div>
+		<label for="Hz1">H(z<sub>1</sub>) =</label>
+		<span id="Hz1" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup> 
+	</div>
+
+
+
+	<div>
+		<label for="Tz1">T(z<sub>1</sub>) =</label>
+		<span id="Tz1" style="color:blue"></span> K 
+	</div>
+
+
+
+	<div>
+		<label for="Omz1">Omegam(z<sub>1</sub>) =</label>
+		<span id="Omz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Olz1">Omegalambda(z<sub>1</sub>) =</label>
+		<span id="Olz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Orz1">Omegar(z<sub>1</sub>) =</label>
+		<span id="Orz1" style="color:blue"></span>  
+	</div>
+
+
+	<div>
+		<label for="Okz1">Omegak(z<sub>1</sub>) =</label>
+		<span id="Okz1" style="color:blue"></span>  
+	</div>
+
+
+
+	<div>
+		<p>Following calculations uses z<sub>1</sub>,</p>
+		<div class="desact_retour">
+			<label for="diametre">D =</label>
+			<input id="diametre" value="" maxlength="17" type="text">  (m)
+			<input type="button" value="--> θ" onClick="calcultheta();">
+		</div>
+		<div class="desact_retour">
+			<input type="button" value="D <--" onClick="calculD();">
+			<label for="theta">θ =</label>
+			<input id="theta" value="" maxlength="17" type="text"> (Seconde d'arc)
+		</div>
+	</div>
+</div>
+	
+ <br />
+<!-- Calculs inverses-->
+		 <strong style="font-size:18px;"><span>Inverse Calculation</span></strong><br/><br/>
+ 		 <div class="desact_retour">
+ 		 	<label for="dm_racine_dm">d<sub>m</sub> =</label>
+ 		 	<input id="dm_racine_dm" value="0" maxlength="26" type="text"> (m)
+ 		 	<label for="z_racine_dm">Z =</label> 
+ 		 	<span id="z_racine_dm" style="color:blue"></span> <!--= <span id="dm1_pc" style="color:blue"></span> pc-->
+ 		 </div>
+ 		 <br/>
+        <div class="desact_retour">
+          <label for="t_racine_em">t<sub>emitted</sub> =</label>
+          <input id="t_racine_em" value="0" maxlength="26" type="text"> (years)
+          <label for="z_racine_t_em">   Z<sub>1</sub> =</label>
+          <span id="z_racine_t_em" style="color:blue"></span> 
+        </div>
+        <br />
+        <div class="desact_retour">
+          <label for="t_racine_rec">t<sub>reception</sub> =</label>
+          <input id="t_racine_rec" value="0" maxlength="26" type="text"> (years)
+          <label for="z_racine_t_rec"> Z<sub>2</sub>=</label>
+          <span id="z_racine_t_rec" style="color:blue"></span> 
+        </div>
+        <div id="plus"><button type="button" onclick="inverse();ga('send', 'event', 'button', 'click', 'Calcul Annexe Inverse Anglais');">Calcul</button> 	
+        </div>
+<br/>
+<!-- Bouton retour -->
+<span style="bottom:20px;right:10%;position: fixed;"><input type="button" value="Back" onClick="retour_simu();"/></span>
+<br/>
+</div>
+<p style="float:right"><script type="text/javascript" src="https://counter10.fcs.ovh/private/counter.js?c=l6zysw8cskfec3jxbdafk3gpmddnlrq1"></script>entries.
+<br><a href="https://www.compteurdevisite.com"></a><noscript><a href="https://www.compteurdevisite.com" title="compteur de visite"><img src="https://counter10.fcs.ovh/private/compteurdevisite.php?c=l6zysw8cskfec3jxbdafk3gpmddnlrq1" border="0" title="compteur de visite" alt="compteur de visite"></a></noscript>
+ </p>
+
+<script>
+	update_omegar0();
+	update_omegak0();
+</script>
+			
+</body>
+</html>

@@ -1,0 +1,172 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="Css/theo.css"/>
+	
+
+	<!-- Latex pour HTML -->
+	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	
+	<!-- MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+																								-->
+	<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+	<script src="js/Menu/rem.min.js"></script>
+
+	<title>Trajectoire theorie</title>
+</head>
+
+<body>
+<!-- Script Google Analytic -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98631213-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- Menu -->
+<header>
+    <h1>Cosmograve</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Univers</a>
+            <ul>
+                <li><a href="Univers-theo.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers.html">Standard</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Sombre</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectoire</a>
+            <ul>
+                <li><a href="Trajectoire-the.html">Theorie</a></li>
+				<li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_trajectoire.html">Particule massive</a></li>
+						<li ><a href="Simulation_trajectoire_photons.html">Photon</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+     	<li><a href="Apropos.html">A propos</a></li>
+       
+    </ul>
+</nav>
+
+<br/>
+<!-- Boutons/drapeaux -->
+<div id="btn_langue">
+	<a href="Trajectoire-the.html"><img src="Images/Francais.png" style="float:right" width="70px" height="55px"/></a> &nbsp;
+	<a href="English/Trajectoire_theo_ang.html"><img src="Images/English.png" style="float:right;margin-right:5px;" width="70px" height="55px"/></a>
+</div>
+
+	
+
+<!-- Theorie -->	
+<div id="nm" style="width:90%;margin:auto;">
+
+<p style="text-align: center; font-size:40px"><strong>Gravitation au voisinage d'un trou noir</strong></p>
+<div id="summ" style="margin-left:15px;">
+<u><strong>Sommaire</strong><br/></u>
+	I- <a href="#nm">Theorie generale</a><br/>
+	II- <a href="#photon">Cas particulier: Le photon </a>
+</div>
+<br/>     
+               
+                  <p>&emsp;Dans un cadre relativiste, on souhaite &eacute;tudier le mouvement d'une particule dans le champ de gravitation d'une masse <strong>M</strong>, &agrave; sym&eacute;trie sph&eacute;rique, sans rotation, plac&eacute;e &agrave; l'origine de coordonn&eacute;es spatiales <strong>r</strong>, <strong>&theta;</strong>, <strong>&phi;</strong>.
+  <br/>On se place dans un espace-temps vide. La m&eacute;trique utilis&eacute;e est celle de Schwarzschild. Cette m&eacute;trique est une solution des &eacute;quations d'Einstein. Elle d&eacute;crit la g&eacute;om&eacute;trie de l'espace-temps lorsqu'elle est d&eacute;form&eacute;e par le champ gravitationnel d'une masse sph&eacute;rique, statique (sans rotation), non charg&eacute;e et entour&eacute;e de vide. Cette masse peut &ecirc;tre une &eacute;toile, une plan&egrave;te ou un trou noir.
+<br/>La m&eacute;trique de Schwarzschild nous donne :<p/>  
+<p align="center" style="font-size:18px">$$ ds^{2}=-e^{\lambda}dr^{2} - r^{2}(d\theta^{2} + sin^{2}\theta d\phi^{2}) + e^{\lambda} c^{2} dt^{2}$$</p>
+<p><br/> On montre que :</p>
+ <p align="center" style="font-size:18px">$$ \lambda + \nu = 0 ~~~~e^{\nu} = 1 -\frac{2m}{r}$$</p>
+ <p>&emsp;<strong>r</strong> est la distance entre le centre de la particule et celui du corps massif et <strong>c</strong> d&eacute;signe la vitesse de la lumi&egrave;re ( c = 299792458 m.s<sup>-1</sup> ).
+     <br/>On montre que <strong><em>m</em></strong>, le rayon du corps attractif de masse <strong>M</strong>, s'&eacute;crit :</p>
+ <p align="center" style="font-size:18px">$$ m=\frac{GM}{c^{2}}$$</p>
+ <p><strong>G</strong> est la constante gravitationnelle et vaut 6,6742.10<sup>-11</sup> m<sup>3</sup>kg<sup>-1</sup>s<sup>-2</sup>.</p>
+ <p>&emsp;On &eacute;tudie les trajectoires possibles d'une particule libre pour lesquelles :</p> 
+ <p align="center" style="font-size:18px">$$\theta = \frac{1}{2}\pi$$</p>
+ <p>&emsp;Les "lignes droites" dans notre espace courb&eacute; par la masse <strong>M</strong> sont appel&eacute;es g&eacute;od&eacute;siques. 
+     <br/>Deux des &eacute;quations des g&eacute;od&eacute;siques s'&eacute;crivent :</p>
+ <p align="center" style="font-size:18px">$$ \frac{d^{2}t}{ds^{2}} + \frac{d\nu}{dr} \frac{dr}{ds} \frac{dt}{ds} ~~~~~\frac{d^{2}\phi}{ds^{2}} + \frac{2}{r} \frac{dr}{ds} \frac{d\phi}{ds} + \frac{2}{tg\theta}\frac{d \theta}{ds} \frac{d\phi}{ds}=0$$</p>
+ <p>&emsp;<strong>&tau;</strong> est le temps propre de la particule. Autrement dit il s'agit du temps mesur&eacute; dans le rep&egrave;re de cette particule, c'est-&agrave;-dire dans le rep&egrave;re o&ugrave; elle est immobile.
+<br/>On d&eacute;duit des deux &eacute;quations pr&eacute;c&eacute;dentes les int&eacute;grales premi&egrave;res :</p>
+  <p align="center" style="font-size:18px">$$ \left( 1-\frac{2m}{r} \right) \frac{dt}{d\tau} =E ~~~~~r^{2}\frac{d\phi}{d\tau}=cL$$</p>
+ <p>Nous pouvons d&eacute;terminer l'expression de <strong>L</strong> avec l'&eacute;quation de la composante tangentielle de la vitesse de la particule en fonction de son temps propre <strong>&tau;</strong> :</p>
+ <p align="center" style="font-size:18px">$$ v_{\phi}(\tau) = r(\tau)\frac{d\phi}{d\tau}$$</p>
+ <p>Avec les conditions initiales, nous obtenons :</p>
+ <p align="center" style="font-size:18px">$$ L=\frac{v_{\phi}(\tau_{0})r(\tau_{0})}{c}$$</p>
+ <p>Revenons &agrave; l'&eacute;quation de la m&eacute;trique de Schwarzschild. Elle peut aussi s'&eacute;crire : </p>
+ <p align="center" style="font-size:18px">$$ \left( \frac{dr}{d\tau} \right)^{2} + c^{2}\left( 1-\frac{2m}{r}\right) \left( 1+\frac{L^{2}}{r^{2}} \right) = c^{2} E^{2}$$</p>
+ <p>Nous pouvons d&eacute;terminer l'expression de <strong>E</strong> avec l'&eacute;quation de la composante radiale de la vitesse de la particule en fonction de son temps propre <strong>&tau;</strong> :</p>
+ <p align="center" style="font-size:18px">$$ v_{r}(\tau) = \frac{dr}{d\tau}$$</p>
+ <p>Avec les conditions initiales, nous obtenons :</p>
+ <p align="center" style="font-size:18px">$$ E=\sqrt{\frac{v_{r}(\tau_{0})^{2}}{c^{2}} + \left( 1-\frac{2m}{r(\tau_{0})} \right) \left( 1+ \frac{L^{2}}{r^{2}(\tau_{0})}\right)}$$</p>
+ <p>&emsp;En d&eacute;rivant la nouvelle &eacute;quation de la m&eacute;trique et pour des trajectoires non circulaires, on d&eacute;duit l'&eacute;quation diff&eacute;rentielle suivante utilis&eacute;e pour faire la simulation d'une particule autour d'un corps massif :</p>
+ <p align="center" style="font-size:18px">$$ \frac{d^{2}r}{d\tau^{2}}=-\frac{1}{2} \frac{dV}{dr}$$</p>
+ <p>avec la fonction <strong>V</strong> appel&eacute;e potentiel effectif donn&eacute; par :</p>
+ <p align="center" style="font-size:18px">$$ V(r)=c^{2}\left( 1-\frac{2m}{r} \right) \left( 1+\frac{L^{2}}{r^{2}}\right)$$</p>
+ <p>
+ 
+  <br/>&emsp;<strong><em>R<sub>S</sub></em></strong> est appel&eacute;  'horizon du trou noir' ou 'rayon de Schwarzschild'. Il repr&eacute;sente la zone sph&eacute;rique qui d&eacute;limite la r&eacute;gion d'o&ugrave; lumi&egrave;re et mati&egrave;re ne peuvent s'&eacute;chapper.
+  <br/>&emsp;Pour mieux l'illustrer, on peut se repr&eacute;senter un observateur situ&eacute; au voisinage de l'horizon et un observateur situ&eacute; loin du trou noir. Le temps s'&eacute;coule diff&eacute;remment pour ces deux observateurs.
+  Proche de l'horizon, l'observateur a l'impression que le temps s'&eacute;coule plus vite pour son confr&egrave;re rest&eacute; loin du trou noir que pour lui.
+  &agrave; l'inverse, l'observateur rest&eacute; loin du trou noir voit son coll&egrave;gue &eacute;voluer de plus en plus lentement.
+  <br/>&emsp;La dilatation du temps peut &ecirc;tre observ&eacute;e quand l'observateur distant voit un objet tomber dans un trou noir. 
+     Les &eacute;ventuels signaux &eacute;mis par l'objet seront de plus en plus espac&eacute;s, donnant l'impression &agrave; l'observateur lointain que l'objet s'est arr&ecirc;t&eacute; juste avant l'horizon.
+  <br/>&emsp;Soient <strong><em>dt</em></strong> un intervalle de temps pour l'observateur et <strong><em>d&tau;</em></strong> pour la particule. 
+ <br/>La formule de dilatation temporelle entre la particule  et l'observateur est donn&eacute;e par : </p>
+  <p align="center" style="font-size:18px">$$ d\tau=\frac{1}{E}\left( 1-\frac{2m}{r(\tau)}\right)dt$$</p>
+  <p>&emsp;A mesure que l'on s'approche d'un trou noir, les effets de marr&eacute;es deviennent de plus en plus importants. Autrement dit, l'objet va subir un &eacute;tirement de plus en plus importante.</p>
+</p><p align="center"><em>Cet expos&eacute;, comme ceux des versions pr&eacute;c&eacute;dentes s'appuie sur les cours de cosmologie de J-P Cordoni.</em></p>
+	</div>
+	
+<div id="photon" style="width:90%;margin:auto;">
+
+	<p style="text-align: center; font-size:25px"><strong>Particules sans masse: Trajectoires d'un photon</strong></p>
+  <p>La m&eacute;trique de Schwarzschild <strong>ds</strong> serait le produit de la vitesse de la lumi&egrave;re avec <strong>d&tau;</strong> le temps propre. Ce dernier est th&eacute;oriquement mesur&eacute; par une horloge qui suivrait la m&ecirc;me ligne d'univers de la particule observ&eacute;e. La ligne d'univers d'un photon est incontestablement impossible &agrave; suivre et donc <strong>d&tau;</strong> = <strong>ds</strong> = 0.</p>
+  <p>Les int&eacute;grales premi&egrave;res des deux &eacute;quations des g&eacute;od&eacute;sique sont toujours valables si le temps propre est remplac&eacute; par un param&egrave;tre <strong>a</strong>. On travail toujours avec <strong>&theta;</strong> = <strong>&pi;/2</strong> (<strong>d&theta;</strong> = 0). On prend en consid&eacute;ration ce qui pr&eacute;c&egrave;de pour mener la m&eacute;trique de Schwarzschild &agrave; la formule suivante:</p>    
+ <p align="center" style="font-size:18px">$$ \left( \frac{dr}{da} \right)^{2} + V(r) = c^{2}E^{2}$$</p>
+  <p align="center" style="font-size:18px">$$  \frac{V(r)}{c^{2}}=\frac{L^{2}}{r^{2}} \left( 1-\frac{2m}{r}\right)$$</p>
+  <p>La d&eacute;riv&eacute;e de (1) donne:</p>
+  <p align="center" style="font-size:18px;">$$ \frac{d^{2}r}{da^{2}}=-\frac{1}{2} \frac{dV}{dr} (2)$$</p>
+  <p>Dans la partie simulation il est demandé à l'utilisateur d'entrer une valeur initiale pour la vitesse tangentielle <strong>v<sub>&phi;</sub>(0)</strong>. Celle-ci permettta de calculer <strong>L</strong> et <strong>v<sub>r</sub>(0)</strong>.</p>
+  <p align="center" style="font-size:18px;">$$ L=\frac{1}{cr}v_{\phi(0)}~~~~~~~v_{r}(0)^{2}=c^{2}-v_{\phi}(0)^{2}$$</p>
+  <p>Puisque la valeur de <strong>v<sub>&phi;</sub>(0)</strong> impose une valeur &agrave; <strong>v<sub>r</sub>(0)</strong>, E peut etre calcul&eacute;e dans (1). La trajectoire du photon est trac&eacute;e en appliquant la m&eacute;thode de Runge-Kutta sur (2).</p>
+  
+<a href="#">Retour en haut</a>
+</div>
+
+<!-- Compteur de visites -->	
+<footer>
+<p style="float:right;width:100%;text-align: right"><script type="text/javascript" src="https://counter10.fcs.ovh/private/counter.js?c=l6zysw8cskfec3jxbdafk3gpmddnlrq1"></script>visites.
+<br><a href="https://www.compteurdevisite.com"></a><noscript><a href="https://www.compteurdevisite.com" title="compteur de visite"><img src="https://counter10.fcs.ovh/private/compteurdevisite.php?c=l6zysw8cskfec3jxbdafk3gpmddnlrq1" border="0" title="compteur de visite" alt="compteur de visite"></a></noscript> </p>
+</footer>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/Menu/nav.jquery.min.js"></script>
+<script>
+    $('.nav').nav();
+</script>
+
+</body>
+</html>
