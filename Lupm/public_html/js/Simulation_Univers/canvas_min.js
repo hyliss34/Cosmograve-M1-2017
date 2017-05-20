@@ -14,7 +14,6 @@ function cosh(a){return.5*(Math.exp(a)+Math.exp(-a))};
 
 // Recupère les coordonnées de la souris par rapport à la page, calcul les omega correspondant et trace le graphique + update le modele
 function GetCoordinates(a) {
-	ga('send', 'event', 'button', 'click', 'Clic canvas univers');
     1 == document.getElementById("univ_plat").checked && (document.getElementById("univ_plat").checked = !1);
     PosY = PosX = 0;
     var b;
