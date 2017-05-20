@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<link rel="stylesheet"  href="../Css/Simu_grav.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+	<title>Simulation trajectoire Anglais</title>
+	<script src="../Lib/jquery-1.12.3.min.js"></script>
+	<script src="../Lib/math.min.js"></script>
+	<script src="../Lib/d3.js"></script>
+	<script src="../Lib/snap.svg.js"></script>
+	<script src="../Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="../js/gravitation/calcul_trajectoire2.js"></script>
+	<script src="../js/gravitation/equation3d.js"></script>
+	<script src="../js/gravitation/Runge_Kutta2.js"></script>
+	<script src="../js/gravitation/stopper.js"></script>
+	<script src="../js/English/graphe_potentiel_ang.js"></script>
+	<script type="text/javascript">
+			pause = true;
+			debut = true;
+		</script>
+	<!-- MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+																								-->
+	<link rel="stylesheet" href="../Css/Resp-Menu/normalize.min.css">
+	<link rel="stylesheet" href="../Css/Resp-Menu/defaults.min.css">
+	<link rel="stylesheet" href="../Css/Resp-Menu/nav-core.min.css">
+	<link rel="stylesheet" href="../Css/Resp-Menu/nav-layout.min.css">
+
+	<script src="../js/Menu/rem.min.js"></script>
+	
+
+</head>
+
+<body>
+
+
+<header>
+    <h1>Cosmogravvity</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index_ang.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Universe</a>
+            <ul>
+                <li><a href="Univers_theo_ang.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers_ang.html">Normal</a></li>
+						<li ><a href="Simulation_univers_noire_ang.html">Dark energy</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectories</a>
+            <ul>
+                <li><a href="Trajectoire_theo_ang.html">Theorie</a></li>
+				<li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_trajectoire_ang.html">Massive Particle</a></li>
+						<li ><a href="Simu_photons_ang.html">Photons</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="About.html">About</a></li>
+       
+    </ul>
+</nav>
+
+			<br/>
+
+<center style="font-size:20px;"><strong>Trajectorie simulation of a particle</strong></center><br/>
+<!-- Paramètres -->
+			<div id="formulaire">
+			  <form name="params" id="parametres" action="" method="post" autocomplete="off">
+
+									<span id="masse">
+									<label for="M">M (kg) =</label>
+										<input id="M" value="3e30" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayons">
+									<span id="rayon">
+									<label for="r0">r<sub>0</sub> (m) =</label>
+										<input id="r0" value="5e4" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayon_phy">
+									<label for="r_phy">r<sub>physique</sub> (m) =</label>
+										<input id="r_phy" value="1" align="left" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+									<span id="vitesses">
+									<span id="vitesse1">
+									<label for="vphi">V<sub>&Phi;</sub> (m.s<sup>-1</sup>) =</label>
+										<input id="vphi" value="5.1e7" maxlength="10" type="text" size="10">
+									</span>
+									<span id="vitesse2">
+									<label for="vr">V<sub>r</sub> (m.s<sup>-1</sup>) =</label>
+										<input id="vr" value="0" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+
+									<span id="buts">
+									<span id="bouton" onclick="trajectoire()">
+										<button type="button" class="myButton">Start</button>
+									</span>
+									
+									<span id="bouton">
+										<button type="button" onclick="pausee()" class="myButton" id="pau">Pause</button>
+									</span>
+
+									<span id="bouton">
+										<button id="clear" class="myButton">Reset</button>
+    								</span>
+	
+									<span id="plusvite">
+										<button type="button" class="myButton">More</button>
+									</span>
+
+									<span id="moinsvite">
+										<button type="button" class="myButton">Less</button>
+									</span>
+									</span>
+									<span id="radio_button">
+									<input type="radio" id="r1" name="traj" checked/>
+    								<label for="r1"><span></span>Complete trajectorie</label>
+    
+    								<input type="radio" id="r2" name="traj" />
+    								<label for="r2"><span></span>Simple trajectorie</label>
+  
+    	  								</span>
+  <!--
+ <div class="wrapper">
+  <span>Rebond :</span>
+  <input type="checkbox" id="checkbox" class="slider-toggle" name="reb" />
+	<label class="slider-viewport" for="checkbox">
+  	<div class="slider">
+    	<div class="slider-button">&nbsp;</div>
+    	<div class="slider-content left"><span>On</span></div>
+    	<div class="slider-content right"><span>Off</span></div>
+  	</div>
+	</label>
+</div>
+-->
+</form>
+			</div>
+			
+
+	<center>			
+<table class="tg">
+  <tr>
+    <th class="tg-aicv">$L$</th>
+    <th class="tg-aicv">$E$</th>
+    <th class="tg-6l4m">$\frac{2Gm}{c^{2}}(m)$</th>
+  </tr>
+  <tr>
+    <td class="tg-3ozo" id="L">0</td>
+    <td class="tg-3ozo" id="E">0</td>
+    <td class="tg-3ozo" id="m">0</td>
+  </tr>
+</table>
+<br/>
+
+
+
+	</center>
+
+<div id="dessous" style="margin-top:-100px;">
+<!-- Graphique -->
+<div id="graphique2" style='top: 0;'>
+	<svg id="grsvg_2"></svg>
+</div>
+			
+<!-- Animation -->
+<div id="anim">
+
+
+			<div id="canvas">
+			<table class="tg2" id="tg2">
+  <tr>
+    <th class="tg-aicv">r(m)</th>
+    <th class="tg-aicv">Elapsed time</th>
+    <th class="tg-6l4m">Acceleration gradient &nbsp;<span id="DivClignotante"></span></th>
+  </tr>
+  <tr>
+    <td class="tg-3ozo" id="r_par">res</td>
+    <td class="tg-3ozo" id="tp">res</td>
+    <td class="tg-3ozo" id="ga">res</td>
+  </tr>
+</table>
+				<canvas id="myCanvas" width="550" height="450" >
+			
+					Votre navigateur ne supporte pas canvas.
+					
+				</canvas>
+			</div>
+<p style="float:right;top:100%;left:90%;width:100%;text-align: right;"><script type="text/javascript" src="https://counter10.fcs.ovh/private/counter.js?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl"></script>
+<br><a href="https://www.compteurdevisite.com"></a><noscript><a href="https://www.compteurdevisite.com" title="compteur de visite"><img src="https://counter10.fcs.ovh/private/compteurdevisite.php?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl" border="0" title="compteur de visite" alt="compteur de visite"></a></noscript>
+ </p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/Menu/nav.jquery.min.js"></script>
+<script>
+	function resize(){
+		$('#grsvg_2').empty();
+		graphique_creation_pot();
+	}
+	
+	d3.select(window).on('resize',resize);
+	
+	
+	ANG=1;
+    $('.nav').nav();
+</script>			
+	</body>
+</html>
