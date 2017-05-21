@@ -1,0 +1,113 @@
+<html class="nav-no-js">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+<!-- Css de la page -->
+<link rel="stylesheet" href="Css/index.css"/>
+
+<!-- 
+									MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+-->
+<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+<script src="js/Menu/rem.min.js"></script>
+
+<title>Index</title>
+</head>
+
+<body>
+
+
+
+<!-- Menu -->
+<header>
+    <h1>Cosmograve</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Univers</a>
+            <ul>
+                <li><a href="Univers-theo.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers.html">Standard</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Sombre</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectoire</a>
+            <ul>
+                <li><a href="Trajectoire-the.html">Theorie</a></li>
+				<li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_trajectoire.html">Particule massive</a></li>
+						<li ><a href="Simulation_trajectoire_photons.html">Photon</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+     	<li><a href="Apropos.html">A propos</a></li>
+       
+    </ul>
+</nav>
+
+
+<!-- Boutons de changement de langue -->
+<div id="btn_langue">
+		<a href="index.html"><img src="Images/Francais.png" style="float:right" width="70px" height="55px"/></a> &nbsp;
+		<a href="English/index_ang.html"><img src="Images/English.png"  style="float:right;margin-right:5px;" width="70px" height="55px"/></a>
+	</div>
+
+<!-- Image Titre -->
+<p id="Cosmog" style="text-align : center;"><img src="./Images/Cosmogravity.png" height="100px" style="margin-top:20px;" /><span style="color : #d60606; font-weight: bold; text-align: center; font-size:16px">Version Beta</span></p>
+					<p style="text-align: center; font-size:16px">Le programme est composé de 2 parties :<br /><br />- évolution des paramètres cosmologiques des univers de Friedmann-Lemaître<br />- trajectoires d'une particule libre en espace-temps de Schwarzschild.</p>
+
+
+				
+					
+<!-- Slides -->
+<p id="image_defile" style="text-align: center;">
+	<img src='./Images/Slide/separatrice.png' style="display: inline;" height="250px">
+	<img src='./Images/Slide/Univers_plat_fr.png' style="display: none;" height="250px" >
+	<img src='./Images/Slide/separa.png' style="display: none;" height="250px" >
+	<img src='./Images/Slide/Univers_ferme_fr.png' style="display: none;" height="250px" >
+	<img src='./Images/Slide/gravitation_ang.png' style="display: none;" height="250px" >
+	<img src='./Images/Slide/gravitation_2_fr.png' style="display: none;" height="250px" >
+</p>
+<script type="text/javascript">
+	function suivante(){document.getElementById("image_defile").getElementsByTagName("img")[I].style.display="none";I<Imax?I++:I=0;document.getElementById("image_defile").getElementsByTagName("img")[I].style.display="inline";setTimeout(suivante,4E3)};
+	//pour faire defiler les images
+	I = 0 ;
+	Imax = document.getElementById("image_defile").getElementsByTagName('img').length - 1 ;		
+	suivante();
+</script>
+ 
+<!-- Logos -->
+<div id="log" style="width:100%;text-align: center;"><img id="logos" src="./Images/logo.png" /></div>
+
+<!-- Compteur de visites -->
+<p style="float:right">
+<script type="text/javascript" src="https://counter10.fcs.ovh/private/counter.js?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl"></script>
+<br><a href="https://www.compteurdevisite.com"></a><noscript><a href="https://www.compteurdevisite.com" title="compteur de visite"><img src="https://counter10.fcs.ovh/private/compteurdevisite.php?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl" border="0" title="compteur de visite" alt="compteur de visite"></a></noscript>
+ </p>
+
+
+<!-- Scripts divers -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/Menu/nav.jquery.min.js"></script>
+<!-- Initialisation du menu (en fin de page pour que cela ne bloque pas le chargement de la page ainsi l'utilisateur a l'impression que la page charge vite)-->
+<script>
+    $('.nav').nav();
+</script>
+</body>
+</html>
