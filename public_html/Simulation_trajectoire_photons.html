@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+	
+	<!-- Css de la page -->
+	<link rel="stylesheet"  href="./Css/Simu_grav.css">
+	
+	<!-- Latex dans HTML -->
+	<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+	<script type="text/x-mathjax-config">	
+	MathJax.Hub.Config({
+  		tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  	});
+	</script>
+
+	<!-- Scripts de calcul -->
+	<script src="./Lib/jquery-1.12.3.min.js"></script>
+	<script src="./Lib/math.min.js"></script>
+	<script src="./Lib/d3.js"></script>
+	<script src="./Lib/snap.svg.js"></script>
+	<script src="./Lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+	<script src="./js/gravitation/calcul_trajectoire2_phtons.js"></script>
+	<script src="./js/gravitation/equation3d.js"></script>
+	<script src="./js/gravitation/Runge_Kutta_phton.js"></script>
+	<script src="./js/gravitation/stopper.js"></script>
+	<script src="./js/gravitation/graphe_potentiel.js"></script>
+	<script type="text/javascript">
+			pause = true;
+			debut = true;
+	</script>
+		
+	<!-- MENUS 
+Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-using-pure-css/ 
+																								-->
+	<link rel="stylesheet" href="Css/Resp-Menu/normalize.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/defaults.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-core.min.css">
+	<link rel="stylesheet" href="Css/Resp-Menu/nav-layout.min.css">
+
+	    <!-- Menu si internet explorer 9 -->
+	    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/ie8-core.min.css">
+    <link rel="stylesheet" href="css/ie8-layout.min.css">
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+	
+	<script src="js/Menu/rem.min.js"></script>
+	
+	<title>Simulation photon</title>
+</head>
+
+<body>
+<!-- Script Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98631213-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Menus -->
+<header>
+    <h1>Cosmograve</h1>
+</header>
+
+<a href="#" class="nav-button">Menu</a>
+
+<nav class="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-submenu"><a href="#">Univers</a>
+            <ul>
+                <li><a href="Univers-theo.html">Theorie</a></li>
+                <li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_univers.html">Standard</a></li>
+						<li ><a href="Simulation_univers_noire.html">Energie Sombre</a></li>
+                    </ul>
+                </li>
+      
+            </ul>
+        </li>
+        <li class="nav-submenu"><a href="#">Trajectoire</a>
+            <ul>
+                <li><a href="Trajectoire-the.html">Theorie</a></li>
+				<li class="nav-submenu"><a href="#">Simulation</a>
+                    <ul>
+                        <li><a href="Simulation_trajectoire.html">Particule massive</a></li>
+						<li ><a href="Simulation_trajectoire_photons.html">Photon</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+     	<li><a href="Apropos.html">A propos</a></li>
+       
+    </ul>
+</nav>
+
+			<br/>
+			<center style="font-size:20px;"><strong>Trajectoire d'un photon</strong></center><br/>
+			
+<!-- Paramètres -->
+			<div id="formulaire">
+			  <form name="params" id="parametres" action="" method="post" autocomplete="off">
+
+									<span id="masse">
+									<label for="M">M (kg) =</label>
+										<input id="M" value="2e30" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayons">
+									<span id="rayon">
+									<label for="r0">r<sub>0</sub> (m) =</label>
+										<input id="r0" value="4137.9912" align="left" maxlength="10" type="text" size="10">
+									</span>
+									<span id="rayon_phy">
+									<label for="r_phy">r<sub>physique</sub> (m) =</label>
+										<input id="r_phy" value="1" align="left" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+									<span id="vitesses">
+									<span id="vitesse1">
+									<label for="vphi">V<sub>&Phi;</sub> (m.s<sup>-1</sup>) =</label>
+										<input id="vphi" value="299792458" maxlength="10" type="text" size="10">
+									</span>
+									</span>
+
+									<span id="buts">
+									<span id="bouton" onclick="trajectoire()">
+										<button type="button" class="myButton">Start</button>
+									</span>
+									
+									<span id="bouton">
+										<button type="button" onclick="pausee()" class="myButton" id="pau">Pause</button>
+									</span>
+
+									<span id="bouton">
+										<button id="clear" class="myButton">Reset</button>
+    								</span>
+	
+									<span id="plusvite">
+										<button type="button" class="myButton">Plus</button>
+									</span>
+
+									<span id="moinsvite">
+										<button type="button" class="myButton">Moins</button>
+									</span>
+									</span>
+									<span id="radio_button">
+									<input type="radio" id="r1" name="traj" checked/>
+    								<label for="r1"><span></span>Trajectoire complete</label>
+    
+    								<input type="radio" id="r2" name="traj" />
+    								<label for="r2"><span></span>Trajectoire simple</label>
+    								</span>
+    								<br/>
+    								<br/>
+
+</form>
+			</div>
+			
+
+<!-- Table Resultats -->			
+<center>			
+<table class="tg">
+  <tr>
+    <th class="tg-aicv">$L$</th>
+    <th class="tg-aicv">$E$</th>
+    <th class="tg-6l4m">$\frac{2GM}{c^{2}}(m)$</th>
+  </tr>
+  <tr>
+    <td class="tg-3ozo" id="L">0</td>
+    <td class="tg-3ozo" id="E">0</td>
+    <td class="tg-3ozo" id="m">0</td>
+  </tr>
+</table>
+<br/>
+
+
+
+	</center>
+			<br/>
+<!-- Graphique -->
+<div id="graphique2" style='margin-top: 35px;'>
+	<svg id="grsvg_2"></svg>
+</div>
+
+<!-- Animation -->			
+<div id="canvas">
+<table class="tg2" id="tg2">
+  <tr>
+    <th class="tg-aicv">r(m)</th>
+    <th class="tg-aicv">Temps ecoulé</th>
+    <th class="tg-6l4m" style="display:none;">Gradient d'accélération &nbsp;<span id="DivClignotante"></span></th>
+  </tr>
+  <tr>
+    <td class="tg-3ozo" id="r_par">res</td>
+    <td class="tg-3ozo" id="tp">res</td>
+    <td class="tg-3ozo" id="ga" style="display:none;">res</td>
+  </tr>
+</table>
+	<canvas id="myCanvas" style=" z-index: 0;" width="550" height="450" >		
+		Votre navigateur ne supporte pas canvas.
+	</canvas>
+</div>
+
+<p style="float:right;top:100%;left:90%;width:100%;text-align: right;"><script type="text/javascript" src="https://counter10.fcs.ovh/private/counter.js?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl"></script>
+<br><a href="https://www.compteurdevisite.com"></a><noscript><a href="https://www.compteurdevisite.com" title="compteur de visite"><img src="https://counter10.fcs.ovh/private/compteurdevisite.php?c=lkqb7anfg7ja8pugbjlt1bw417tde9gl" border="0" title="compteur de visite" alt="compteur de visite"></a></noscript>
+ </p>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+			
+<!-- Script resize, tracer et menu -->
+<script src="js/Menu/nav.jquery.min.js"></script>
+<script>
+	function resize(){
+		$('#grsvg_2').empty();
+		graphique_creation_pot();
+	}
+	
+	d3.select(window).on('resize',resize);
+	
+	
+	ANG=0;
+    $('.nav').nav();
+</script>
+			
+</body>
+</html>

@@ -1,0 +1,306 @@
+/*
+	Cosmograve
+*/
+@viewport {
+   width: device-width; /* largeur du viewport */
+   zoom: 1; /* zoom initial à 1.0 (et clin d'oeil aux fans d'IE6/7) */
+}
+
+/* css*/
+body {
+	height:100%;
+}
+label{
+	font-weight 	:	bold;
+}
+.desact_retour{
+	display			:	inline-block;
+}
+#parametres{
+	text-align		:	center;
+}
+
+#canvas{
+	float			:	left;
+	margin-top		:	10%;
+	width:48%;
+}
+#plus{
+	float			:	right;
+}
+#plus button{
+	font-weight 	:	bold;
+}
+.axis path, .axis line {
+	fill			:	none;
+	stroke			:	grey;
+	stroke-width	:	1;
+	shape-rendering	:	crispEdges;
+}
+svg{
+	text-align		:	center;
+}
+.legend_axe{
+	font-weight		:	bold;
+	font-size		:	1.2em;
+}
+.legend_titre{
+	font-weight		:	bold;
+	font-size		:	1.3em;
+}
+#tabs-2{
+	margin			:	0px;
+	padding			:	0px;
+}
+#tabs-3{
+	margin			:	0px;
+	padding			:	0px;
+}
+#tabs-a{
+	height			:	100%;
+}
+#graphique2 {
+	display:block;
+	margin-top:10%;
+	width:50%;
+	float:right;
+}
+
+
+
+
+#radio_button{width:100%;
+display: block;}
+
+/* On/off */
+
+
+/* Radio Buttons */
+
+
+input[type="radio"],input[type="checkbox"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+    color:black;
+    font-family:Arial, sans-serif;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) 0px top no-repeat;
+    cursor:pointer;
+}
+
+input[type="radio"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+}
+
+input[type="checkbox"] + label {
+    color:black;
+    font-family:Arial, sans-serif;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) 0px top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+}
+
+input[type="text"]{
+	-webkit-appearance: none;
+	border-radius: 3px;
+	border:thin;
+	height:20px;
+	-moz-box-shadow: 2px 2px 2px 1px #656565;
+	-webkit-box-shadow: 2px 2px 2px 1px #656565;
+	-o-box-shadow: 2px 2px 2px 1px #656565;
+	box-shadow: 2px 2px 2px 1px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=4);
+}
+
+/* BOUTONS 
+Source: http://www.bestcssbuttongenerator.com/  */
+
+
+.myButton {
+	-moz-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	-webkit-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	background-color:#a73f2d;
+	border:1px solid #f5f5f5;
+	display:inline-block;
+	border-radius: 7px;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #7a2a1d;
+}
+.myButton:hover {
+	background-color:#b34332;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+/* TABLEAU */
+
+.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;}
+.tg td{font-family:Arial, sans-serif;font-size:13px;padding:4px 8px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:1px solid black;}
+.tg th{font-family:Arial, sans-serif;font-size:13px;font-weight:normal;padding:4px 8px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;;border:1px solid black}
+.tg .tg-6l4m{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-3ozo{background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top}
+.tg .tg-aicv{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center}
+
+
+.tg2  {border-collapse:collapse;border-spacing:0;border:1px solid black;float:left;display:none;}
+.tg2 td{font-family:Arial, sans-serif;font-size:11px;padding:5px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:1px solid black}
+.tg2 th{font-family:Arial, sans-serif;font-size:11px;font-weight:normal;padding:5px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:1px solid black;}
+.tg2 .tg-6l4m{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center;vertical-align:top}
+.tg2 .tg-3ozo{background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top}
+.tg2 .tg-aicv{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center}
+	
+
+
+
+
+
+#reb_label {
+	padding-bottom: 20px;
+	display:inline-block;
+}
+
+
+
+
+
+/* Entre 1700 et 1320 pixels les deux bouton de trajectoires redescendent */
+
+@media screen and (min-width:1320px) and (max-width:1700px) 
+{
+	#rad_button,#rebond {
+		display:inline-block;
+	}
+	#masse {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.tg {
+		border:1px solid black;
+	}
+	
+/* Boutons trajectoires */
+	#radio_button{
+		display: inline-block;
+		width:500px;
+		border:2px solid blue;
+	}
+	.wrapper{
+		display: inline-block;
+		border:2px solid black;
+	}
+	#cont_boutons{
+		width:100%;
+		border: 2px solid red;
+	}
+	.onoffswitch {
+		margin-top:20px;
+		display: inline-block;
+	}
+
+
+}
+
+/*Entre 1300 et 1050 les bouton p,m,reset ... */
+
+@media screen and (min-width: 1050px) and (max-width: 1300px) 
+{
+	#buts {
+		display: inline-block;
+		margin-bottom: 5px;
+		margin-top:5px;
+	}
+	#buts {
+		display:block;
+	}
+	#masse {
+		margin-bottom:5px ;
+	}
+
+
+}
+
+/* En dessous de 1050 px */
+@media screen and (max-width: 960px) {
+	#vitesse {
+		display: inline-block;
+	}
+	#rayons {
+		display: inline-block;
+		margin-top:4px;
+		margin-bottom:4px;
+	}
+	#rayons,#vitesse,#buts {
+		display: block;
+	}
+	#masse,#rayon,#rayon_phy,#vitesse2 {
+		display:block;
+	}
+	#radio_button{display:block;}
+	#buts {
+		margin-top:5px;
+		margin-bottom: 5px;
+	}
+
+	#graphique2 {
+		margin-top:100px;
+		margin-left:-30px;
+		width:100%;
+		text-align: center;
+		display:block;
+	}
+	
+	#myCanvas{width:100%;}
+	#canvas{
+		
+		text-align: center;
+		margin:0 9% 0 10%;
+		width:80%;
+	}
+	#dessous{
+		margin-top:200x;
+		float:left;
+	width:90%;}
+.tg  {border-collapse:collapse;border-spacing:0;border:1px solid black;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:3px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border:1px solid black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:3px 3px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;;border:1px solid black}
+.tg .tg-6l4m{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-3ozo{background-color:#ffffff;color:#3166ff;text-align:center;vertical-align:top}
+.tg .tg-aicv{font-weight:bold;background-color:#a73f2d;color:#ffffff;text-align:center}
+	
+}
+
+@media screen and (max-width:450px){
+	#sp_reb{
+		display: block;
+		width:100%;}
+	input[type="checkbox"]{display:none;}
+	
+}
