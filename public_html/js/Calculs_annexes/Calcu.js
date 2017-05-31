@@ -53,7 +53,7 @@ function calcu(){
 	H0enannee = H0parsec*(3600*24*nbrjours);
 	H0engannee = H0enannee*Math.pow(10, 9);
 	
-	
+
 	Or = 0;
 	if (document.getElementById("resultat_omegar0_annexes").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
@@ -78,8 +78,8 @@ function calcu(){
 	
 	
 	//on recupere les valeurs de z1 et z2
-	z1 = document.getElementById("z1").value;
-	z2 = document.getElementById("z2").value;
+	z1 = Number(document.getElementById("z1").value);
+	z2 = Number(document.getElementById("z2").value);
 	
 	if(z1<=-1){
 		alert("z1 n'a pas une valeur correcte !");
@@ -124,7 +124,7 @@ function calcu(){
 	
 
 	
-	
+		
 	//agebetween = (1./H0engannee)*simpson(Number(z1), Number(z2), fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	
      
@@ -142,17 +142,21 @@ function calcu(){
 	                  }
 
 
-
+	inf=Number(document.getElementById("z_lim_t").innerHTML) + 0.01;
+	
         if(Or > 0)      { 
 
         if(z2 <= 5e6){  
                      if(omegalambda0 >= Olambdalim) {
-                     tempsReception = simpson(1/(1+z2), 1, temps_parcours,Number(Or), omegam0,Number(omegak0),Number(omegalambda0)) ;//<-----------------------------A  VOIR
+                     tempsReception = simpson(inf, 5e6, fonction_integrale,Number(Or), omegam0,Number(omegak0),Number(omegalambda0));//<-----------------------------A  VOIR
                      }else{
-		     tempsReception = simpson(Number(z2), 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
+		
+		     tempsReception = simpson(Number(z2), 5e6, fonction_integrale, Number(omegam0), Number(omegalambda0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2))) 
+					 };//<-----------------------
 	}else{
                      if(omegalambda0 >= Olambdalim) {
-                     tempsReception = simpson(0, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z2,2));//<-----------------------------
+						 
+                     tempsReception = simpson(inf, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z2,2));//<-----------------------------
                      }else{
           	     tempsReception = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z2, 2)))   };//<------------------------------
 	}
@@ -161,12 +165,12 @@ function calcu(){
 
         if(z1 <= 5e6){  
                      if(omegalambda0 >= Olambdalim) {
-                     tempsEmission = simpson(0, z1, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps);//<-----------------------------
+                     tempsEmission = simpson(inf, z1, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps);//<-----------------------------
                      }else{
 		     tempsEmission = simpson(Number(z1), 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
 	}else{
                      if(omegalambda0 >= Olambdalim) {
-                     tempsEmission = simpson(0, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z1,2));//<-----------------------------
+                     tempsEmission = simpson(inf, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),Eps)+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z1,2));//<-----------------------------
                      }else{
           	     tempsEmission = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z1, 2)))   };//<------------------------------
 	}

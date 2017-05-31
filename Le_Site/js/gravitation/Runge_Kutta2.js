@@ -1,13 +1,10 @@
 function fonction(r) {
 
-	if (r >= r_phy) {
-		return n/e*(-Math.pow(c,2)*(2*m/Math.pow(r,2)-2*Math.pow(L,2)/Math.pow(r,3)+6*m*Math.pow(L,2)/Math.pow(r,4)));
-	}
-	else {
-		return n/e*(Math.pow(c,2)*(2*m/Math.pow(r,2)-2*Math.pow(L,2)/Math.pow(r,3)+6*m*Math.pow(L,2)/Math.pow(r,4)));
-	}
+		return (-Math.pow(c,2)*(2*m/Math.pow(r,2)-2*Math.pow(L,2)/Math.pow(r,3)+6*m*Math.pow(L,2)/Math.pow(r,4)));
+	
 
 						}
+
 
 function calcul_J_K(pas_de_temps,a,A) {
 
@@ -37,4 +34,4 @@ function rungekutta(pas_de_temps) {
 								}
 
 
-								
+							

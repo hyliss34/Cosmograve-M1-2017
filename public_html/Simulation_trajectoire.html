@@ -50,15 +50,23 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     <![endif]-->
 	
 	<script> // SCRIPTS pour l'ammortissement
+		var isrebond=0;
 		function outputUpdate(vol) {
 	document.querySelector('#ammorti').value = vol/100;
 }
 		function ammort(){
 		if(document.getElementById("rebondd").checked){
+			isrebond=1;
 			document.getElementById("barre_reb").style.display="block";
+			document.getElementById("plusvi").disabled=true;
+			document.getElementById("moinsvi").disabled=true;
+			
 		}
 		else{
+			isrebond=0;
 			document.getElementById("barre_reb").style.display="none";
+			document.getElementById("plusvi").disabled=false;
+			document.getElementById("moinsvi").disabled=false;
 		}
 	}
 	</script>
@@ -164,11 +172,11 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     								</span>
 	
 									<span id="plusvite">
-										<button type="button" class="myButton">Plus</button>
+										<button id="plusvi" type="button" class="myButton">Plus</button>
 									</span>
 
 									<span id="moinsvite">
-										<button type="button" class="myButton">Moins</button>
+										<button id="moinsvi" type="button" class="myButton">Moins</button>
 									</span>
 									</span>
 									
@@ -191,8 +199,8 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
 				  
 
 <div class="wraper" id="barre_reb" style="display:none;">
-  <span>Ammortissement :</span><br>
-  <input type="range" id="reb" max = "100" min = "1" value = "1" name="rebond" oninput="outputUpdate(value)"/>&nbsp;
+  <span>Amortissement :</span><br>
+  <input type="range" id="reb" max = "100" min = "0" value = "0" name="rebond" oninput="outputUpdate(value)"/>&nbsp;
   <output for="reb" id="ammorti"></output>
 </div>
 				  
@@ -244,7 +252,7 @@ Source: http://www.cssscript.com/multi-level-toggle-responsive-navigation-menu-u
     <td class="tg-3ozo" id="ga">res</td>
   </tr>
 </table>
-	<canvas id="myCanvas" style=" z-index: 0;" width="550" height="450" >		
+	<canvas id="myCanvas" style=" z-index: 0;" width="600" height="550" >		
 		Votre navigateur ne supporte pas canvas.
 	</canvas>
 </div>

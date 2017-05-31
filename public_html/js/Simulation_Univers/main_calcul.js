@@ -99,24 +99,27 @@ function calcul(){   // fonction principale de cosmogravity
 	omegak0_afficher = Number(omegak0);
 	
 	//affiche les imformations sur les paramètres cosmologiques de la simulation
-	document.getElementById("resultat_omegam0").innerHTML = omegam0;
-	document.getElementById("resultat_omegar0").innerHTML = Or;
-	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
+	
 
 	// Calcul l'age de l'univers
-	eps = 0.00001;
-	if(omegalambda0>1e6 || omegam0>1e6){
-		eps=0.01;
-	}
+	eps = 0.0000001;
+
 	if(omegam0 != 0 && omegalambda0 != 1){
 		//calcul de l'age de l'univers
 		if(Or != 0 && t0 >= 2){
 			age_sec = simpson(0, 5e6,  fonction_integrale, omegam0, Number(omegalambda0), Number(Or) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2))),eps);
 		}else{
-
+			
 			age_sec = simpson(0, 5e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or),eps);
+
+		
+			
+			
 		}
+		
 		age_sec = age_sec*(1./H0parsec);
+		
+		
 		//on le passe en gigaannees
 		age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
 		//on creer une variable limite en nombre de decimal pour l'affichage
@@ -127,7 +130,7 @@ function calcul(){   // fonction principale de cosmogravity
 		age_aficher = NaN;
 	}
 	
-
+	console.log(age);
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
 	document.getElementById("resultat_ageunivers_ga").innerHTML = "Pas de Big Bang";
 	document.getElementById("resultat_ageunivers_s").innerHTML = "Pas de Big Bang";
@@ -172,13 +175,13 @@ function calcul(){   // fonction principale de cosmogravity
 	}
 	
 	
-
+	
 	//on fait appel a la methode de rungekutta pour calculer les points de la courbe
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
 	k1 = [0,0,0,0];
 	j1 = [0,0,0,0];
-	pas = 5e-5;
+	pas = 1e-6;
 	m = 0;
 	yrunge = 1;
 	yrunge2 = 1;
@@ -186,9 +189,15 @@ function calcul(){   // fonction principale de cosmogravity
 	data_x=[];
 	data_y=[];
 	console.log(OlER_max);
-	save=0;
-	if(omegam0>1e7){pas=1e-6;}
-	if(omegam0>1e10){pas=1e-7;}
+	
+	// Choix du pas
+	// Ici mouton et age sont le meme calcul, simplement mouton est plus précis et permet de renvoyer l'age en Ga et donc de prendre un bon pas dans les cas extremes.
+	
+	if(age == NaN ){pas=1e-4;}
+	else if(age==0){pas=1e-4;}
+	else {pas=age*1e-6;}
+	
+	
 
 		while (yrunge2>0 && yrunge2<5){
 			yrunge2 = rungekutta_neg(m);
@@ -206,22 +215,19 @@ function calcul(){   // fonction principale de cosmogravity
 	fin=data_y.length;
 	data_y[fin-1]=data_y[fin-2];
 	data_x[fin-1]=data_x[fin-2];
-	
-	
 	data_x.reverse();
 	data_y.reverse();
 
+	console.log("pas: "+ pas);
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
-	pas = 5e-5;
 	yrunge=1;
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
 	k1 = [0,0,0,0];
 	j1 = [0,0,0,0];
-	if(omegam0>1e7){pas=1e-6;}
-	if(omegam0>1e10){pas=1e-7;}
-	
+
+
 	//suite rungekutta avec rajout du cas ou l'on serait sur la generatrice
 
 		while (yrunge>0 && yrunge<5){ // permet de boucler sur une valeur de reference
@@ -232,7 +238,6 @@ function calcul(){   // fonction principale de cosmogravity
 			}
 			i=i+pas;
 		}
-	
 
 	//liste les differents cas pour afficher a l'utilisateur les informations
 	if(ANG==0){
@@ -273,8 +278,8 @@ function calcul(){   // fonction principale de cosmogravity
 		document.getElementById("resultat_bigcrunch").innerHTML = "No Big Crunch";
 	}
 	}
-	
-	
+	console.log(omegalambda0);
+
 	Or=document.getElementById("resultat_omegar0").innerHTML;
 	omegak0=document.getElementById("resultat_omegak0").innerHTML;
 	//on creer le graphique (librairie Plotly)
@@ -289,18 +294,9 @@ function calcul(){   // fonction principale de cosmogravity
 	frame[0].data[0].x=data_x;
 	frame[0].data[0].y=data_y;
 
-	maxx = getMaxTableau(data_x);
-	maxy = getMaxTableau(data_y);
-	minx = getMinTableau(data_x);
-	miny = getMinTableau(data_y);
-	nbx=data_x.length;
-	nby=data_y.length;
-	rangex=maxx-minx;
-	rangey=maxy-miny;
-	moinsx=rangex/nbx;
-	moinsy=rangey/nby;
 	
-
+	
+	
 	if(ANG==0){
 		title="<b>Evolution du facteur d'\u00e9chelle r\u00e9duit</b>";
 		leg_gauche='<b>Entrees</b><br>'+'T<sub>0</sub>:'+t0+'<br>'+'H<sub>0:</sub>'+h0+'<br>'+'Omega<sub>m0</sub>:'+omegam0+'<br>Omega<sub>L0</sub>:'+omegalambda0;
@@ -345,11 +341,13 @@ function calcul(){   // fonction principale de cosmogravity
 	Plotly.newPlot('graphique',tracer1, {
 		title: title,
 		
-	xaxis: {range: [minx,maxx],
+	xaxis: {
+    		autorange: true,
 		   title: 't (Ga)'},
 		
 		
-	yaxis: {range: [0,maxy],
+	yaxis: {rangemode: 'tozero',
+    		autorange: true,
 		   title: 'a(t)'},
 	annotations: annots,
 	},{displaylogo: false});
@@ -357,11 +355,13 @@ function calcul(){   // fonction principale de cosmogravity
 	Plotly.newPlot('graphique_enr',tracer1, {
 		title: title,
 		
-	xaxis: {range: [minx,maxx],
+	xaxis: {
+    		autorange: true,
 		   title: 't (Ga)'},
 		
 		
-	yaxis: {range: [miny,maxy],
+	yaxis: {rangemode: 'tozero',
+    		autorange: true,
 		   title: 'a(t)'},
 	annotations: annots,
 	},{displaylogo: false}).then(function(gd){
